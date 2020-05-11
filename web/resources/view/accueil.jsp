@@ -13,9 +13,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestion de Conge</title>
-    <link rel="stylesheet" type="text/css" href="../style/styleConnexion.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/styleConnexion.css">
 </head>
 <body>
 <c:import url="header.jsp"/>
+<%-- Affichage de la chaîne "message" transmise par la servlet --%>
+<c:if test="${ validation }" var="varValidation" scope="session">
+    </br>
+    <c:out value="validation: ${ validation }"/>
+    <%-- Puis affichage des données enregistrées dans le bean "Utilisateur" transmis par la servlet --%>
+    </br>
+    <c:out value="Email : ${ user.email }"/>
+    </br>
+    <c:out value="mot de passe : ${user.motDePasse}"/>
+    </br>
+</c:if>
+
+<c:out value="${ message }"></c:out>
 </body>
 </html>
