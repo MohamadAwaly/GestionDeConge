@@ -25,8 +25,9 @@
     </br>
     <c:out value="Email : ${ user.email }"/>
     </br>
-    <c:out value="mot de passe : ${user.motDePasse}"/>
+    <c:out value="mot de passe : ${ user.motDePasse }"/>
     </br>
+    <c:out value="Calendar: ${ calendar }"/>
 </c:if>
 
 <c:out value="${ message }"></c:out>

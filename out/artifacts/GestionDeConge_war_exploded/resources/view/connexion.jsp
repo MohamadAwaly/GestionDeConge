@@ -13,15 +13,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestion de Conge</title>
-    <link rel="stylesheet" type="text/css" href="../css/styleConnexion.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/styleConnexion.css">
 </head>
 <body>
 <c:import url="header.jsp"/>
-<form method="post" action="accueil" class="formulaireLogin">
+<form method="post" action="login" class="formulaireLogin">
     <legend>BIENVENUE</legend>
     <p>Connexion</p>
-    <input type="email" name="email" id="email" class="ChampFormulaire" placeholder="E-mail"/></br></br>
-    <input type="password" name="pass" id="pass" class="ChampFormulaire"/></br></br>
+    <input type="email" name="email" id="email" class="ChampFormulaire" placeholder="E-mail" for="email"/></br></br>
+    <input type="password" name="pass" id="pass" class="ChampFormulaire" for="pass"/></br></br>
     <p>Mot de passe oublié ? </p>
     <input type="submit" id="boutonConnexion" value="Connexion">
 
