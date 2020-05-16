@@ -9,4 +9,14 @@
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GestionTestJDBC</servlet-name>
+        <servlet-class>com.atc.momo.Jiwaii.servlets.GestionTestJDBC</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GestionTestJDBC</servlet-name>
+        <url-pattern>/testjdbc</url-pattern>
+    </servlet-mapping>
 </web-app>

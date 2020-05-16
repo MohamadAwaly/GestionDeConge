@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Calendar;
 
 @WebServlet( name = "/Login" )
 public class Login extends HttpServlet {
@@ -58,7 +57,7 @@ public class Login extends HttpServlet {
             logger.log( Level.INFO, utilisateur.getEmail() );
             logger.log( Level.INFO, utilisateur.getMotDePasse() );
         } catch ( Exception e ) {
-            logger.fatal( "Une exception est survenue", e );
+            logger.fatal( "Une exception est survenue:", e );
         }
 
         /* ajout du bean et du message à l'objet requête */
