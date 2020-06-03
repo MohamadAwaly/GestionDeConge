@@ -13,7 +13,7 @@ import java.util.List;
 @WebServlet( name = "GestionTestJDBC" )
 public class GestionTestJDBC extends HttpServlet {
 
-    public static final String ATT_MESSAGES = "message";
+    public static final String ATT_MESSAGES = "messages";
     public static final String VUE = "/resources/view/test_jdbc.jsp";
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )

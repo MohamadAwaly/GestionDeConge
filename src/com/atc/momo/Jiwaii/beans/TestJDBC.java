@@ -11,7 +11,7 @@ import java.util.List;
 public class TestJDBC {
 
     /* La liste qui contiendra tous les resultats de nos essais */
-    private      List<String> messages = new ArrayList<String>();
+    private      List<String> messages = new ArrayList<>();
     final static Logger       logger2  = Logger.getLogger( TestJDBC.class );
 
     public List<String> executerTests( HttpServletRequest request ) {
@@ -27,8 +27,8 @@ public class TestJDBC {
 
         /* Connexion à la base de données */
         String url = "jdbc:mysql://localhost:3306/gestiondeconge";
-        String utilisateur = "java";
-        String motDePasse = "123456";
+        String utilisateur = "root";
+        String motDePasse = "";
         Connection connexion = null;
         Statement statement = null;
         ResultSet resultat = null;
@@ -42,13 +42,13 @@ public class TestJDBC {
             messages.add( "Objet requête créé !" );
 
             /* Exécution d'une requête de lecture */
-            resultat = statement.executeQuery( "SELECT id, email, motDePasse FROM User;" );
-            messages.add( "Requête \"SELECT id, email, motDePAsse FROM User;\" effectuée !" );
+            resultat = statement.executeQuery( "SELECT id, email, motDePasse FROM user;" );
+            messages.add( "Requête \"SELECT id, email, motDePAsse FROM user;\" effectuée !" );
 
             try {
-                logger2.log( Level.INFO, "resultat" + resultat );
+                logger2.log( Level.INFO, "resultat" );
                 logger2.log( Level.INFO, "avant le while" );
-            } catch ( Exception e ){
+            } catch ( Exception e ) {
                 logger2.fatal( "Une exceptin est survenue " + e.getMessage() );
             }
 
@@ -94,7 +94,6 @@ public class TestJDBC {
                 }
             }
         }
-
         return messages;
     }
 }

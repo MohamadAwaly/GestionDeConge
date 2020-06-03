@@ -11,13 +11,13 @@
 
 <meta charset="UTF-8">
 <title>Test JDBC</title>
-<link rel="stylesheet" type="text/css" href="resources/css/styleConnexion.css">
+
 
 </head>
 <body>
 <h1>Tests JDBC</h1>
-<c:forEach items="${ messages }" var="message" varStatus="boucle">
-    <p>${ boucle.count }. $ { message }</p>
+<c:forEach items="${ messages }" var="messages" varStatus="boucle">
+    <p>${ messages }</p>
 </c:forEach>
 
 </body>
