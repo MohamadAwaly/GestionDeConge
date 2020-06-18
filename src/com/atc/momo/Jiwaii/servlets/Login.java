@@ -1,6 +1,5 @@
 package com.atc.momo.Jiwaii.servlets;
 
-import com.atc.momo.Jiwaii.beans.Utilisateur;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import javax.servlet.ServletException;
