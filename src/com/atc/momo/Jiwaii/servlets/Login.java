@@ -1,5 +1,6 @@
 package com.atc.momo.Jiwaii.servlets;
 
+import com.atc.momo.Jiwaii.entities.PersonnesEntity;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import javax.servlet.ServletException;
@@ -49,7 +50,7 @@ public class Login extends HttpServlet {
          * creation du bean utilisateur et initialisation avec les données récupérées
          */
 
-        Utilisateur utilisateur = new Utilisateur();
+        PersonnesEntity utilisateur = new PersonnesEntity();
         utilisateur.setEmail( email );
         utilisateur.setMotDePasse( motDePasse );
         try {
