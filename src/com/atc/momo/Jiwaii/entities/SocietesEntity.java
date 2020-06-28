@@ -3,14 +3,15 @@ package com.atc.momo.Jiwaii.entities;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity @Table( name = "societes", schema = "gestiondeconge", catalog = "" ) public class SocietesEntity {
+@Entity @Table( name = "societes", schema = "gestiondeconge" ) public class SocietesEntity {
     private int idSociete;
     private String nom;
-    private int tel;
-    private int nTva;
+    private String tel;
+    private Integer ntva;
     private String email;
+    private Integer fkAdresse;
 
-    @Id @Column( name = "IDSociete", nullable = false ) public int getIdSociete() {
+    @Id @Column( name = "idSociete", nullable = false ) public int getIdSociete() {
         return idSociete;
     }
 
@@ -18,7 +19,7 @@ import java.util.Objects;
         this.idSociete = idSociete;
     }
 
-    @Basic @Column( name = "Nom", nullable = false, length = 50 ) public String getNom() {
+    @Basic @Column( name = "Nom", nullable = false, length = 45 ) public String getNom() {
         return nom;
     }
 
@@ -26,28 +27,36 @@ import java.util.Objects;
         this.nom = nom;
     }
 
-    @Basic @Column( name = "Tel", nullable = false ) public int getTel() {
+    @Basic @Column( name = "Tel", nullable = true, length = 45 ) public String getTel() {
         return tel;
     }
 
-    public void setTel( int tel ) {
+    public void setTel( String tel ) {
         this.tel = tel;
     }
 
-    @Basic @Column( name = "NTva", nullable = false ) public int getnTva() {
-        return nTva;
+    @Basic @Column( name = "NTVA", nullable = true ) public Integer getNtva() {
+        return ntva;
     }
 
-    public void setnTva( int nTva ) {
-        this.nTva = nTva;
+    public void setNtva( Integer ntva ) {
+        this.ntva = ntva;
     }
 
-    @Basic @Column( name = "Email", nullable = false, length = 255 ) public String getEmail() {
+    @Basic @Column( name = "Email", nullable = true, length = 100 ) public String getEmail() {
         return email;
     }
 
     public void setEmail( String email ) {
         this.email = email;
+    }
+
+    @Basic @Column( name = "FKAdresse", nullable = true ) public Integer getFkAdresse() {
+        return fkAdresse;
+    }
+
+    public void setFkAdresse( Integer fkAdresse ) {
+        this.fkAdresse = fkAdresse;
     }
 
     @Override public boolean equals( Object o ) {
@@ -57,13 +66,14 @@ import java.util.Objects;
             return false;
         SocietesEntity that = (SocietesEntity) o;
         return idSociete == that.idSociete &&
-                tel == that.tel &&
-                nTva == that.nTva &&
                 Objects.equals( nom, that.nom ) &&
-                Objects.equals( email, that.email );
+                Objects.equals( tel, that.tel ) &&
+                Objects.equals( ntva, that.ntva ) &&
+                Objects.equals( email, that.email ) &&
+                Objects.equals( fkAdresse, that.fkAdresse );
     }
 
     @Override public int hashCode() {
-        return Objects.hash( idSociete, nom, tel, nTva, email );
+        return Objects.hash( idSociete, nom, tel, ntva, email, fkAdresse );
     }
 }

@@ -4,15 +4,15 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
-@Entity @Table( name = "personnejourdecongeautorisetypedemande", schema = "gestiondeconge", catalog = "" ) public class PersonnejourdecongeautorisetypedemandeEntity {
+@Entity @Table( name = "personnejourdecongeautorisetypedemande", schema = "gestiondeconge") public class PersonnejourdecongeautorisetypedemandeEntity {
     private int idPersonneJourDeCongeAutoriseTypeDemande;
-    private int fkPersonne;
-    private int fkJourCongeAutorise;
+    private Integer fkPersonne;
+    private Integer fkJourCongeAutorise;
     private Date dateDebut;
     private Date dateFin;
-    private int fkTypeDemandes;
+    private Integer fkTypeDemandes;
 
-    @Id @Column( name = "IDPersonneJourDeCongeAutoriseTypeDemande", nullable = false ) public int getIdPersonneJourDeCongeAutoriseTypeDemande() {
+    @Id @Column( name = "idPersonneJourDeCongeAutoriseTypeDemande", nullable = false ) public int getIdPersonneJourDeCongeAutoriseTypeDemande() {
         return idPersonneJourDeCongeAutoriseTypeDemande;
     }
 
@@ -20,19 +20,19 @@ import java.util.Objects;
         this.idPersonneJourDeCongeAutoriseTypeDemande = idPersonneJourDeCongeAutoriseTypeDemande;
     }
 
-    @Basic @Column( name = "FKPersonne", nullable = false ) public int getFkPersonne() {
+    @Basic @Column( name = "FKPersonne", nullable = true ) public Integer getFkPersonne() {
         return fkPersonne;
     }
 
-    public void setFkPersonne( int fkPersonne ) {
+    public void setFkPersonne( Integer fkPersonne ) {
         this.fkPersonne = fkPersonne;
     }
 
-    @Basic @Column( name = "FKJourCongeAutorise", nullable = false ) public int getFkJourCongeAutorise() {
+    @Basic @Column( name = "FKJourCongeAutorise", nullable = true ) public Integer getFkJourCongeAutorise() {
         return fkJourCongeAutorise;
     }
 
-    public void setFkJourCongeAutorise( int fkJourCongeAutorise ) {
+    public void setFkJourCongeAutorise( Integer fkJourCongeAutorise ) {
         this.fkJourCongeAutorise = fkJourCongeAutorise;
     }
 
@@ -44,7 +44,7 @@ import java.util.Objects;
         this.dateDebut = dateDebut;
     }
 
-    @Basic @Column( name = "DateFin", nullable = false ) public Date getDateFin() {
+    @Basic @Column( name = "DateFin", nullable = true ) public Date getDateFin() {
         return dateFin;
     }
 
@@ -52,11 +52,11 @@ import java.util.Objects;
         this.dateFin = dateFin;
     }
 
-    @Basic @Column( name = "FKTypeDemandes", nullable = false ) public int getFkTypeDemandes() {
+    @Basic @Column( name = "FKTypeDemandes", nullable = true ) public Integer getFkTypeDemandes() {
         return fkTypeDemandes;
     }
 
-    public void setFkTypeDemandes( int fkTypeDemandes ) {
+    public void setFkTypeDemandes( Integer fkTypeDemandes ) {
         this.fkTypeDemandes = fkTypeDemandes;
     }
 
@@ -67,11 +67,11 @@ import java.util.Objects;
             return false;
         PersonnejourdecongeautorisetypedemandeEntity that = (PersonnejourdecongeautorisetypedemandeEntity) o;
         return idPersonneJourDeCongeAutoriseTypeDemande == that.idPersonneJourDeCongeAutoriseTypeDemande &&
-                fkPersonne == that.fkPersonne &&
-                fkJourCongeAutorise == that.fkJourCongeAutorise &&
-                fkTypeDemandes == that.fkTypeDemandes &&
+                Objects.equals( fkPersonne, that.fkPersonne ) &&
+                Objects.equals( fkJourCongeAutorise, that.fkJourCongeAutorise ) &&
                 Objects.equals( dateDebut, that.dateDebut ) &&
-                Objects.equals( dateFin, that.dateFin );
+                Objects.equals( dateFin, that.dateFin ) &&
+                Objects.equals( fkTypeDemandes, that.fkTypeDemandes );
     }
 
     @Override public int hashCode() {

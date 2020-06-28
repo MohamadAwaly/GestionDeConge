@@ -15,7 +15,7 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <datasource-mapping>
-          <factory-entry name="gestiondeconge" value="cbf16d1a-adf4-425d-97df-c4f29d03411c" />
+          <factory-entry name="gestiondeconge" value="eaa84584-5083-4dfa-9cea-561a784c9e4e" />
         </datasource-mapping>
         <naming-strategy-map />
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/META-INF/persistence.xml" />

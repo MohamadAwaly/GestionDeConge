@@ -4,17 +4,17 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
-@Entity @Table( name = "personnejourdecongetypedemande", schema = "gestiondeconge", catalog = "" ) public class PersonnejourdecongetypedemandeEntity {
+@Entity @Table( name = "personnejourdecongetypedemande", schema = "gestiondeconge") public class PersonnejourdecongetypedemandeEntity {
     private int idPersonneJourDeCongeTypeDemande;
-    private int fkPersonne;
-    private int fkJourDeConge;
+    private Integer fkPersonne;
+    private Integer fkJourDeConge;
     private Date dateDemande;
     private Date dateReponse;
     private String messageApprobateur;
-    private int fkTypeDemande;
-    private Object apprrouve;
+    private Integer fkTypeDemande;
+    private Object aprouver;
 
-    @Id @Column( name = "IDPersonneJourDeCongeTypeDemande", nullable = false ) public int getIdPersonneJourDeCongeTypeDemande() {
+    @Id @Column( name = "idPersonneJourDeCongeTypeDemande", nullable = false ) public int getIdPersonneJourDeCongeTypeDemande() {
         return idPersonneJourDeCongeTypeDemande;
     }
 
@@ -22,23 +22,23 @@ import java.util.Objects;
         this.idPersonneJourDeCongeTypeDemande = idPersonneJourDeCongeTypeDemande;
     }
 
-    @Basic @Column( name = "FKPersonne", nullable = false ) public int getFkPersonne() {
+    @Basic @Column( name = "FKPersonne", nullable = true ) public Integer getFkPersonne() {
         return fkPersonne;
     }
 
-    public void setFkPersonne( int fkPersonne ) {
+    public void setFkPersonne( Integer fkPersonne ) {
         this.fkPersonne = fkPersonne;
     }
 
-    @Basic @Column( name = "FKJourDeConge", nullable = false ) public int getFkJourDeConge() {
+    @Basic @Column( name = "FKJourDeConge", nullable = true ) public Integer getFkJourDeConge() {
         return fkJourDeConge;
     }
 
-    public void setFkJourDeConge( int fkJourDeConge ) {
+    public void setFkJourDeConge( Integer fkJourDeConge ) {
         this.fkJourDeConge = fkJourDeConge;
     }
 
-    @Basic @Column( name = "DateDemande", nullable = false ) public Date getDateDemande() {
+    @Basic @Column( name = "DateDemande", nullable = true ) public Date getDateDemande() {
         return dateDemande;
     }
 
@@ -46,7 +46,7 @@ import java.util.Objects;
         this.dateDemande = dateDemande;
     }
 
-    @Basic @Column( name = "DateReponse", nullable = false ) public Date getDateReponse() {
+    @Basic @Column( name = "DateReponse", nullable = true ) public Date getDateReponse() {
         return dateReponse;
     }
 
@@ -54,7 +54,7 @@ import java.util.Objects;
         this.dateReponse = dateReponse;
     }
 
-    @Basic @Column( name = "MessageApprobateur", nullable = false, length = 255 ) public String getMessageApprobateur() {
+    @Basic @Column( name = "MessageApprobateur", nullable = true, length = 255 ) public String getMessageApprobateur() {
         return messageApprobateur;
     }
 
@@ -62,20 +62,20 @@ import java.util.Objects;
         this.messageApprobateur = messageApprobateur;
     }
 
-    @Basic @Column( name = "FKTypeDemande", nullable = false ) public int getFkTypeDemande() {
+    @Basic @Column( name = "FKTypeDemande", nullable = true ) public Integer getFkTypeDemande() {
         return fkTypeDemande;
     }
 
-    public void setFkTypeDemande( int fkTypeDemande ) {
+    public void setFkTypeDemande( Integer fkTypeDemande ) {
         this.fkTypeDemande = fkTypeDemande;
     }
 
-    @Basic @Column( name = "Apprrouve", nullable = true ) public Object getApprrouve() {
-        return apprrouve;
+    @Basic @Column( name = "Aprouver", nullable = true ) public Object getAprouver() {
+        return aprouver;
     }
 
-    public void setApprrouve( Object apprrouve ) {
-        this.apprrouve = apprrouve;
+    public void setAprouver( Object aprouver ) {
+        this.aprouver = aprouver;
     }
 
     @Override public boolean equals( Object o ) {
@@ -85,17 +85,17 @@ import java.util.Objects;
             return false;
         PersonnejourdecongetypedemandeEntity that = (PersonnejourdecongetypedemandeEntity) o;
         return idPersonneJourDeCongeTypeDemande == that.idPersonneJourDeCongeTypeDemande &&
-                fkPersonne == that.fkPersonne &&
-                fkJourDeConge == that.fkJourDeConge &&
-                fkTypeDemande == that.fkTypeDemande &&
+                Objects.equals( fkPersonne, that.fkPersonne ) &&
+                Objects.equals( fkJourDeConge, that.fkJourDeConge ) &&
                 Objects.equals( dateDemande, that.dateDemande ) &&
                 Objects.equals( dateReponse, that.dateReponse ) &&
                 Objects.equals( messageApprobateur, that.messageApprobateur ) &&
-                Objects.equals( apprrouve, that.apprrouve );
+                Objects.equals( fkTypeDemande, that.fkTypeDemande ) &&
+                Objects.equals( aprouver, that.aprouver );
     }
 
     @Override public int hashCode() {
         return Objects.hash( idPersonneJourDeCongeTypeDemande, fkPersonne, fkJourDeConge, dateDemande, dateReponse,
-                messageApprobateur, fkTypeDemande, apprrouve );
+                messageApprobateur, fkTypeDemande, aprouver );
     }
 }

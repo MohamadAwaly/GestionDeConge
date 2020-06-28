@@ -4,17 +4,17 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
-@Entity @Table( name = "jourdeconge", schema = "gestiondeconge", catalog = "" ) public class JourdecongeEntity {
-    private int idJourDeConge;
+@Entity @Table( name = "jourdeconge", schema = "gestiondeconge") public class JourdecongeEntity {
+    private int idJourDeconge;
     private Date dateDebut;
     private Date dateFin;
 
-    @Id @Column( name = "IDJourDeConge", nullable = false ) public int getIdJourDeConge() {
-        return idJourDeConge;
+    @Id @Column( name = "idJourDeconge", nullable = false ) public int getIdJourDeconge() {
+        return idJourDeconge;
     }
 
-    public void setIdJourDeConge( int idJourDeConge ) {
-        this.idJourDeConge = idJourDeConge;
+    public void setIdJourDeconge( int idJourDeconge ) {
+        this.idJourDeconge = idJourDeconge;
     }
 
     @Basic @Column( name = "DateDebut", nullable = false ) public Date getDateDebut() {
@@ -39,12 +39,12 @@ import java.util.Objects;
         if ( o == null || getClass() != o.getClass() )
             return false;
         JourdecongeEntity that = (JourdecongeEntity) o;
-        return idJourDeConge == that.idJourDeConge &&
+        return idJourDeconge == that.idJourDeconge &&
                 Objects.equals( dateDebut, that.dateDebut ) &&
                 Objects.equals( dateFin, that.dateFin );
     }
 
     @Override public int hashCode() {
-        return Objects.hash( idJourDeConge, dateDebut, dateFin );
+        return Objects.hash( idJourDeconge, dateDebut, dateFin );
     }
 }

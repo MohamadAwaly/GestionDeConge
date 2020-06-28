@@ -4,17 +4,17 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
-@Entity @Table( name = "personnes", schema = "gestiondeconge" ) public class PersonnesEntity {
+@Entity @Table( name = "personnes", schema = "gestiondeconge") public class PersonnesEntity {
     private int idPersonne;
     private String nom;
     private String prenom;
     private Date dateDeNaissance;
     private String email;
     private String motDePasse;
-    private int fkRole;
-    private int fkAdresse;
+    private Integer fkRole;
+    private Integer fkAdresse;
 
-    @Id @Column( name = "IDPersonne", nullable = false ) public int getIdPersonne() {
+    @Id @Column( name = "idPersonne", nullable = false ) public int getIdPersonne() {
         return idPersonne;
     }
 
@@ -22,7 +22,7 @@ import java.util.Objects;
         this.idPersonne = idPersonne;
     }
 
-    @Basic @Column( name = "Nom", nullable = false, length = 50 ) public String getNom() {
+    @Basic @Column( name = "Nom", nullable = false, length = 45 ) public String getNom() {
         return nom;
     }
 
@@ -30,7 +30,7 @@ import java.util.Objects;
         this.nom = nom;
     }
 
-    @Basic @Column( name = "Prenom", nullable = false, length = 60 ) public String getPrenom() {
+    @Basic @Column( name = "Prenom", nullable = false, length = 45 ) public String getPrenom() {
         return prenom;
     }
 
@@ -46,7 +46,7 @@ import java.util.Objects;
         this.dateDeNaissance = dateDeNaissance;
     }
 
-    @Basic @Column( name = "Email", nullable = false, length = 255 ) public String getEmail() {
+    @Basic @Column( name = "Email", nullable = false, length = 100 ) public String getEmail() {
         return email;
     }
 
@@ -54,7 +54,7 @@ import java.util.Objects;
         this.email = email;
     }
 
-    @Basic @Column( name = "MotDePasse", nullable = false, length = 8 ) public String getMotDePasse() {
+    @Basic @Column( name = "MotDePasse", nullable = false, length = 45 ) public String getMotDePasse() {
         return motDePasse;
     }
 
@@ -62,19 +62,19 @@ import java.util.Objects;
         this.motDePasse = motDePasse;
     }
 
-    @Basic @Column( name = "FKRole", nullable = false ) public int getFkRole() {
+    @Basic @Column( name = "FKRole", nullable = true ) public Integer getFkRole() {
         return fkRole;
     }
 
-    public void setFkRole( int fkRole ) {
+    public void setFkRole( Integer fkRole ) {
         this.fkRole = fkRole;
     }
 
-    @Basic @Column( name = "FkAdresse", nullable = false ) public int getFkAdresse() {
+    @Basic @Column( name = "FKAdresse", nullable = true ) public Integer getFkAdresse() {
         return fkAdresse;
     }
 
-    public void setFkAdresse( int fkAdresse ) {
+    public void setFkAdresse( Integer fkAdresse ) {
         this.fkAdresse = fkAdresse;
     }
 
@@ -85,13 +85,13 @@ import java.util.Objects;
             return false;
         PersonnesEntity that = (PersonnesEntity) o;
         return idPersonne == that.idPersonne &&
-                fkRole == that.fkRole &&
-                fkAdresse == that.fkAdresse &&
                 Objects.equals( nom, that.nom ) &&
                 Objects.equals( prenom, that.prenom ) &&
                 Objects.equals( dateDeNaissance, that.dateDeNaissance ) &&
                 Objects.equals( email, that.email ) &&
-                Objects.equals( motDePasse, that.motDePasse );
+                Objects.equals( motDePasse, that.motDePasse ) &&
+                Objects.equals( fkRole, that.fkRole ) &&
+                Objects.equals( fkAdresse, that.fkAdresse );
     }
 
     @Override public int hashCode() {

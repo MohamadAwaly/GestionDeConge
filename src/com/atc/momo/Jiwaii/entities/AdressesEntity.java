@@ -3,13 +3,13 @@ package com.atc.momo.Jiwaii.entities;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity @Table( name = "adresses", schema = "gestiondeconge", catalog = "" ) public class AdressesEntity {
-    private int    idAdresse;
+@Entity @Table( name = "adresses", schema = "gestiondeconge" ) public class AdressesEntity {
+    private int idAdresse;
     private String nomRue;
-    private int    numero;
-    private int    fkVille;
+    private Integer numero;
+    private Integer fkVille;
 
-    @Id @Column( name = "IDAdresse", nullable = false ) public int getIdAdresse() {
+    @Id @Column( name = "idAdresse", nullable = false ) public int getIdAdresse() {
         return idAdresse;
     }
 
@@ -17,7 +17,7 @@ import java.util.Objects;
         this.idAdresse = idAdresse;
     }
 
-    @Basic @Column( name = "NomRue", nullable = false, length = -1 ) public String getNomRue() {
+    @Basic @Column( name = "NomRue", nullable = true, length = 45 ) public String getNomRue() {
         return nomRue;
     }
 
@@ -25,19 +25,19 @@ import java.util.Objects;
         this.nomRue = nomRue;
     }
 
-    @Basic @Column( name = "Numero", nullable = false ) public int getNumero() {
+    @Basic @Column( name = "Numero", nullable = true ) public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero( int numero ) {
+    public void setNumero( Integer numero ) {
         this.numero = numero;
     }
 
-    @Basic @Column( name = "FKVille", nullable = false ) public int getFkVille() {
+    @Basic @Column( name = "FKVille", nullable = true ) public Integer getFkVille() {
         return fkVille;
     }
 
-    public void setFkVille( int fkVille ) {
+    public void setFkVille( Integer fkVille ) {
         this.fkVille = fkVille;
     }
 
@@ -48,9 +48,9 @@ import java.util.Objects;
             return false;
         AdressesEntity that = (AdressesEntity) o;
         return idAdresse == that.idAdresse &&
-                numero == that.numero &&
-                fkVille == that.fkVille &&
-                Objects.equals( nomRue, that.nomRue );
+                Objects.equals( nomRue, that.nomRue ) &&
+                Objects.equals( numero, that.numero ) &&
+                Objects.equals( fkVille, that.fkVille );
     }
 
     @Override public int hashCode() {

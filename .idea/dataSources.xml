@@ -1,35 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@gestiondeconge" uuid="cbf16d1a-adf4-425d-97df-c4f29d03411c">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3308/gestiondeconge</jdbc-url>
-      <driver-properties>
-        <property name="serverTimezone" value="UTC" />
-      </driver-properties>
-    </data-source>
-    <data-source source="LOCAL" name="gestiondeconge/EclipseLink" uuid="30fd8996-108e-4ff9-b8a5-3012efe3a83e">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>EclipseLink
-
-C:/Users/Gaming/IdeaProjects/GestionDeConge/src/META-INF/persistence.xml</remarks>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3308/gestiondeconge</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="jdbc/TestDB" uuid="dc47db18-b742-4a86-80ee-fb47b9547486">
-      <driver-ref>mysql</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>Tomcat.Resource
-
-C:/Users/Gaming/IdeaProjects/GestionDeConge/web/META-INF/context.xml</remarks>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3308/gestiondeconge?autoReconnect=true</jdbc-url>
-    </data-source>
     <data-source source="LOCAL" name="@gestiondecongeMysql" uuid="eaa84584-5083-4dfa-9cea-561a784c9e4e">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>

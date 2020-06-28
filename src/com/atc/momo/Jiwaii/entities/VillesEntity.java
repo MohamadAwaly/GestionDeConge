@@ -3,13 +3,14 @@ package com.atc.momo.Jiwaii.entities;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity @Table( name = "villes", schema = "gestiondeconge", catalog = "" ) public class VillesEntity {
+@Entity @Table( name = "villes", schema = "gestiondeconge") public class VillesEntity {
     private int idVille;
     private String nomVille;
-    private int codePostal;
-    private int fkPays;
+    private Integer codePosal;
+    private Integer fkPays;
+    private String villescol;
 
-    @Id @Column( name = "IDVille", nullable = false ) public int getIdVille() {
+    @Id @Column( name = "idVille", nullable = false ) public int getIdVille() {
         return idVille;
     }
 
@@ -17,7 +18,7 @@ import java.util.Objects;
         this.idVille = idVille;
     }
 
-    @Basic @Column( name = "NomVille", nullable = false, length = -1 ) public String getNomVille() {
+    @Basic @Column( name = "NomVille", nullable = true, length = 45 ) public String getNomVille() {
         return nomVille;
     }
 
@@ -25,20 +26,28 @@ import java.util.Objects;
         this.nomVille = nomVille;
     }
 
-    @Basic @Column( name = "CodePostal", nullable = false ) public int getCodePostal() {
-        return codePostal;
+    @Basic @Column( name = "CodePosal", nullable = true ) public Integer getCodePosal() {
+        return codePosal;
     }
 
-    public void setCodePostal( int codePostal ) {
-        this.codePostal = codePostal;
+    public void setCodePosal( Integer codePosal ) {
+        this.codePosal = codePosal;
     }
 
-    @Basic @Column( name = "FKPays", nullable = false ) public int getFkPays() {
+    @Basic @Column( name = "FKPays", nullable = true ) public Integer getFkPays() {
         return fkPays;
     }
 
-    public void setFkPays( int fkPays ) {
+    public void setFkPays( Integer fkPays ) {
         this.fkPays = fkPays;
+    }
+
+    @Basic @Column( name = "Villescol", nullable = true, length = 45 ) public String getVillescol() {
+        return villescol;
+    }
+
+    public void setVillescol( String villescol ) {
+        this.villescol = villescol;
     }
 
     @Override public boolean equals( Object o ) {
@@ -48,12 +57,13 @@ import java.util.Objects;
             return false;
         VillesEntity that = (VillesEntity) o;
         return idVille == that.idVille &&
-                codePostal == that.codePostal &&
-                fkPays == that.fkPays &&
-                Objects.equals( nomVille, that.nomVille );
+                Objects.equals( nomVille, that.nomVille ) &&
+                Objects.equals( codePosal, that.codePosal ) &&
+                Objects.equals( fkPays, that.fkPays ) &&
+                Objects.equals( villescol, that.villescol );
     }
 
     @Override public int hashCode() {
-        return Objects.hash( idVille, nomVille, codePostal, fkPays );
+        return Objects.hash( idVille, nomVille, codePosal, fkPays, villescol );
     }
 }

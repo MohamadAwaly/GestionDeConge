@@ -3,12 +3,12 @@ package com.atc.momo.Jiwaii.entities;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity @Table( name = "typedemandes", schema = "gestiondeconge", catalog = "" ) public class TypedemandesEntity {
+@Entity @Table( name = "typedemande", schema = "gestiondeconge") public class TypedemandeEntity {
     private int idTypeDemande;
     private String libele;
     private String description;
 
-    @Id @Column( name = "IDTypeDemande", nullable = false ) public int getIdTypeDemande() {
+    @Id @Column( name = "idTypeDemande", nullable = false ) public int getIdTypeDemande() {
         return idTypeDemande;
     }
 
@@ -16,7 +16,7 @@ import java.util.Objects;
         this.idTypeDemande = idTypeDemande;
     }
 
-    @Basic @Column( name = "Libele", nullable = false, length = 50 ) public String getLibele() {
+    @Basic @Column( name = "Libele", nullable = true, length = 45 ) public String getLibele() {
         return libele;
     }
 
@@ -24,7 +24,7 @@ import java.util.Objects;
         this.libele = libele;
     }
 
-    @Basic @Column( name = "Description", nullable = false, length = 255 ) public String getDescription() {
+    @Basic @Column( name = "Description", nullable = true, length = 255 ) public String getDescription() {
         return description;
     }
 
@@ -37,7 +37,7 @@ import java.util.Objects;
             return true;
         if ( o == null || getClass() != o.getClass() )
             return false;
-        TypedemandesEntity that = (TypedemandesEntity) o;
+        TypedemandeEntity that = (TypedemandeEntity) o;
         return idTypeDemande == that.idTypeDemande &&
                 Objects.equals( libele, that.libele ) &&
                 Objects.equals( description, that.description );

@@ -3,23 +3,23 @@ package com.atc.momo.Jiwaii.entities;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity @Table( name = "jourdecongeautorise", schema = "gestiondeconge", catalog = "" ) public class JourdecongeautoriseEntity {
-    private int idJourCongeAutorise;
-    private int nbrJourAutorise;
+@Entity @Table( name = "jourdecongeautorise", schema = "gestiondeconge" ) public class JourdecongeautoriseEntity {
+    private int idJourDeCongeAutorise;
+    private Integer nbrJourAutorise;
 
-    @Id @Column( name = "IDJourCongeAutorise", nullable = false ) public int getIdJourCongeAutorise() {
-        return idJourCongeAutorise;
+    @Id @Column( name = "idJourDeCongeAutorise", nullable = false ) public int getIdJourDeCongeAutorise() {
+        return idJourDeCongeAutorise;
     }
 
-    public void setIdJourCongeAutorise( int idJourCongeAutorise ) {
-        this.idJourCongeAutorise = idJourCongeAutorise;
+    public void setIdJourDeCongeAutorise( int idJourDeCongeAutorise ) {
+        this.idJourDeCongeAutorise = idJourDeCongeAutorise;
     }
 
-    @Basic @Column( name = "NbrJourAutorise", nullable = false ) public int getNbrJourAutorise() {
+    @Basic @Column( name = "NbrJourAutorise", nullable = true ) public Integer getNbrJourAutorise() {
         return nbrJourAutorise;
     }
 
-    public void setNbrJourAutorise( int nbrJourAutorise ) {
+    public void setNbrJourAutorise( Integer nbrJourAutorise ) {
         this.nbrJourAutorise = nbrJourAutorise;
     }
 
@@ -29,11 +29,11 @@ import java.util.Objects;
         if ( o == null || getClass() != o.getClass() )
             return false;
         JourdecongeautoriseEntity that = (JourdecongeautoriseEntity) o;
-        return idJourCongeAutorise == that.idJourCongeAutorise &&
-                nbrJourAutorise == that.nbrJourAutorise;
+        return idJourDeCongeAutorise == that.idJourDeCongeAutorise &&
+                Objects.equals( nbrJourAutorise, that.nbrJourAutorise );
     }
 
     @Override public int hashCode() {
-        return Objects.hash( idJourCongeAutorise, nbrJourAutorise );
+        return Objects.hash( idJourDeCongeAutorise, nbrJourAutorise );
     }
 }

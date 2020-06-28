@@ -13,13 +13,13 @@
         <class>com.atc.momo.Jiwaii.entities.PersonnejourdecongeautorisetypedemandeEntity</class>
         <class>com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity</class>
         <class>com.atc.momo.Jiwaii.entities.PersonnesEntity</class>
-        <class>com.atc.momo.Jiwaii.entities.PersonnessocietesEntity</class>
+        <class>com.atc.momo.Jiwaii.entities.PersonnesocietesEntity</class>
         <class>com.atc.momo.Jiwaii.entities.RolesEntity</class>
         <class>com.atc.momo.Jiwaii.entities.SocietesEntity</class>
-        <class>com.atc.momo.Jiwaii.entities.TypedemandesEntity</class>
+        <class>com.atc.momo.Jiwaii.entities.TypedemandeEntity</class>
         <class>com.atc.momo.Jiwaii.entities.VillesEntity</class>
         <properties>
-            <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3308/gestiondeconge"/>
+            <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/gestiondeconge"/>
             <property name="eclipselink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
         </properties>
     </persistence-unit>

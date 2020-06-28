@@ -45,8 +45,8 @@ public class TestJDBC {
             messages.add( "Objet requête créé !" );
 
             /* Exécution d'une requête de lecture */
-            resultat = statement.executeQuery( "SELECT idPersonne, nom, motDePasse FROM personne;" );
-            messages.add( "Requête \"SELECT id, email, motDePAsse FROM Personne;\" effectuée !" );
+            resultat = statement.executeQuery( "SELECT idPersonne, nom,email , motDePasse, dateDeNaissance FROM personne;" );
+            messages.add( "Requête \"SELECT idPersonne, email, motDePAsse FROM Personne;\" effectuée !" );
 
             try {
                 logger2.log( Level.INFO, "resultat" );
@@ -57,15 +57,17 @@ public class TestJDBC {
 
             /* Récupération des données du résultat de la requête de lecture */
             while ( resultat.next() ) {
-                int idUtilisateur = resultat.getInt( "id" );
+                int idUtilisateur = resultat.getInt( "idPersonne" );
                 String emailUtilisateur = resultat.getString( "email" );
                 String motDePasseUtilisateur = resultat.getString( "motDePasse" );
+                String nomUtilisateur = resultat.getString( "nom" );
+                String dateNaissanceUtilisateur = resultat.getString( "dateDeNaissance" );
 
                 /* Formatage des données pour affichage dans la JSP finale. */
                 messages.add(
                         "Données retournées par la requête : id = " + idUtilisateur + ", email = " + emailUtilisateur
                                 + ", motdepasse = "
-                                + motDePasseUtilisateur + ", nom = " + "." );
+                                + motDePasseUtilisateur + ", nom = " + nomUtilisateur + ", Date de naissance " + dateNaissanceUtilisateur +  "." );
                 logger2.log( Level.INFO, idUtilisateur );
                 logger2.log( Level.INFO, emailUtilisateur );
                 logger2.log( Level.INFO, motDePasseUtilisateur );

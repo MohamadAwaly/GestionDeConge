@@ -3,11 +3,11 @@ package com.atc.momo.Jiwaii.entities;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity @Table( name = "roles", schema = "gestiondeconge", catalog = "" ) public class RolesEntity {
+@Entity @Table( name = "roles", schema = "gestiondeconge" ) public class RolesEntity {
     private int idRole;
     private String typeRole;
 
-    @Id @Column( name = "IDRole", nullable = false ) public int getIdRole() {
+    @Id @Column( name = "idRole", nullable = false ) public int getIdRole() {
         return idRole;
     }
 
@@ -15,7 +15,7 @@ import java.util.Objects;
         this.idRole = idRole;
     }
 
-    @Basic @Column( name = "TypeRole", nullable = false, length = 50 ) public String getTypeRole() {
+    @Basic @Column( name = "TypeRole", nullable = false, length = 45 ) public String getTypeRole() {
         return typeRole;
     }
 
