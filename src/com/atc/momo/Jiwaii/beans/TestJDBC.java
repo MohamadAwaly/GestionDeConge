@@ -45,7 +45,7 @@ public class TestJDBC {
             messages.add( "Objet requête créé !" );
 
             /* Exécution d'une requête de lecture */
-            resultat = statement.executeQuery( "SELECT idPersonne, nom,email , motDePasse, dateDeNaissance FROM personne;" );
+            resultat = statement.executeQuery( "SELECT idPersonne, nom,email , motDePasse, dateDeNaissance FROM personnes;" );
             messages.add( "Requête \"SELECT idPersonne, email, motDePAsse FROM Personne;\" effectuée !" );
 
             try {

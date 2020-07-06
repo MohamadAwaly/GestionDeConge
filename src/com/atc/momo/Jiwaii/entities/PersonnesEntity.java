@@ -4,17 +4,19 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
-@Entity @Table( name = "personnes", schema = "gestiondeconge") public class PersonnesEntity {
-    private int idPersonne;
-    private String nom;
-    private String prenom;
-    private Date dateDeNaissance;
-    private String email;
-    private String motDePasse;
+@Entity @Table( name = "personnes", schema = "gestiondeconge" )
+public class PersonnesEntity {
+    private int     idPersonne;
+    private String  nom;
+    private String  prenom;
+    private Date    dateDeNaissance;
+    private String  email;
+    private String  motDePasse;
     private Integer fkRole;
     private Integer fkAdresse;
 
-    @Id @Column( name = "idPersonne", nullable = false ) public int getIdPersonne() {
+    @Id @Column( name = "idPersonne", nullable = false )
+    public int getIdPersonne() {
         return idPersonne;
     }
 
@@ -22,7 +24,8 @@ import java.util.Objects;
         this.idPersonne = idPersonne;
     }
 
-    @Basic @Column( name = "Nom", nullable = false, length = 45 ) public String getNom() {
+    @Basic @Column( name = "Nom", nullable = false, length = 45 )
+    public String getNom() {
         return nom;
     }
 
@@ -30,7 +33,8 @@ import java.util.Objects;
         this.nom = nom;
     }
 
-    @Basic @Column( name = "Prenom", nullable = false, length = 45 ) public String getPrenom() {
+    @Basic @Column( name = "Prenom", nullable = false, length = 45 )
+    public String getPrenom() {
         return prenom;
     }
 
@@ -38,7 +42,8 @@ import java.util.Objects;
         this.prenom = prenom;
     }
 
-    @Basic @Column( name = "DateDeNaissance", nullable = false ) public Date getDateDeNaissance() {
+    @Basic @Column( name = "DateDeNaissance", nullable = false )
+    public Date getDateDeNaissance() {
         return dateDeNaissance;
     }
 
@@ -46,7 +51,8 @@ import java.util.Objects;
         this.dateDeNaissance = dateDeNaissance;
     }
 
-    @Basic @Column( name = "Email", nullable = false, length = 100 ) public String getEmail() {
+    @Basic @Column( name = "Email", nullable = false, length = 100 )
+    public String getEmail() {
         return email;
     }
 
@@ -54,7 +60,8 @@ import java.util.Objects;
         this.email = email;
     }
 
-    @Basic @Column( name = "MotDePasse", nullable = false, length = 45 ) public String getMotDePasse() {
+    @Basic @Column( name = "MotDePasse", nullable = false, length = 45 )
+    public String getMotDePasse() {
         return motDePasse;
     }
 
@@ -62,7 +69,8 @@ import java.util.Objects;
         this.motDePasse = motDePasse;
     }
 
-    @Basic @Column( name = "FKRole", nullable = true ) public Integer getFkRole() {
+    @Basic @Column( name = "FKRole", nullable = true )
+    public Integer getFkRole() {
         return fkRole;
     }
 
@@ -70,7 +78,8 @@ import java.util.Objects;
         this.fkRole = fkRole;
     }
 
-    @Basic @Column( name = "FKAdresse", nullable = true ) public Integer getFkAdresse() {
+    @Basic @Column( name = "FKAdresse", nullable = true )
+    public Integer getFkAdresse() {
         return fkAdresse;
     }
 

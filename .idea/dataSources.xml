@@ -10,5 +10,25 @@
         <property name="serverTimezone" value="UTC" />
       </driver-properties>
     </data-source>
+    <data-source source="LOCAL" name="gestiondeconge/EclipseLink" uuid="7dfa8c23-292c-481a-9ebb-f3087f3911f9">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>EclipseLink
+
+C:/Users/Gaming/IdeaProjects/GestionDeConge/src/META-INF/persistence.xml</remarks>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/gestiondeconge</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="jdbc/TestDB" uuid="f4b681b1-b925-4494-bdf2-ae57b8405eee">
+      <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Tomcat.Resource
+
+C:/Users/Gaming/IdeaProjects/GestionDeConge/web/META-INF/context.xml</remarks>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/test?autoReconnect=true</jdbc-url>
+    </data-source>
   </component>
 </project>
