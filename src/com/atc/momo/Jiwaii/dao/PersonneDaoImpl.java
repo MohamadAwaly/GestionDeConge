@@ -32,7 +32,7 @@ public class PersonneDaoImpl implements PersonneDao {
             connection = daoFactory.getConnection();
             logger.log( Level.INFO, "Dans le blog Try apres la connexion" );
             preparedStatement = connection.prepareStatement
-                    ( "INSERT INTO personnes(Nom, prenom, DateDeNaissance, email,MotDePasse) VALUES (?,?,?,?,?);" );
+                    ( "INSERT INTO personnes(Nom, Prenom, DateDeNaissance, Email,MotDePasse,FKRole, FKAdresse) VALUES (?,?,?,?,?,?,?);" );
             //PersonnesEntity personne = new PersonnesEntity();
             logger.log( Level.INFO, "Dans le blog Try apres la preparedStatement" );
             preparedStatement.setString( 1, personnesEntity.getNom() );
@@ -40,8 +40,8 @@ public class PersonneDaoImpl implements PersonneDao {
             preparedStatement.setDate( 3, personnesEntity.getDateDeNaissance());
             preparedStatement.setString( 4, personnesEntity.getEmail() );
             preparedStatement.setString( 5, personnesEntity.getMotDePasse() );
-            //preparedStatement.setInt( 6, personnesEntity.getFkRole() );
-            //preparedStatement.setInt( 7, personnesEntity.getFkAdresse() );
+            preparedStatement.setInt( 6, personnesEntity.getFkRole() );
+            preparedStatement.setInt( 7, personnesEntity.getFkAdresse() );
 
             logger.log( Level.INFO, "Dans le blog Try apres les gets" );
             logger.log( Level.INFO, "Class PersonneDaoImpl" );

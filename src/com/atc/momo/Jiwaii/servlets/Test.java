@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 public class Test extends HttpServlet {
     private static final long        serialVersionUID = 1L;
     private              PersonneDao personneDao;
-    public static final  String      VUE              = "/resources/view/bonjour.jsp";
+    public static final  String      VUE              = "/resources/view/ajoutPersonne.jsp";
     final static         Logger      logger           = Logger.getLogger( Test.class );
 
     //cree un nouvelle objet DAOFactory qui sera connecter et on va stocke l'objet personne DAO Dans une objet
@@ -41,12 +41,16 @@ public class Test extends HttpServlet {
         personnesEntity.setMotDePasse( request.getParameter( "motDePasse" ) );
         personnesEntity.setFkRole( Integer.parseInt( request.getParameter( "role" ) ) );
         personnesEntity.setFkAdresse( Integer.parseInt( request.getParameter( "adresse" ) ) );
+
+        personneDao.ajouter( personnesEntity );
         logger.log( Level.INFO, "test" );
         logger.log( Level.INFO, "Nom: " + personnesEntity.getNom() );
         logger.log( Level.INFO, "dateDirect: " + request.getParameter( "dateDeNaissance" ) );
         logger.log( Level.INFO, "Date de naissance: " + personnesEntity.getDateDeNaissance() );
 
-        request.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+        request.setAttribute( "personnes", personneDao.lister() );
+
+        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 
     }
 
