@@ -2,7 +2,8 @@
 
 body {
     font: 100% Arial, Helvetica, sans-serif;
-    background-image: url("../Images/wallBackground.jpg");
+    /*background-image: url("../Images/wallBackground.jpg");*/
+    background-color: #FFFFFF;
 }
 
 /*Style Header*/
