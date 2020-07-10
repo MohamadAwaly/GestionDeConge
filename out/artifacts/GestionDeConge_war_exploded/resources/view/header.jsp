@@ -10,9 +10,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Gestion de Conge</title>
-    <link rel="stylesheet" type="text/css" href="../css/styleConnexion.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/styleConnexion.css">
 </head>
 <body>
 

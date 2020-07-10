@@ -13,8 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.DatagramPacket;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 @WebServlet( name = "/Test" )
 public class Test extends HttpServlet {
@@ -44,22 +45,26 @@ public class Test extends HttpServlet {
             personnesEntity.setFkAdresse( Integer.parseInt( request.getParameter( "adresse" ) ) );
 
             personneDao.ajouter( personnesEntity );
-
             request.setAttribute( "personnes", personneDao.lister() );
 
         } catch ( Exception e ) {
             request.setAttribute( "erreur", e.getMessage() );
         }
+
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
+
         try {
             request.setAttribute( "personnes", personneDao.lister() );
         } catch ( DaoException e ) {
             request.setAttribute( "erreur", e.getMessage() );
         }
+
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+
     }
 }

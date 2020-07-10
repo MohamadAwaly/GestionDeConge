@@ -13,10 +13,10 @@
 <head>
     <meta charset="utf-8"/>
     <title>Ajout d'une nouvelle personne</title>
-    <link href="<c:url value="header.jsp" />" rel="stylesheet">
+    <c:import url="header.jsp"/>
 </head>
 <body>
-<c:import url="header.jsp"/>
+
 <c:if test="${ !empty erreur}"><p style="color: red;"><c:out value="${ erreur }"/></p></c:if>
 <form method="post" action="ajoutpersonne">
     <p>
