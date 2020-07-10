@@ -46,7 +46,21 @@
         <input type="number" name="adresse" id="adresse">
     </p>
 
+    <p>
+
+        <SELECT name="adresse" size="1">
+            <c:forEach var="adresse" items="${ adresse }">
+            <OPTION>
+                    <c:out value="${ adresse.idAdresse } "/>
+                    <c:out value="${ adresse.nomRue } "/>
+             </c:forEach>
+        </SELECT>
+
+
+    </p>
+
     <input type="submit"/>
+
 </form>
 
 <table style="width:100%" border="1px solid black">

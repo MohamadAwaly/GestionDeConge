@@ -1,5 +1,6 @@
 package com.atc.momo.Jiwaii.servlets;
 
+import com.atc.momo.Jiwaii.dao.AdresseDao;
 import com.atc.momo.Jiwaii.dao.DaoException;
 import com.atc.momo.Jiwaii.dao.DaoFactory;
 import com.atc.momo.Jiwaii.dao.PersonneDao;
@@ -14,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
+
+import com.atc.momo.Jiwaii.dao.*;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -21,6 +25,7 @@ import java.text.SimpleDateFormat;
 public class Test extends HttpServlet {
     private static final long        serialVersionUID = 1L;
     private              PersonneDao personneDao;
+    private              AdresseDao  adresseDao;
     public static final  String      VUE              = "/resources/view/ajoutPersonne.jsp";
     final static         Logger      logger           = Logger.getLogger( Test.class );
 
@@ -60,6 +65,7 @@ public class Test extends HttpServlet {
 
         try {
             request.setAttribute( "personnes", personneDao.lister() );
+            request.setAttribute( "adresse", adresseDao.mapAdresse() );
         } catch ( DaoException e ) {
             request.setAttribute( "erreur", e.getMessage() );
         }
