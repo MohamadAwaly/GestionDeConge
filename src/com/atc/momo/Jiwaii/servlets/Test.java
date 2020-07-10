@@ -65,7 +65,7 @@ public class Test extends HttpServlet {
 
         try {
             request.setAttribute( "personnes", personneDao.lister() );
-            request.setAttribute( "adresse", adresseDao.mapAdresse() );
+            request.setAttribute( "adresse", adresseDao.lister() );
         } catch ( DaoException e ) {
             request.setAttribute( "erreur", e.getMessage() );
         }

@@ -6,7 +6,9 @@ import org.apache.log4j.Logger;
 import sun.applet.resources.MsgAppletViewer;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,30 +24,33 @@ public class AdresseDaoImpl implements AdresseDao {
         this.daoFactory = daoFactory;
     }
 
-    @Override public Map<Integer, String> mapAdresse() {
-        Map<Integer, String> map = new HashMap<>();
+    @Override public List<AdressesEntity> lister() {
+        List<AdressesEntity> adressesEntities = new ArrayList<>();
         Connection connection = null;
         Statement statement = null;
         ResultSet resultat = null;
-
+        logger.log( Level.INFO, "avant le try" );
         try {
             connection = daoFactory.getConnection();
             statement = connection.createStatement();
             resultat = statement.executeQuery( "SELECT * FROM adresses" );
-
+            logger.log( Level.INFO, "avant le while" );
             while ( resultat.next() ) {
+                logger.log( Level.INFO, "test");
                 int idAdresse = resultat.getInt( "idAdresse" );
                 String nomRue = resultat.getString( "NomRue" );
                 logger.log( Level.INFO, idAdresse + " " + nomRue );
-                map.put( idAdresse, nomRue );
 
+                AdressesEntity adresse = new AdressesEntity();
+                adresse.setIdAdresse( idAdresse );
+                adresse.setNomRue( nomRue );
+
+                adressesEntities.add( adresse );
             }
 
         } catch ( SQLException e ) {
 
         }
-
-        return map;
+        return adressesEntities;
     }
-
 }
