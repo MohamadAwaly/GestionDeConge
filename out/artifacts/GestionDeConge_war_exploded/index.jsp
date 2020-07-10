@@ -10,11 +10,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Gestion de Conge</title>
-    <link rel="stylesheet" type="text/css" href="resources/css/styleConnexion.css">
-</head>
+
 <body>
 <c:import url="/resources/view/header.jsp"/>
 <form method="post" action="login" class="formulaireLogin">

@@ -11,12 +11,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
+    <c:import url="head.jsp"/>
     <title>Ajout d'une nouvelle personne</title>
-    <c:import url="header.jsp"/>
 </head>
-<body>
 
+<body>
+<c:import url="header.jsp"/>
 <c:if test="${ !empty erreur}"><p style="color: red;"><c:out value="${ erreur }"/></p></c:if>
 <form method="post" action="ajoutpersonne">
     <p>

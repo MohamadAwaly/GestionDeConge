@@ -7,16 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <link rel="stylesheet" type="text/css" href="resources/css/styleConnexion.css">
-</head>
-<body>
 
 <header>
     <h1>Gestion de congé</h1>
 </header>
-
-</body>
-</html>
