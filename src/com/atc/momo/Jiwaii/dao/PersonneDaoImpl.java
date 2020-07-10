@@ -26,7 +26,7 @@ public class PersonneDaoImpl implements PersonneDao {
     @Override public void ajouter( PersonnesEntity personnesEntity ) throws DaoException{
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        Date dateDenaissance = new Date( System.currentTimeMillis() );
+
         logger.log( Level.INFO, "Avant le blog Try" );
         try {
             connection = daoFactory.getConnection();

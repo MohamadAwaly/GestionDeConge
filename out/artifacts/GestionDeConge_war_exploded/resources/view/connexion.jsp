@@ -13,10 +13,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestion de Conge</title>
-    <link rel="stylesheet" type="text/css" href="resources/css/styleConnexion.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-<c:import url="header.jsp"/>
+
 <form method="post" action="login" class="formulaireLogin">
     <legend>BIENVENUE</legend>
     <p>Connexion</p>
