@@ -62,4 +62,5 @@ public class DaoFactory {
     public PersonneDao getPersonneDao() {
         return new PersonneDaoImpl( this );
     }
+    public AdresseDao getAdresseDao() {return new AdresseDaoImpl( this );}
 }

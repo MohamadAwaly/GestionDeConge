@@ -33,18 +33,19 @@ public class AdresseDaoImpl implements AdresseDao {
         try {
             connection = daoFactory.getConnection();
             statement = connection.createStatement();
-            resultat = statement.executeQuery( "SELECT * FROM adresses" );
+            resultat = statement.executeQuery( "SELECT idAdresse,NomRue, Numero FROM adresses" );
             logger.log( Level.INFO, "avant le while" );
             while ( resultat.next() ) {
                 logger.log( Level.INFO, "test");
                 int idAdresse = resultat.getInt( "idAdresse" );
                 String nomRue = resultat.getString( "NomRue" );
+                int numero = resultat.getInt( "Numero" );
                 logger.log( Level.INFO, idAdresse + " " + nomRue );
 
                 AdressesEntity adresse = new AdressesEntity();
                 adresse.setIdAdresse( idAdresse );
                 adresse.setNomRue( nomRue );
-
+                adresse.setNumero( numero );
                 adressesEntities.add( adresse );
             }
 

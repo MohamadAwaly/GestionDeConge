@@ -48,11 +48,10 @@
 
     <p>
 
-        <SELECT name="adresse" size="1">
+        <SELECT id = "select"  name="select" size="1">
             <c:forEach var="adresse" items="${ adresse }">
-            <OPTION>
-                    <c:out value="${ adresse.idAdresse } "/>
-                    <c:out value="${ adresse.nomRue } "/>
+            <OPTION name="idaresse" id="idaresse  value = "<c:out value="${ adresse.idAdresse } "/>>
+                   <c:out value="${ adresse.nomRue } "/>
              </c:forEach>
         </SELECT>
 
@@ -81,7 +80,11 @@
             <td><c:out value="${ personnes.motDePasse }"/></td>
         </tr>
     </c:forEach>
-</table>
+
+    <c:forEach var="adresse" items= "${ adresse }">
+        <c:out value="${ adresse.nomRue }"/>
+    </c:forEach>
+
 
 </body>
 </html>

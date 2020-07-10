@@ -4,6 +4,7 @@ import com.atc.momo.Jiwaii.dao.AdresseDao;
 import com.atc.momo.Jiwaii.dao.DaoException;
 import com.atc.momo.Jiwaii.dao.DaoFactory;
 import com.atc.momo.Jiwaii.dao.PersonneDao;
+import com.atc.momo.Jiwaii.entities.AdressesEntity;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -34,6 +35,7 @@ public class Test extends HttpServlet {
     public void init() throws ServletException {
         DaoFactory daoFactory = DaoFactory.getInstance();
         this.personneDao = daoFactory.getPersonneDao();
+        this.adresseDao = daoFactory.getAdresseDao();
     }
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
@@ -49,8 +51,16 @@ public class Test extends HttpServlet {
             personnesEntity.setFkRole( Integer.parseInt( request.getParameter( "role" ) ) );
             personnesEntity.setFkAdresse( Integer.parseInt( request.getParameter( "adresse" ) ) );
 
+            AdressesEntity adresseEntity = new AdressesEntity();
+            //adresseEntity.setIdAdresse(Integer.parseInt( request.getParameter( "idaresse" ) ));
+            logger.log( Level.INFO,"Liste Adresse "+request.getParameter( "select" )  );
+            String testNomRue = request.getParameter( "select" );
+
+            int test = 0;
+
             personneDao.ajouter( personnesEntity );
             request.setAttribute( "personnes", personneDao.lister() );
+            request.setAttribute( "adresse", adresseDao.lister() );
 
         } catch ( Exception e ) {
             request.setAttribute( "erreur", e.getMessage() );
@@ -62,10 +72,10 @@ public class Test extends HttpServlet {
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-
+        request.setAttribute( "adresse", adresseDao.lister() );
         try {
             request.setAttribute( "personnes", personneDao.lister() );
-            request.setAttribute( "adresse", adresseDao.lister() );
+
         } catch ( DaoException e ) {
             request.setAttribute( "erreur", e.getMessage() );
         }
