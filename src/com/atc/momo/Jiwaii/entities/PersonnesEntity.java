@@ -29,8 +29,11 @@ public class PersonnesEntity {
         return nom;
     }
 
-    public void setNom( String nom ) {
-        this.nom = nom;
+    public void setNom( String nom ) throws EntityException{
+        if (nom.length() > 10) // le nom ne doit pas dépasser 10 caractère
+            throw new EntityException( "Le nom est trop grand ! (10 caractère maximum)" );
+        else
+            this.nom = nom;
     }
 
     @Basic @Column( name = "Prenom", nullable = false, length = 45 )

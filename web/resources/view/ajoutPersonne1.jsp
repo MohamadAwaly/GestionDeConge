@@ -16,7 +16,7 @@
     <link href="<c:url value="header.jsp" />" rel="stylesheet">
 </head>
 <body>
-<c:import url="header.jsp"/>
+
 <c:if test="${ !empty erreur}"><p style="color: red;"><c:out value="${ erreur }"/></p></c:if>
 <form method="post" action="ajoutpersonne">
     <p>

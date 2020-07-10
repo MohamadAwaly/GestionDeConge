@@ -1,5 +1,6 @@
 package com.atc.momo.Jiwaii.servlets;
 
+import com.atc.momo.Jiwaii.dao.DaoException;
 import com.atc.momo.Jiwaii.dao.DaoFactory;
 import com.atc.momo.Jiwaii.dao.PersonneDao;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
@@ -12,9 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.DatagramPacket;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 @WebServlet( name = "/Test" )
 public class Test extends HttpServlet {
@@ -32,33 +32,34 @@ public class Test extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        PersonnesEntity personnesEntity = new PersonnesEntity();
-        personnesEntity.setNom( request.getParameter( "nom" ) );
-        personnesEntity.setPrenom( request.getParameter( "prenom" ) );
-        personnesEntity.setDateDeNaissance( Date.valueOf( request.getParameter( "dateDeNaissance" ) ) );
-        personnesEntity.setEmail( request.getParameter( "dateDeNaissance" ) );
-        personnesEntity.setEmail( request.getParameter( "email" ) );
-        personnesEntity.setMotDePasse( request.getParameter( "motDePasse" ) );
-        personnesEntity.setFkRole( Integer.parseInt( request.getParameter( "role" ) ) );
-        personnesEntity.setFkAdresse( Integer.parseInt( request.getParameter( "adresse" ) ) );
+        try {
+            PersonnesEntity personnesEntity = new PersonnesEntity();
+            personnesEntity.setNom( request.getParameter( "nom" ) );
+            personnesEntity.setPrenom( request.getParameter( "prenom" ) );
+            personnesEntity.setDateDeNaissance( Date.valueOf( request.getParameter( "dateDeNaissance" ) ) );
+            personnesEntity.setEmail( request.getParameter( "dateDeNaissance" ) );
+            personnesEntity.setEmail( request.getParameter( "email" ) );
+            personnesEntity.setMotDePasse( request.getParameter( "motDePasse" ) );
+            personnesEntity.setFkRole( Integer.parseInt( request.getParameter( "role" ) ) );
+            personnesEntity.setFkAdresse( Integer.parseInt( request.getParameter( "adresse" ) ) );
 
-        personneDao.ajouter( personnesEntity );
-        logger.log( Level.INFO, "test" );
-        logger.log( Level.INFO, "Nom: " + personnesEntity.getNom() );
-        logger.log( Level.INFO, "dateDirect: " + request.getParameter( "dateDeNaissance" ) );
-        logger.log( Level.INFO, "Date de naissance: " + personnesEntity.getDateDeNaissance() );
+            personneDao.ajouter( personnesEntity );
 
-        request.setAttribute( "personnes", personneDao.lister() );
+            request.setAttribute( "personnes", personneDao.lister() );
 
+        } catch ( Exception e ) {
+            request.setAttribute( "erreur", e.getMessage() );
+        }
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
-
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-
-        request.setAttribute( "personnes", personneDao.lister() );
+        try {
+            request.setAttribute( "personnes", personneDao.lister() );
+        } catch ( DaoException e ) {
+            request.setAttribute( "erreur", e.getMessage() );
+        }
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
-
     }
 }
