@@ -18,48 +18,38 @@
 <body>
 <c:import url="header.jsp"/>
 <c:if test="${ !empty erreur}"><p style="color: red;"><c:out value="${ erreur }"/></p></c:if>
-<form method="post" action="ajoutpersonne">
+<form method="post" action="ajoutpersonne" class="formulairePersonne">
     <p>
-        <label for="nom">Nom : </label>
-        <input type="text" name="nom" id="nom"/>
-    </p>
-    <p>
-        <label for="prenom">Prénom : </label>
-        <input type="text" name="prenom" id="prenom"/>
-    </p>
-    <p>
-        <label for="dateDeNaissance">Date de Naissance : </label>
-        <input type="date" name="dateDeNaissance" id="dateDeNaissance">
-    </p>
-    <label for="email">Email : </label>
-    <input type="email" name="email" id="email">
-    <p>
-        <label for="motDePasse">Mot de passe : </label>
-        <input type="text" name="motDePasse" id="motDePasse">
-    </p>
-    <p>
-        <label for="role">Role : </label>
-        <input type="number" name="role" id="role">
-    </p>
-    <p>
-        <label for="adresse">Adresse : </label>
-        <input type="number" name="adresse" id="adresse">
-    </p>
+        <label for="nom" class="labelAjoutPers">Nom : </label>
+        <input type="text" name="nom" id="nom" class="ChampFormulaireajoutPersonne"/>
 
+        <label for="prenom" class="labelAjoutPers">Prénom : </label>
+        <input type="text" name="prenom" id="prenom" class="ChampFormulaireajoutPersonne"/>
+    </p>
     <p>
+        <label for="dateDeNaissance" class="labelAjoutPers">Date de Naissance : </label>
+        <input type="date" name="dateDeNaissance" id="dateDeNaissance" class="ChampFormulaireajoutPersonne">
 
-        <SELECT id = "select"  name="select" size="1">
+        <label for="email" class="labelAjoutPers">Email : </label>
+        <input type="email" name="email" id="email" class="ChampFormulaireajoutPersonne">
+    <p>
+        <label for="motDePasse" class="labelAjoutPers">Mot de passe : </label>
+        <input type="text" name="motDePasse" id="motDePasse" class="ChampFormulaireajoutPersonne">
+
+        <label for="role" class="labelAjoutPers">Role : </label>
+        <input type="number" name="role" id="role" class="ChampFormulaireajoutPersonne">
+    </p>
+    <p>
+        <label for="role" class="labelAjoutPers">Adresse : </label>
+        <SELECT id="selectAdresse" name="selectAdresse" size="1" class="ChampFormulaireajoutPersonne">
+
             <c:forEach var="adresses" items="${ adresses }">
-            <OPTION name="adresses" id="adresses" >
-                   <c:out value="${ adresses } "/>
-             </c:forEach>
+            <OPTION value="${ adresses.idAdresse }">
+                    <c:out value="${ adresses.nomRue } "/>
+            </c:forEach>
         </SELECT>
-
-
     </p>
-
-    <input type="submit"/>
-
+    <input type="submit" class="boutonAjoutPersonne"/>
 </form>
 
 <table style="width:100%" border="1px solid black">
@@ -70,18 +60,22 @@
         <th>Date de naissance</th>
         <th>Email</th>
         <th>Mot de Passe</th>
+        <th>Adresse</th>
+        <th>Role</th>
     </tr>
     <c:forEach var="personnes" items="${ personnes }">
-        <tr>
-            <td><c:out value="${ personnes.prenom } "/></td>
-            <td><c:out value="${ personnes.nom } "/></td>
-            <td><c:out value="${ personnes.dateDeNaissance } "/></td>
-            <td><c:out value="${ personnes.email } "/></td>
-            <td><c:out value="${ personnes.motDePasse }"/></td>
-        </tr>
+    <tr>
+        <td><c:out value="${ personnes.prenom } "/></td>
+        <td><c:out value="${ personnes.nom } "/></td>
+        <td><c:out value="${ personnes.dateDeNaissance } "/></td>
+        <td><c:out value="${ personnes.email } "/></td>
+        <td><c:out value="${ personnes.motDePasse }"/></td>
+        <td><c:out value="${ personnes.fkAdresse }"/></td>
+        <td><c:out value="${ personnes.fkRole }"/></td>
+    </tr>
     </c:forEach>
 
-    <c:forEach var="adresse" items= "${ adresse }">
+    <c:forEach var="adresse" items="${ adresse }">
         <c:out value="${ adresse.nomRue }"/>
     </c:forEach>
 

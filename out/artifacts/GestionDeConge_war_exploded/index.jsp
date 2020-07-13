@@ -17,7 +17,7 @@
 </head>
 <body>
 <c:import url="/resources/view/header.jsp"/>
-<form method="post" action="login" class="formulaireLogin">
+<form method="GET" action="ajoutpersonne" class="formulaireLogin">
     <legend>BIENVENUE</legend>
     <p>Connexion</p>
     <input type="email" name="email" id="email" class="ChampFormulaire" placeholder="E-mail" for="email"/></br></br>

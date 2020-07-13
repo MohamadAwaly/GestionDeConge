@@ -5,7 +5,6 @@ package com.atc.momo.Jiwaii.dao;
 
 import com.atc.momo.Jiwaii.entities.EntityException;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
-import com.atc.momo.Jiwaii.servlets.Test;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -73,7 +72,7 @@ public class PersonneDaoImpl implements PersonneDao {
         try {
             connection = daoFactory.getConnection();
             statement = connection.createStatement();
-            resultat = statement.executeQuery( "SELECT nom, prenom,dateDeNaissance, email, motDePasse FROM personnes" );
+            resultat = statement.executeQuery( "SELECT nom, prenom,dateDeNaissance, email, motDePasse,fkrole,fkadresse  FROM personnes" );
 
             while ( resultat.next() ) {
                 String nom = resultat.getString( "Nom" );
@@ -81,6 +80,8 @@ public class PersonneDaoImpl implements PersonneDao {
                 Date dateDeNaissance = resultat.getDate( "DateDeNaissance" );
                 String email = resultat.getString( "Email" );
                 String motdePAsse = resultat.getString( "MotDePasse" );
+                int fkrole = resultat.getInt( "FKRole" );
+                int fkadresse = resultat.getInt( "FKAdresse" );
 
                 PersonnesEntity personnesEntity = new PersonnesEntity();
                 personnesEntity.setNom( nom );
@@ -88,6 +89,8 @@ public class PersonneDaoImpl implements PersonneDao {
                 personnesEntity.setDateDeNaissance( dateDeNaissance );
                 personnesEntity.setEmail( email );
                 personnesEntity.setMotDePasse( motdePAsse );
+                personnesEntity.setFkAdresse( fkadresse );
+                personnesEntity.setFkRole( fkrole );
 
                 personnesEntities.add( personnesEntity );
             }

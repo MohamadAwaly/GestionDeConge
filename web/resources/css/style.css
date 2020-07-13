@@ -71,3 +71,40 @@ nav {
 footer {
     text-align: center;
 }
+
+.formulairePersonne{
+    background-color: rgb(30, 150, 252, 0.03);
+    font-size: 100%;
+    padding: 20px 30px 10px;
+    border-radius: 0 0 20px 0;
+    display: flex;
+    flex-flow: column;
+
+}
+.boutonAjoutPersonne{
+    background: #041A6B none repeat scroll 0 0;
+    border: medium none;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: bold;
+    border-width: 1px;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-size: 13px;
+    line-height: 30px;
+    padding: 0 20px;
+    text-transform: uppercase;
+    margin-left: 70%;
+    margin-right: 10%;
+}
+.ChampFormulaireajoutPersonne{
+    width: 20%;
+    padding: 1em 0.5em 0.6em;
+}
+.labelAjoutPers{
+    width: 100%;
+    padding: 1em 0.5em 0.6em;
+    display: inline-block;
+    width: 120px;
+    vertical-align: top;
+}

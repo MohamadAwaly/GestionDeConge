@@ -52,26 +52,14 @@ public class Test extends HttpServlet {
             personnesEntity.setEmail( request.getParameter( "email" ) );
             personnesEntity.setMotDePasse( request.getParameter( "motDePasse" ) );
             personnesEntity.setFkRole( Integer.parseInt( request.getParameter( "role" ) ) );
-            //personnesEntity.setFkAdresse( Integer.parseInt( request.getParameter( "adresse" ) ) );
-
-            Map<Integer, String> mapAdresse = new HashMap<>();
-            //mapAdresse.put( request.getParameter( "select", "adresse") );
-
-
-            request.getParameter( "select" );
+            personnesEntity.setFkAdresse( Integer.parseInt( request.getParameter( "selectAdresse" ) ) );
 
             logger.log( Level.INFO, "A regarder" );
-            logger.log( Level.INFO, "l'adresse est :" + personnesEntity.getFkAdresse() );
+            logger.log( Level.INFO, "l'adresse est :" + request.getParameter( "selectAdresse" ) );
 
-
-
-
-            //adresseEntity.setIdAdresse(Integer.parseInt( request.getParameter( "idaresse" ) ));
-            logger.log( Level.INFO,"Liste Adresse "+request.getParameter( "select" )  );
-            String testNomRue = request.getParameter( "select" );
             personneDao.ajouter( personnesEntity );
             request.setAttribute( "personnes", personneDao.lister() );
-            request.setAttribute( "adresses", adresseDao.mapAdresse() );
+            request.setAttribute( "adresses", adresseDao.lister() );
 
         } catch ( Exception e ) {
             request.setAttribute( "erreur", e.getMessage() );
@@ -83,9 +71,10 @@ public class Test extends HttpServlet {
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        request.setAttribute( "adresses", adresseDao.mapAdresse() );
+
         try {
             request.setAttribute( "personnes", personneDao.lister() );
+            request.setAttribute( "adresses", adresseDao.lister() );
 
         } catch ( DaoException e ) {
             request.setAttribute( "erreur", e.getMessage() );
