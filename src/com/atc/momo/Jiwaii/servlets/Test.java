@@ -9,6 +9,7 @@ import com.atc.momo.Jiwaii.entities.PersonnesEntity;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +22,8 @@ import com.atc.momo.Jiwaii.dao.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet( name = "/Test" )
 public class Test extends HttpServlet {
@@ -49,18 +52,26 @@ public class Test extends HttpServlet {
             personnesEntity.setEmail( request.getParameter( "email" ) );
             personnesEntity.setMotDePasse( request.getParameter( "motDePasse" ) );
             personnesEntity.setFkRole( Integer.parseInt( request.getParameter( "role" ) ) );
-            personnesEntity.setFkAdresse( Integer.parseInt( request.getParameter( "adresse" ) ) );
+            //personnesEntity.setFkAdresse( Integer.parseInt( request.getParameter( "adresse" ) ) );
 
-            AdressesEntity adresseEntity = new AdressesEntity();
+            Map<Integer, String> mapAdresse = new HashMap<>();
+            //mapAdresse.put( request.getParameter( "select", "adresse") );
+
+
+            request.getParameter( "select" );
+
+            logger.log( Level.INFO, "A regarder" );
+            logger.log( Level.INFO, "l'adresse est :" + personnesEntity.getFkAdresse() );
+
+
+
+
             //adresseEntity.setIdAdresse(Integer.parseInt( request.getParameter( "idaresse" ) ));
             logger.log( Level.INFO,"Liste Adresse "+request.getParameter( "select" )  );
             String testNomRue = request.getParameter( "select" );
-
-            int test = 0;
-
             personneDao.ajouter( personnesEntity );
             request.setAttribute( "personnes", personneDao.lister() );
-            request.setAttribute( "adresse", adresseDao.lister() );
+            request.setAttribute( "adresses", adresseDao.mapAdresse() );
 
         } catch ( Exception e ) {
             request.setAttribute( "erreur", e.getMessage() );
@@ -72,7 +83,7 @@ public class Test extends HttpServlet {
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        request.setAttribute( "adresse", adresseDao.lister() );
+        request.setAttribute( "adresses", adresseDao.mapAdresse() );
         try {
             request.setAttribute( "personnes", personneDao.lister() );
 

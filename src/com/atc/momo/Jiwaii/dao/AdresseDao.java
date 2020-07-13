@@ -8,5 +8,6 @@ import java.util.Map;
 public interface AdresseDao {
     //Map<Integer,String> mapAdresse ();
     List<AdressesEntity> lister();
+    Map<Integer,String> mapAdresse();
 
 }

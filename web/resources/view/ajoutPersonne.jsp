@@ -49,9 +49,9 @@
     <p>
 
         <SELECT id = "select"  name="select" size="1">
-            <c:forEach var="adresse" items="${ adresse }">
-            <OPTION name="idaresse" id="idaresse  value = "<c:out value="${ adresse.idAdresse } "/>>
-                   <c:out value="${ adresse.nomRue } "/>
+            <c:forEach var="adresses" items="${ adresses }">
+            <OPTION name="adresses" id="adresses" >
+                   <c:out value="${ adresses } "/>
              </c:forEach>
         </SELECT>
 

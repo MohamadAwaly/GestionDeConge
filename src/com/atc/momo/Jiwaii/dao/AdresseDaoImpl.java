@@ -36,11 +36,11 @@ public class AdresseDaoImpl implements AdresseDao {
             resultat = statement.executeQuery( "SELECT idAdresse,NomRue, Numero FROM adresses" );
             logger.log( Level.INFO, "avant le while" );
             while ( resultat.next() ) {
-                logger.log( Level.INFO, "test");
+                //logger.log( Level.INFO, "test");
                 int idAdresse = resultat.getInt( "idAdresse" );
                 String nomRue = resultat.getString( "NomRue" );
                 int numero = resultat.getInt( "Numero" );
-                logger.log( Level.INFO, idAdresse + " " + nomRue );
+                //logger.log( Level.INFO, idAdresse + " " + nomRue );
 
                 AdressesEntity adresse = new AdressesEntity();
                 adresse.setIdAdresse( idAdresse );
@@ -53,5 +53,39 @@ public class AdresseDaoImpl implements AdresseDao {
 
         }
         return adressesEntities;
+    }
+
+    @Override public Map<Integer, String> mapAdresse() {
+        Map<Integer, String> map = new HashMap<>();
+        //List<AdressesEntity> adressesEntities = new ArrayList<>();
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultat = null;
+        logger.log( Level.INFO, "avant le try" );
+        try {
+            connection = daoFactory.getConnection();
+            statement = connection.createStatement();
+            resultat = statement.executeQuery( "SELECT idAdresse,NomRue, Numero FROM adresses" );
+            logger.log( Level.INFO, "avant le while" );
+            while ( resultat.next() ) {
+                //logger.log( Level.INFO, "test");
+                int idAdresse = resultat.getInt( "idAdresse" );
+                String nomRue = resultat.getString( "NomRue" );
+                int numero = resultat.getInt( "Numero" );
+                //logger.log( Level.INFO, idAdresse + " " + nomRue );
+
+                AdressesEntity adresse = new AdressesEntity();
+                adresse.setIdAdresse( idAdresse );
+                adresse.setNomRue( nomRue );
+                adresse.setNumero( numero );
+                //adressesEntities.add( adresse );
+                map.put( idAdresse,nomRue );
+            }
+
+        } catch ( SQLException e ) {
+
+        }
+        return map;
+
     }
 }

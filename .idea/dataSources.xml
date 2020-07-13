@@ -17,5 +17,15 @@ C:/Users/Gaming/IdeaProjects/GestionDeConge/web/META-INF/context.xml</remarks>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/gestiondeconge</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="gestiondeconge/EclipseLink" uuid="c8266ea3-4701-48ad-80ef-fece6842a7af">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>EclipseLink
+
+C:/Users/Gaming/IdeaProjects/GestionDeConge/src/META-INF/persistence.xml</remarks>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/gestiondeconge</jdbc-url>
+    </data-source>
   </component>
 </project>
