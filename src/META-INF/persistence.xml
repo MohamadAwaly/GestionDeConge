@@ -11,25 +11,25 @@
         <class>com.atc.momo.Jiwaii.entities.JourdecongeautoriseEntity</class>
         <class>com.atc.momo.Jiwaii.entities.PaysEntity</class>
         <class>com.atc.momo.Jiwaii.entities.PersonnejourdecongeautorisetypedemandeEntity</class>
-        <class>com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity</class>
-        <class>com.atc.momo.Jiwaii.entities.PersonnesEntity</class>
-        <class>com.atc.momo.Jiwaii.entities.PersonnesocietesEntity</class>
-        <class>com.atc.momo.Jiwaii.entities.RolesEntity</class>
-        <class>com.atc.momo.Jiwaii.entities.SocietesEntity</class>
-        <class>com.atc.momo.Jiwaii.entities.TypedemandeEntity</class>
-        <class>com.atc.momo.Jiwaii.entities.VillesEntity</class>
-        <properties>
-            <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/gestiondeconge"/>
-            <property name="eclipselink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="eclipselink.jdbc.user" value="root"/>
-            <property name="eclipselink.jdbc.password" value="12345678"/>
+        <!--  <class>com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity</class> -->
+          <class>com.atc.momo.Jiwaii.entities.PersonnesEntity</class>
+          <class>com.atc.momo.Jiwaii.entities.PersonnesocietesEntity</class>
+          <class>com.atc.momo.Jiwaii.entities.RolesEntity</class>
+          <class>com.atc.momo.Jiwaii.entities.SocietesEntity</class>
+          <class>com.atc.momo.Jiwaii.entities.TypedemandeEntity</class>
+          <class>com.atc.momo.Jiwaii.entities.VillesEntity</class>
+          <properties>
+              <property name="eclipselink.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+              <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/gestiondeconge"/>
+              <property name="eclipselink.jdbc.user" value="root"/>
+              <property name="eclipselink.jdbc.password" value="12345678"/>
 
-            <property name='javax.persistence.jdbc.driver' value='com.mysql.jdbc.Driver' />
-            <property name='javax.persistence.jdbc.url' value='jdbc:mysql://localhost:3306/gestiondeconge' />
-            <property name='javax.persistence.jdbc.user' value='root' />
-            <property name='javax.persistence.jdbc.password' value='12345678' />
+              <property name='javax.persistence.jdbc.driver' value='com.mysql.jdbc.Driver' />
+              <property name='javax.persistence.jdbc.url' value='jdbc:mysql://localhost:3306/gestiondeconge' />
+              <property name='javax.persistence.jdbc.user' value='root' />
+              <property name='javax.persistence.jdbc.password' value='12345678' />
 
-            <!--  Optimization #14 - avoid auto flush cost on query execution -->
+              <!--  Optimization #14 - avoid auto flush cost on query execution -->
             <property name="eclipselink.persistence-context.flush-mode" value="commit" />
             <property name="eclipselink.cache.shared.default" value="false"/>
 
@@ -39,6 +39,8 @@
             <property name="eclipselink.connection-pool.node2.min" value="16"/>
             <property name="eclipselink.connection-pool.node2.max" value="16"/>
             <property name="eclipselink.connection-pool.node2.wait" value="300"/>
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
         </properties>
     </persistence-unit>
 </persistence>

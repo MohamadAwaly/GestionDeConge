@@ -73,13 +73,12 @@ footer {
 }
 
 .formulairePersonne{
-    background-color: rgb(30, 150, 252, 0.03);
+    background-color: rgba(35, 150, 248, 0.03);
     font-size: 100%;
     padding: 20px 30px 10px;
     border-radius: 0 0 20px 0;
     display: flex;
     flex-flow: column;
-
 }
 .boutonAjoutPersonne{
     background: #041A6B none repeat scroll 0 0;
@@ -98,13 +97,15 @@ footer {
     margin-right: 10%;
 }
 .ChampFormulaireajoutPersonne{
-    width: 20%;
-    padding: 1em 0.5em 0.6em;
+    width: 15%;
+    padding: 1em 0.5em 0.2em;
+    height: min-content;
+    //vertical-align: top;
 }
 .labelAjoutPers{
     width: 100%;
     padding: 1em 0.5em 0.6em;
     display: inline-block;
     width: 120px;
-    vertical-align: top;
+    //vertical-align: top;
 }

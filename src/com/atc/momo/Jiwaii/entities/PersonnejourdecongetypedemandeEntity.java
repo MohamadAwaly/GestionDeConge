@@ -1,18 +1,21 @@
 package com.atc.momo.Jiwaii.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
-@Entity @Table( name = "personnejourdecongetypedemande", schema = "gestiondeconge") public class PersonnejourdecongetypedemandeEntity {
-    private int idPersonneJourDeCongeTypeDemande;
-    private Integer fkPersonne;
-    private Integer fkJourDeConge;
-    private Date dateDemande;
-    private Date dateReponse;
-    private String messageApprobateur;
-    private Integer fkTypeDemande;
-    private Object aprouver;
+@Entity @Table( name = "personnejourdecongetypedemande", schema = "gestiondeconge" )
+public class PersonnejourdecongetypedemandeEntity implements Serializable {
+    private static final long    serialVersionUID = 1L;
+    private              int     idPersonneJourDeCongeTypeDemande;
+    private              Integer fkPersonne;
+    private              Integer fkJourDeConge;
+    private              Date    dateDemande;
+    private              Date    dateReponse;
+    private              String  messageApprobateur;
+    private              Integer fkTypeDemande;
+    private              Object  aprouver;
 
     @Id @Column( name = "idPersonneJourDeCongeTypeDemande", nullable = false ) public int getIdPersonneJourDeCongeTypeDemande() {
         return idPersonneJourDeCongeTypeDemande;

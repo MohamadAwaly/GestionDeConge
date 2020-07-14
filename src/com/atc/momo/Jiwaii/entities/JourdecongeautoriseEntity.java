@@ -3,7 +3,8 @@ package com.atc.momo.Jiwaii.entities;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity @Table( name = "jourdecongeautorise", schema = "gestiondeconge" ) public class JourdecongeautoriseEntity {
+@Entity @Table( name = "jourdecongeautorise", schema = "gestiondeconge" )
+public class JourdecongeautoriseEntity {
     private int idJourDeCongeAutorise;
     private Integer nbrJourAutorise;
 

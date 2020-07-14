@@ -4,7 +4,8 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
-@Entity @Table( name = "personnejourdecongeautorisetypedemande", schema = "gestiondeconge") public class PersonnejourdecongeautorisetypedemandeEntity {
+@Entity @Table( name = "personnejourdecongeautorisetypedemande", schema = "gestiondeconge")
+public class PersonnejourdecongeautorisetypedemandeEntity {
     private int idPersonneJourDeCongeAutoriseTypeDemande;
     private Integer fkPersonne;
     private Integer fkJourCongeAutorise;
