@@ -1,19 +1,21 @@
 package com.atc.momo.Jiwaii.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity @Table( name = "personnes", schema = "gestiondeconge" )
-public class PersonnesEntity {
-    private int     idPersonne;
-    private String  nom;
-    private String  prenom;
-    private Date    dateDeNaissance;
-    private String  email;
-    private String  motDePasse;
-    private Integer fkRole;
-    private Integer fkAdresse;
+public class PersonnesEntity implements Serializable {
+    private static final long    serialVersionUID = 1L;
+    private              int     idPersonne;
+    private              String  nom;
+    private              String  prenom;
+    private              Date    dateDeNaissance;
+    private              String  email;
+    private              String  motDePasse;
+    private              Integer fkRole;
+    private              Integer fkAdresse;
 
     @Id @Column( name = "idPersonne", nullable = false )
     public int getIdPersonne() {
@@ -29,8 +31,8 @@ public class PersonnesEntity {
         return nom;
     }
 
-    public void setNom( String nom ) throws EntityException{
-        if (nom.length() > 10) // le nom ne doit pas dépasser 10 caractère
+    public void setNom( String nom ) throws EntityException {
+        if ( nom.length() > 10 ) // le nom ne doit pas dépasser 10 caractère
             throw new EntityException( "Le nom est trop grand ! (10 caractère maximum)" );
         else
             this.nom = nom;

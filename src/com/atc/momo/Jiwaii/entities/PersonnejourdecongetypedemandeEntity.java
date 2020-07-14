@@ -6,8 +6,8 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity @Table( name = "personnejourdecongetypedemande", schema = "gestiondeconge" )
-public class PersonnejourdecongetypedemandeEntity implements Serializable {
-    private static final long    serialVersionUID = 1L;
+public class PersonnejourdecongetypedemandeEntity  {
+
     private              int     idPersonneJourDeCongeTypeDemande;
     private              Integer fkPersonne;
     private              Integer fkJourDeConge;
@@ -17,7 +17,8 @@ public class PersonnejourdecongetypedemandeEntity implements Serializable {
     private              Integer fkTypeDemande;
     private              Object  aprouver;
 
-    @Id @Column( name = "idPersonneJourDeCongeTypeDemande", nullable = false ) public int getIdPersonneJourDeCongeTypeDemande() {
+    @Id @Column( name = "idPersonneJourDeCongeTypeDemande", nullable = false )
+    public int getIdPersonneJourDeCongeTypeDemande() {
         return idPersonneJourDeCongeTypeDemande;
     }
 

@@ -1,5 +1,6 @@
 package com.atc.momo.Jiwaii.servlets;
 
+import com.atc.momo.Jiwaii.dao.DaoException;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
 import org.apache.log4j.Level;
 import org.eclipse.persistence.exceptions.EntityManagerSetupException;
@@ -18,11 +19,11 @@ import java.io.Serializable;
 import java.util.List;
 
 @WebServlet( name = "TestEntityManager" )
-public class TestEntityManager extends HttpServlet implements Serializable {
-    private static final long                    serialVersionUID = 1L;
-    final static         org.apache.log4j.Logger logger           = org.apache.log4j.Logger
+public class TestEntityManager extends HttpServlet {
+
+    final static        org.apache.log4j.Logger logger = org.apache.log4j.Logger
             .getLogger( TestEntityManager.class );
-    public static final  String                  VUE              = "/resources/view/test.jsp";
+    public static final String                  VUE    = "/resources/view/test.jsp";
 
     protected void doPost( HttpServletRequest request,
             HttpServletResponse response )
@@ -36,19 +37,17 @@ public class TestEntityManager extends HttpServlet implements Serializable {
         EntityManager entityManager = null;
         try {
             entityManagerFactory = Persistence.createEntityManagerFactory( "gestiondeconge" );
-            //entityManager = entityManagerFactory.createEntityManager();
+            entityManager = entityManagerFactory.createEntityManager();
             logger.log( Level.INFO, "Lecture de tout les personnes" );
             logger.log( Level.INFO, "Entity Manager " + entityManagerFactory );
             PersonnesEntity pers = entityManager.find( PersonnesEntity.class, 1 );
-            logger.log( Level.INFO, "find: " + pers );
-            List<PersonnesEntity> personnes = entityManager.createQuery( "select p from PersonnesEntity p " ).getResultList();
-            for ( PersonnesEntity p : personnes ) {
-                logger.log( Level.INFO, "personnes test" + p.getNom() );
-                //request.setAttribute( "personnes", p );
-            }
 
-        } catch ( PersistenceUnitLoadingException e ) {
-            logger.log( Level.INFO, "message d'erreur" + e.getMessage() );
+            logger.log( Level.INFO, "find: " + pers.getNom() + pers.getEmail() );
+            List<PersonnesEntity> personnes = entityManager.createQuery( "select p from PersonnesEntity p",PersonnesEntity.class ).getResultList();
+            //logger.log( Level.INFO, personnes);
+            request.setAttribute( "personnes", pers );
+            request.setAttribute( "personnestest", personnes );
+
         } finally {
             if ( entityManager != null )
                 entityManager.close();
