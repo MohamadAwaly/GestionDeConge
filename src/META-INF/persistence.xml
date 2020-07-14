@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 
     <persistence-unit name="gestiondeconge" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
@@ -21,6 +21,24 @@
         <properties>
             <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/gestiondeconge"/>
             <property name="eclipselink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="eclipselink.jdbc.user" value="root"/>
+            <property name="eclipselink.jdbc.password" value="12345678"/>
+
+            <property name='javax.persistence.jdbc.driver' value='com.mysql.jdbc.Driver' />
+            <property name='javax.persistence.jdbc.url' value='jdbc:mysql://localhost:3306/gestiondeconge' />
+            <property name='javax.persistence.jdbc.user' value='root' />
+            <property name='javax.persistence.jdbc.password' value='12345678' />
+
+            <!--  Optimization #14 - avoid auto flush cost on query execution -->
+            <property name="eclipselink.persistence-context.flush-mode" value="commit" />
+            <property name="eclipselink.cache.shared.default" value="false"/>
+
+            <property name="eclipselink.logging.level" value="FINEST"/>
+
+            <property name="eclipselink.connection-pool.default.initial" value="1" />
+            <property name="eclipselink.connection-pool.node2.min" value="16"/>
+            <property name="eclipselink.connection-pool.node2.max" value="16"/>
+            <property name="eclipselink.connection-pool.node2.wait" value="300"/>
         </properties>
     </persistence-unit>
 </persistence>

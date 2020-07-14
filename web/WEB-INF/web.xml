@@ -10,6 +10,16 @@
         <servlet-class>com.atc.momo.Jiwaii.servlets.Test</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>TestEntityManager</servlet-name>
+        <servlet-class>com.atc.momo.Jiwaii.servlets.TestEntityManager</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TestEntityManager</servlet-name>
+        <url-pattern>/testEntityManager</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>

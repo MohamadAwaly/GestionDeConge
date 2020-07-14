@@ -24,7 +24,6 @@
     <input type="password" name="pass" id="pass" class="ChampFormulaire" for="pass"/></br></br>
     <p>Mot de passe oublié ? </p>
     <input type="submit" id="boutonConnexion" value="Connexion">
-
 </form>
 </body>
 <footer>

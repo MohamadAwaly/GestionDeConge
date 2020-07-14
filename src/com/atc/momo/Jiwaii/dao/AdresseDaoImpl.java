@@ -51,17 +51,18 @@ public class AdresseDaoImpl implements AdresseDao {
 
         } catch ( SQLException e ) {
             throw new DaoException( "Impossible de communiquer avec la base de donées" );
-        }
-        finally {
+        } finally {
             try {
-                if(connection != null){
+                if ( connection != null ) {
                     connection.close();
                 }
-            } catch ( SQLException e ){
+            } catch ( SQLException e ) {
                 throw new DaoException( "Impossible de communiquer avec la base de donées" );
             }
         }
         return adressesEntities;
     }
+
+
 
 }

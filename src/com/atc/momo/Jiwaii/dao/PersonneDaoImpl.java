@@ -3,8 +3,10 @@ package com.atc.momo.Jiwaii.dao;
  * Ici on retrouve les requête SQL
  */
 
+import com.atc.momo.Jiwaii.entities.AdressesEntity;
 import com.atc.momo.Jiwaii.entities.EntityException;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
+import com.atc.momo.Jiwaii.entities.RolesEntity;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -22,7 +24,7 @@ public class PersonneDaoImpl implements PersonneDao {
         this.daoFactory = daoFactory;
     }
 
-    @Override public void ajouter( PersonnesEntity personnesEntity ) throws DaoException{
+    @Override public void ajouter( PersonnesEntity personnesEntity ) throws DaoException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -45,19 +47,18 @@ public class PersonneDaoImpl implements PersonneDao {
             connection.commit();
         } catch ( SQLException e ) {
             try {
-                if (connection != null){
+                if ( connection != null ) {
                     connection.rollback();
                 }
-            } catch ( SQLException e2 ){
+            } catch ( SQLException e2 ) {
             }
             throw new DaoException( "Impossible de communiquer avec la base de données" );
-        }
-        finally {
+        } finally {
             try {
-                if(connection != null){
+                if ( connection != null ) {
                     connection.close();
                 }
-            } catch ( SQLException e ){
+            } catch ( SQLException e ) {
                 throw new DaoException( "Impossible de communiquer avec la base de donées" );
             }
         }
@@ -65,6 +66,7 @@ public class PersonneDaoImpl implements PersonneDao {
 
     @Override public List<PersonnesEntity> lister() throws DaoException {
         List<PersonnesEntity> personnesEntities = new ArrayList<PersonnesEntity>();
+
         Connection connection = null;
         Statement statement = null;
         ResultSet resultat = null;
@@ -73,15 +75,18 @@ public class PersonneDaoImpl implements PersonneDao {
             connection = daoFactory.getConnection();
             statement = connection.createStatement();
             resultat = statement.executeQuery( "SELECT nom, prenom,dateDeNaissance, email, motDePasse,fkrole,fkadresse  FROM personnes" );
-
+            //resultat = statement.executeQuery(
+            //        "select idPersonne,Nom,Prenom,DateDeNaissance,Email,MotDePasse,NomRue,TypeRole from (personnes, adresses, roles) \n"
+            //                + "where FKRole = idRole and FKAdresse = idAdresse;" );
             while ( resultat.next() ) {
                 String nom = resultat.getString( "Nom" );
                 String prenom = resultat.getString( "Prenom" );
                 Date dateDeNaissance = resultat.getDate( "DateDeNaissance" );
                 String email = resultat.getString( "Email" );
                 String motdePAsse = resultat.getString( "MotDePasse" );
-                int fkrole = resultat.getInt( "FKRole" );
-                int fkadresse = resultat.getInt( "FKAdresse" );
+                int fkrole = resultat.getInt( "fkrole" );
+                int fkadresse = resultat.getInt( "fkadresse" );
+
 
                 PersonnesEntity personnesEntity = new PersonnesEntity();
                 personnesEntity.setNom( nom );
@@ -97,19 +102,17 @@ public class PersonneDaoImpl implements PersonneDao {
 
         } catch ( SQLException e ) {
             throw new DaoException( "Impossible de communiquer avec la base de donées" );
-        } catch ( EntityException e ){
+        } catch ( EntityException e ) {
             throw new DaoException( "Les données de la base sont invalides" );
-        }
-        finally {
+        } finally {
             try {
-                if(connection != null){
+                if ( connection != null ) {
                     connection.close();
                 }
-            } catch ( SQLException e ){
+            } catch ( SQLException e ) {
                 throw new DaoException( "Impossible de communiquer avec la base de donées" );
             }
         }
-
         return personnesEntities;
     }
 }
