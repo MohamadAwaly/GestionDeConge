@@ -14,6 +14,15 @@
         <servlet-name>TestEntityManager</servlet-name>
         <servlet-class>com.atc.momo.Jiwaii.servlets.TestEntityManager</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Personnes</servlet-name>
+        <servlet-class>com.atc.momo.Jiwaii.servlets.Personnes</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Personnes</servlet-name>
+        <url-pattern>/personnes</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>TestEntityManager</servlet-name>

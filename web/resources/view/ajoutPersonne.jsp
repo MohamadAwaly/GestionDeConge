@@ -78,6 +78,7 @@
     <c:forEach var="adresse" items="${ adresse }">
         <c:out value="${ adresse.nomRue }"/>
     </c:forEach>
+</table>
 
 
 </body>
