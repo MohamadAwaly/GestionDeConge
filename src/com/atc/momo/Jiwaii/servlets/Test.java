@@ -43,23 +43,23 @@ public class Test extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        try {
-            PersonnesEntity personnesEntity = new PersonnesEntity();
-            personnesEntity.setNom( request.getParameter( "nom" ) );
-            personnesEntity.setPrenom( request.getParameter( "prenom" ) );
-            personnesEntity.setDateDeNaissance( Date.valueOf( request.getParameter( "dateDeNaissance" ) ) );
-            personnesEntity.setEmail( request.getParameter( "dateDeNaissance" ) );
-            personnesEntity.setEmail( request.getParameter( "email" ) );
-            personnesEntity.setMotDePasse( request.getParameter( "motDePasse" ) );
-            personnesEntity.setFkRole( Integer.parseInt( request.getParameter( "role" ) ) );
-            personnesEntity.setFkAdresse( Integer.parseInt( request.getParameter( "selectAdresse" ) ) );
+       try {
+           PersonnesEntity personnesEntity = new PersonnesEntity();
+           personnesEntity.setNom( request.getParameter( "nom" ) );
+           personnesEntity.setPrenom( request.getParameter( "prenom" ) );
+           personnesEntity.setDateDeNaissance( Date.valueOf( request.getParameter( "dateDeNaissance" ) ) );
+           personnesEntity.setEmail( request.getParameter( "dateDeNaissance" ) );
+           personnesEntity.setEmail( request.getParameter( "email" ) );
+           personnesEntity.setMotDePasse( request.getParameter( "motDePasse" ) );
+           personnesEntity.setFkRole( Integer.parseInt( request.getParameter( "role" ) ) );
+           personnesEntity.setFkAdresse( Integer.parseInt( request.getParameter( "selectAdresse" ) ) );
 
-            logger.log( Level.INFO, "A regarder" );
-            logger.log( Level.INFO, "l'adresse est :" + request.getParameter( "selectAdresse" ) );
+           logger.log( Level.INFO, "A regarder" );
+           logger.log( Level.INFO, "l'adresse est :" + request.getParameter( "selectAdresse" ) );
 
-            personneDao.ajouter( personnesEntity );
-            request.setAttribute( "personnes", personneDao.lister() );
-            request.setAttribute( "adresses", adresseDao.lister() );
+           personneDao.ajouter( personnesEntity );
+           request.setAttribute( "personnes", personneDao.lister() );
+           request.setAttribute( "adresses", adresseDao.lister() );
 
         } catch ( Exception e ) {
             request.setAttribute( "erreur", e.getMessage() );

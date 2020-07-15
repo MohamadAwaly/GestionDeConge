@@ -16,7 +16,10 @@
 </head>
 <body>
 <c:import url="header.jsp"/>
+
+
 <c:if test="${ !empty erreur}"><p style="color: red;"><c:out value="${ erreur }"/></p></c:if>
+
 <table style="width:100%" border="1px solid black">
 
     <tr>

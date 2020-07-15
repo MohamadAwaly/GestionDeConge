@@ -1,0 +1,56 @@
+body {
+    font-family: "Source Code Pro",Tahoma,Serif, cursive;
+    margin: 0px;
+    padding: 0px;
+}
+
+nav {
+    width: 100%;
+    background-color: #424558;
+}
+
+nav ul {
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+nav li {
+    list-style-type: none;
+    float: left;
+}
+
+nav a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 20px;
+    color: #FFFFFF;
+}
+
+.menu-html:hover {
+    border-top: 5px solid #e44d26;
+    background-color: RGBa(228, 77, 38, 0.15);
+
+}
+
+.menu-css:hover {
+    border-top: 5px solid #0070bb;
+    background-color: RGBa(000, 112, 192, 0.15);
+}
+
+.menu-javascript:hover {
+    border-top: 5px solid #f1dc4f;
+    background-color: RGBa(241, 411, 79, 0.15);
+}
+.menu-contact:hover{
+    border-top: 5px solid #BBB;
+    background-color: RGBa(220,220,220,0.15);
+}
+nav li:hover a{
+    padding: 15px 30px 20px 30px;
+}
+
+.table{
+    display: table;
+    margin: 0 auto;
+}
