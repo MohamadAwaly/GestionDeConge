@@ -17,13 +17,28 @@
 </head>
 <body>
 <c:import url="/resources/view/header.jsp"/>
-<form method="GET" action="ajoutpersonne" class="formulaireLogin">
+<form method="POST" action="seconnecter" class="formulaireLogin">
     <legend>BIENVENUE</legend>
     <p>Connexion</p>
-    <input type="email" name="email" id="email" class="ChampFormulaire" placeholder="E-mail" for="email"/></br></br>
-    <input type="password" name="pass" id="pass" class="ChampFormulaire" for="pass"/></br></br>
-    <p>Mot de passe oublié ? </p>
+
+
+    <input type="email" name="email" id="email" class="ChampFormulaire" placeholder="E-mail" for="email"
+           value="<c:out value="${utilisateur.email}"/>" size="20" maxlength="60"/></br></br>
+    <span class="erreur">${form.erreurs['email']}</span>
+
+    <input type="password" name="motdepasse" id="pass" class="ChampFormulaire" for="motdepasse"/></br></br>
+    <span class="erreur">${form.erreurs['motdepasse']}</span>
+
+
     <input type="submit" id="boutonConnexion" value="Connexion">
+    <p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
+
+    <%-- Vérification de la présence d'un objet utilisateur en session --%>
+    <c:if test="${!empty sessionScope.sessionUtilisateur}">
+        <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
+        <p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.sessionUtilisateur.email}</p>
+    </c:if>
+
 </form>
 </body>
 <footer>

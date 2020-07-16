@@ -24,6 +24,16 @@
         <servlet-class>com.atc.momo.Jiwaii.servlets.NouvellePersonne</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>Connexion</servlet-name>
+        <servlet-class>com.atc.momo.Jiwaii.servlets.Connexion</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Connexion</servlet-name>
+        <url-pattern>/seconnecter</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>NouvellePersonne</servlet-name>
         <url-pattern>/nouvellepersonne</url-pattern>
