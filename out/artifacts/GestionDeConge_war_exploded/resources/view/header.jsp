@@ -14,7 +14,7 @@
     <div class="table">
         <ul>
             <li class="menu-html"><a href="personnes">Afficher Employer</a></li>
-            <li class="menu-css"><a href="ajoutpersonne">Afficher Employer</a></li>
+            <li class="menu-css"><a href="nouvellepersonne">Nouvel Employé</a></li>
             <li class="menu-javascript"><a href="ajoutpersonne">Afficher Employer</a></li>
             <li class="menu-contact"><a href="ajoutpersonne">Afficher Employer</a></li>
         </ul>

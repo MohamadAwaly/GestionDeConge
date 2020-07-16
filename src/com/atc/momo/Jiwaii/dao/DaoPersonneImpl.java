@@ -11,6 +11,7 @@ public class DaoPersonneImpl implements DaoPersonne {
     final static         org.apache.log4j.Logger logger                = org.apache.log4j.Logger
             .getLogger( DaoPersonneImpl.class );
     private static final String                  PERSISTENCE_UNIT_NAME = "gestiondeconge";
+    private static final String                  PARAM_EMAIL           = "email";
 
     @Override public void ajouter( PersonnesEntity personne ) throws DaoException {
         EntityManagerFactory entityManagerFactory = null;
@@ -20,12 +21,10 @@ public class DaoPersonneImpl implements DaoPersonne {
             entityManager = entityManagerFactory.createEntityManager();
             EntityTransaction trans = entityManager.getTransaction();
             trans.begin();
-            PersonnesEntity newUser = new PersonnesEntity();
-            entityManager.persist( newUser );
-
-
+            entityManager.persist( personne );
+            trans.commit();
         } catch ( Exception e ) {
-            logger.log( Level.INFO, "Erreur" );
+            logger.log( Level.INFO, "Erreur" + e.getMessage() );
         } finally {
             if ( entityManager != null )
                 entityManager.close();
@@ -37,15 +36,12 @@ public class DaoPersonneImpl implements DaoPersonne {
         EntityManager entityManager = null;
         List<PersonnesEntity> personnesEntities = new ArrayList<PersonnesEntity>();
         try {
+
             entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
             entityManager = entityManagerFactory.createEntityManager();
 
             personnesEntities = entityManager
                     .createQuery( "select p from PersonnesEntity p", PersonnesEntity.class ).getResultList();
-
-            for ( PersonnesEntity str : personnesEntities ) {
-                logger.log( Level.INFO, "restul: " + str );
-            }
 
         } catch ( Exception e ) {
             logger.log( Level.INFO, "Erreur" );
@@ -55,5 +51,31 @@ public class DaoPersonneImpl implements DaoPersonne {
         }
 
         return personnesEntities;
+    }
+
+    @Override public PersonnesEntity userFind( String email, String motDePasse ) throws DaoException {
+        EntityManagerFactory entityManagerFactory = null;
+        EntityManager entityManager = null;
+        List<PersonnesEntity> personnesEntities = new ArrayList<>();
+        PersonnesEntity personne = null;
+       //try {
+       //    entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
+       //    entityManager = entityManagerFactory.createEntityManager();
+       //    Query requete = entityManager.createQuery(
+       //            "select p.email from PersonnesEntity p where p.email = :email and p.motDePasse = :motDePasse" )
+       //    requete.setParameter( PARAM_EMAIL, email);
+       //    try {
+       //        personne = (PersonnesEntity) requete.getSingleResult();
+       //    } catch ( NoResultException e ) {
+       //        return null;
+       //    }
+
+       //} catch ( Exception e ) {
+       //    logger.log( Level.INFO, "Erreur" );
+       //} finally {
+       //    if ( entityManager != null )
+       //        entityManager.close();
+       //}
+        return null;
     }
 }

@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
+enum EnumApprouver {
+    envoyer, traitement, reponseEnvoye
+}
 
 @Entity @Table( name = "personnejourdecongetypedemande", schema = "gestiondeconge" )
 public class PersonnejourdecongetypedemandeEntity  {
@@ -15,7 +18,7 @@ public class PersonnejourdecongetypedemandeEntity  {
     private              Date    dateReponse;
     private              String  messageApprobateur;
     private              Integer fkTypeDemande;
-    private              Object  aprouver;
+    private              EnumApprouver  aprouver;
 
     @Id @Column( name = "idPersonneJourDeCongeTypeDemande", nullable = false )
     public int getIdPersonneJourDeCongeTypeDemande() {
@@ -74,11 +77,11 @@ public class PersonnejourdecongetypedemandeEntity  {
         this.fkTypeDemande = fkTypeDemande;
     }
 
-    @Basic @Column( name = "Aprouver", nullable = true ) public Object getAprouver() {
+    @Basic @Column( name = "Aprouver", nullable = true ) public EnumApprouver getAprouver() {
         return aprouver;
     }
 
-    public void setAprouver( Object aprouver ) {
+    public void setAprouver( EnumApprouver aprouver ) {
         this.aprouver = aprouver;
     }
 

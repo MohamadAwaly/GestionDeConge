@@ -19,6 +19,16 @@
         <servlet-class>com.atc.momo.Jiwaii.servlets.Personnes</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>NouvellePersonne</servlet-name>
+        <servlet-class>com.atc.momo.Jiwaii.servlets.NouvellePersonne</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>NouvellePersonne</servlet-name>
+        <url-pattern>/nouvellepersonne</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>Personnes</servlet-name>
         <url-pattern>/personnes</url-pattern>

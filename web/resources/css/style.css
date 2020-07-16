@@ -72,6 +72,12 @@ footer {
     text-align: center;
 }
 
+H1{
+    display: table;
+    margin: 0 auto;;
+}
+
+/******************Formulaire Personne ************/
 .formulairePersonne{
     background-color: rgba(35, 150, 248, 0.03);
     font-size: 100%;
@@ -98,14 +104,15 @@ footer {
 }
 .ChampFormulaireajoutPersonne{
     width: 15%;
-    padding: 1em 0.5em 0.2em;
-    height: min-content;
-    //vertical-align: top;
+//padding: 1em 0.5em 0.2em;
+    height: auto;
+//vertical-align: top;
 }
 .labelAjoutPers{
     width: 100%;
     padding: 1em 0.5em 0.6em;
     display: inline-block;
-    width: 120px;
-    //vertical-align: top;
+    width: 200px;
+    font-weight: bold;
+//vertical-align: top;
 }

@@ -11,7 +11,7 @@
         <class>com.atc.momo.Jiwaii.entities.JourdecongeautoriseEntity</class>
         <class>com.atc.momo.Jiwaii.entities.PaysEntity</class>
         <class>com.atc.momo.Jiwaii.entities.PersonnejourdecongeautorisetypedemandeEntity</class>
-        <!-- <class>com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity</class> -->
+        <class>com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity</class>
         <class>com.atc.momo.Jiwaii.entities.PersonnesEntity</class>
         <class>com.atc.momo.Jiwaii.entities.PersonnesocietesEntity</class>
         <class>com.atc.momo.Jiwaii.entities.RolesEntity</class>

@@ -15,14 +15,13 @@ import java.io.IOException;
 
 @WebServlet( name = "Personnes" )
 public class Personnes extends HttpServlet {
-    final static         Logger logger           = Logger.getLogger( Personnes.class );
-    private static final long   serialVersionUID = 1L;
+    final static         Logger      logger           = Logger.getLogger( Personnes.class );
+    private static final long        serialVersionUID = 1L;
     private              DaoPersonne personne;
     public static final  String      VUE              = "/resources/view/afficherPersonne.jsp";
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
