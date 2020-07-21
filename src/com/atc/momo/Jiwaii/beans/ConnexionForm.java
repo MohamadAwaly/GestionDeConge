@@ -102,20 +102,23 @@ public class ConnexionForm {
 
         requete.setParameter( "motDePasse", motDePasse );
         try {
+
+            if ( motDePasse != null ) {
+                if ( motDePasse.length() < 3 ) {
+                    throw new Exception( "Le mot de passe doit contenir au moins 3 caractères." );
+                }
+            } else {
+                throw new Exception( "Merci de saisir votre mot de passe." );
+            }
             utilisateur = (PersonnesEntity) requete.getSingleResult();
 
         } catch ( NoResultException e ) {
+            logger.log( Level.INFO,"le mot de passe ne correspond pas a la db" );
         } catch ( Exception e ) {
             throw new DaoException( e.getMessage() );
         }
 
-        if ( motDePasse != null ) {
-            if ( motDePasse.length() < 3 ) {
-                throw new Exception( "Le mot de passe doit contenir au moins 3 caractères." );
-            }
-        } else {
-            throw new Exception( "Merci de saisir votre mot de passe." );
-        }
+
     }
 
     /*
