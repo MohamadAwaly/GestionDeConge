@@ -49,7 +49,6 @@ public class DaoPersonneImpl implements DaoPersonne {
             if ( entityManager != null )
                 entityManager.close();
         }
-
         return personnesEntities;
     }
 

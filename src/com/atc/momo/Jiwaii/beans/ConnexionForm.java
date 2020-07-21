@@ -1,21 +1,25 @@
 package com.atc.momo.Jiwaii.beans;
 
+import com.atc.momo.Jiwaii.dao.DaoException;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
 import com.atc.momo.Jiwaii.servlets.Test;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import javax.persistence.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ConnexionForm {
-    private static final String                  CHAMP_EMAIL = "email";
-    private static final String                  CHAMP_PASS  = "motdepasse";
-    final static        org.apache.log4j.Logger logger      = Logger.getLogger( ConnexionForm.class );
-
-    private String              resultat;
-    private Map<String, String> erreurs = new HashMap<String, String>();
+    private static final String                  CHAMP_EMAIL           = "email";
+    private static final String                  CHAMP_PASS            = "motdepasse";
+    private static final String                  PERSISTENCE_UNIT_NAME = "gestiondeconge";
+    final static         org.apache.log4j.Logger logger                = Logger.getLogger( ConnexionForm.class );
+    private              String                  resultat;
+    private              Map<String, String>     erreurs               = new HashMap<String, String>();
+    private              EntityManagerFactory    entityManagerFactory  = null;
+    private              EntityManager           em;
 
     public String getResultat() {
         return resultat;
@@ -26,6 +30,7 @@ public class ConnexionForm {
     }
 
     public PersonnesEntity connecterUtilisateur( HttpServletRequest request ) {
+
         logger.log( Level.INFO, "méthode" );
         /* Récupération des champs du formulaire */
         String email = getValeurChamp( request, CHAMP_EMAIL );
@@ -35,10 +40,7 @@ public class ConnexionForm {
 
         /* Validation du champ email. */
         try {
-            logger.log( Level.INFO, "try validation du champ email" );
             validationEmail( email );
-            logger.log( Level.INFO, "email Validé " + email );
-
         } catch ( Exception e ) {
             setErreur( CHAMP_EMAIL, e.getMessage() );
         }
@@ -46,7 +48,7 @@ public class ConnexionForm {
 
         /* Validation du champ mot de passe. */
         try {
-            logger.log( Level.INFO, "try validation du champ mdp");
+            logger.log( Level.INFO, "try validation du champ mdp" );
             validationMotDePasse( motDePasse );
         } catch ( Exception e ) {
             setErreur( CHAMP_PASS, e.getMessage() );
@@ -67,9 +69,23 @@ public class ConnexionForm {
      * Valide l'adresse email saisie.
      */
     private void validationEmail( String email ) throws Exception {
-        logger.log( Level.INFO, "méthode validation email");
-        if ( email == null || !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" )) {
-            throw new Exception( "Merci de saisir une adresse mail valide." );
+
+        PersonnesEntity utilisateur = null;
+
+        entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
+        em = entityManagerFactory.createEntityManager();
+        Query requete = (Query) em.createQuery( "select p from PersonnesEntity p WHERE p.email=:email" );
+        requete.setParameter( "email", email );
+        try {
+
+            if ( email == null || !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
+                throw new Exception( "Merci de saisir une adresse mail valide." );
+            }
+            utilisateur = (PersonnesEntity) requete.getSingleResult();
+        } catch ( NoResultException e ) {
+            logger.log( Level.INFO, "L'email ne correspend pas " );
+        } catch ( Exception e ) {
+            throw new DaoException( e.getMessage() );
         }
     }
 
@@ -77,6 +93,22 @@ public class ConnexionForm {
      * Valide le mot de passe saisi.
      */
     private void validationMotDePasse( String motDePasse ) throws Exception {
+        PersonnesEntity utilisateur = null;
+
+        entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
+        em = entityManagerFactory.createEntityManager();
+
+        Query requete = (Query) em.createQuery( "select p from PersonnesEntity p WHERE p.motDePasse=:motDePasse" );
+
+        requete.setParameter( "motDePasse", motDePasse );
+        try {
+            utilisateur = (PersonnesEntity) requete.getSingleResult();
+
+        } catch ( NoResultException e ) {
+        } catch ( Exception e ) {
+            throw new DaoException( e.getMessage() );
+        }
+
         if ( motDePasse != null ) {
             if ( motDePasse.length() < 3 ) {
                 throw new Exception( "Le mot de passe doit contenir au moins 3 caractères." );

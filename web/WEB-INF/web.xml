@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app>
+    //expire après 30mn d'inactivité de l'utilisateur
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>com.atc.momo.Jiwaii.servlets.Login</servlet-class>
