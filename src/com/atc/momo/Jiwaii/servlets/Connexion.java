@@ -36,6 +36,7 @@ public class Connexion extends HttpServlet {
          */
         if ( form.getErreurs().isEmpty() ) {
             session.setAttribute( ATT_SESSION_USER, utilisateur );
+
         } else {
             session.setAttribute( ATT_SESSION_USER, null );
         }
@@ -43,6 +44,7 @@ public class Connexion extends HttpServlet {
         /* Stockage du formulaire et du bean dans l'objet request */
         request.setAttribute( ATT_FORM, form );
         request.setAttribute( ATT_USER, utilisateur );
+
 
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
     }

@@ -8,7 +8,11 @@ import org.apache.log4j.Logger;
 
 import javax.persistence.*;
 import javax.servlet.http.HttpServletRequest;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ConnexionForm {
@@ -40,6 +44,7 @@ public class ConnexionForm {
 
         /* Validation du champ email. */
         try {
+            logger.log( Level.INFO, "try validation du champ email" );
             validationEmail( email );
         } catch ( Exception e ) {
             setErreur( CHAMP_EMAIL, e.getMessage() );
@@ -49,7 +54,7 @@ public class ConnexionForm {
         /* Validation du champ mot de passe. */
         try {
             logger.log( Level.INFO, "try validation du champ mdp" );
-            validationMotDePasse( motDePasse );
+            validationMotDePasse( motDePasse, email );
         } catch ( Exception e ) {
             setErreur( CHAMP_PASS, e.getMessage() );
         }
@@ -74,14 +79,25 @@ public class ConnexionForm {
 
         entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
         em = entityManagerFactory.createEntityManager();
-        Query requete = (Query) em.createQuery( "select p from PersonnesEntity p WHERE p.email=:email" );
+        Query requete = (Query) em.createQuery( "select p.email from PersonnesEntity p WHERE p.email=:email" );
+        //utilisateur = em.createQuery("select p.email from PersonnesEntity p WHERE p.email=:email" );
+
+        // //List<PersonnesEntity> pers = new ArrayList<>();
         requete.setParameter( "email", email );
         try {
 
+            logger.log( Level.INFO, "*********************dans le try if******************" );
             if ( email == null || !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
                 throw new Exception( "Merci de saisir une adresse mail valide." );
             }
-            utilisateur = (PersonnesEntity) requete.getSingleResult();
+            String pers = (String) requete.getSingleResult();
+            if ( pers.equals( email ) ) {
+                logger.log( Level.INFO, "++++++++++++++++pers adresse correct++++++++++++++: " + pers );
+            } else {
+                throw new Exception( "Adresse email incorrecte" );
+            }
+            //utilisateur = (PersonnesEntity) requete.getSingleResult();
+            logger.log( Level.INFO, "L'email  correspend  " );
         } catch ( NoResultException e ) {
             logger.log( Level.INFO, "L'email ne correspend pas " );
         } catch ( Exception e ) {
@@ -92,15 +108,18 @@ public class ConnexionForm {
     /**
      * Valide le mot de passe saisi.
      */
-    private void validationMotDePasse( String motDePasse ) throws Exception {
+    private void validationMotDePasse( String motDePasse, String email ) throws Exception {
         PersonnesEntity utilisateur = null;
 
         entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
         em = entityManagerFactory.createEntityManager();
 
-        Query requete = (Query) em.createQuery( "select p from PersonnesEntity p WHERE p.motDePasse=:motDePasse" );
+        Query requete = (Query) em
+                .createQuery( "select p from PersonnesEntity p WHERE p.motDePasse=:motDePasse and p.email=:email" );
 
         requete.setParameter( "motDePasse", motDePasse );
+        requete.setParameter( "email", email );
+
         try {
 
             if ( motDePasse != null ) {
@@ -111,13 +130,13 @@ public class ConnexionForm {
                 throw new Exception( "Merci de saisir votre mot de passe." );
             }
             utilisateur = (PersonnesEntity) requete.getSingleResult();
+            logger.log( Level.INFO, "le mot de passe correspond a la db" );
 
         } catch ( NoResultException e ) {
-            logger.log( Level.INFO,"le mot de passe ne correspond pas a la db" );
+            logger.log( Level.ERROR, "le mot de passe ne correspond pas a la db" );
         } catch ( Exception e ) {
             throw new DaoException( e.getMessage() );
         }
-
 
     }
 
