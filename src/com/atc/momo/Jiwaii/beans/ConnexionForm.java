@@ -129,6 +129,12 @@ public class ConnexionForm {
             } else {
                 throw new Exception( "Merci de saisir votre mot de passe." );
             }
+            String pers = (String) requete.getSingleResult();
+            if (pers.equals( motDePasse )){
+                logger.log( Level.INFO, "++++++++++++++++pers mot de passe correct++++++++++++++: " + pers );
+            } else
+                throw new Exception("Le mot de passe ne correspond pas a la base de donnée");
+
             utilisateur = (PersonnesEntity) requete.getSingleResult();
             logger.log( Level.INFO, "le mot de passe correspond a la db" );
 
