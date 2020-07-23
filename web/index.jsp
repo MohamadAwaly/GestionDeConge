@@ -16,7 +16,7 @@
     <c:import url="/resources/view/head.jsp"/>
 </head>
 <body>
-<c:import url="/resources/view/header.jsp"/>
+
 <form method="POST" action="seconnecter" class="formulaireLogin">
     <legend>BIENVENUE</legend>
     <p>Connexion</p>

@@ -18,18 +18,19 @@
 <body>
 <c:import url="header.jsp"/>
 <%-- Affichage de la chaîne "message" transmise par la servlet --%>
-<c:if test="${ validation }" var="varValidation" scope="session">
-    </br>
-    <c:out value="validation: ${ validation }"/>
-    <%-- Puis affichage des données enregistrées dans le bean "Utilisateur" transmis par la servlet --%>
-    </br>
-    <c:out value="Email : ${ user.email }"/>
-    </br>
-    <c:out value="mot de passe : ${ user.motDePasse }"/>
-    </br>
-    <c:out value="Calendar: ${ calendar }"/>
+<%--<c:if test="${ validation }" var="varValidation" scope="session">
+  </br>
+  <c:out value="validation: ${ validation }"/>
+  <%-- Puis affichage des données enregistrées dans le bean "Utilisateur" transmis par la servlet --%>
+<%--    </br>
+  <c:out value="Email : ${ user.email }"/>
+  </br>
+  <c:out value="mot de passe : ${ user.motDePasse }"/>
+  </br>
+  <c:out value="Calendar: ${ calendar }"/>
 </c:if>
 
-<c:out value="${ message }"></c:out>
+<c:out value="${ message }"></c:out>--%>
+<c:out value="${ calendar }" />
 </body>
 </html>

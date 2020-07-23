@@ -92,7 +92,7 @@ public class ConnexionForm {
             }
             String pers = (String) requete.getSingleResult();
             if ( pers.equals( email ) ) {
-                logger.log( Level.INFO, "++++++++++++++++pers adresse correct++++++++++++++: " + pers );
+                //logger.log( Level.INFO, "++++++++++++++++pers adresse correct++++++++++++++: " + pers );
             } else {
                 throw new Exception( "Adresse email incorrecte" );
             }
@@ -100,6 +100,7 @@ public class ConnexionForm {
             logger.log( Level.INFO, "L'email  correspend  " );
         } catch ( NoResultException e ) {
             logger.log( Level.INFO, "L'email ne correspend pas " );
+            throw new DaoException( "Adresse email incorrecte" );
         } catch ( Exception e ) {
             throw new DaoException( e.getMessage() );
         }
@@ -115,13 +116,13 @@ public class ConnexionForm {
         em = entityManagerFactory.createEntityManager();
 
         Query requete = (Query) em
-                .createQuery( "select p from PersonnesEntity p WHERE p.motDePasse=:motDePasse and p.email=:email" );
+                .createQuery(
+                        "select p.motDePasse from PersonnesEntity p WHERE p.motDePasse=:motDePasse and p.email=:email" );
 
         requete.setParameter( "motDePasse", motDePasse );
         requete.setParameter( "email", email );
 
         try {
-
             if ( motDePasse != null ) {
                 if ( motDePasse.length() < 3 ) {
                     throw new Exception( "Le mot de passe doit contenir au moins 3 caractères." );
@@ -130,16 +131,18 @@ public class ConnexionForm {
                 throw new Exception( "Merci de saisir votre mot de passe." );
             }
             String pers = (String) requete.getSingleResult();
-            if (pers.equals( motDePasse )){
+            logger.log( Level.INFO, "personne to string" + pers );
+            if ( pers.equals( motDePasse ) ) {
                 logger.log( Level.INFO, "++++++++++++++++pers mot de passe correct++++++++++++++: " + pers );
-            } else
-                throw new Exception("Le mot de passe ne correspond pas a la base de donnée");
+            } else {
+                throw new Exception( "Le mot de passe ne correspond pas a la base de donnée" );
+            }
 
-            utilisateur = (PersonnesEntity) requete.getSingleResult();
+            //utilisateur = (PersonnesEntity) requete.getSingleResult();
             logger.log( Level.INFO, "le mot de passe correspond a la db" );
 
         } catch ( NoResultException e ) {
-            logger.log( Level.ERROR, "le mot de passe ne correspond pas a la db" );
+            throw new Exception( "mot de passe incorrecte" );
         } catch ( Exception e ) {
             throw new DaoException( e.getMessage() );
         }

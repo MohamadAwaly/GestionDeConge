@@ -2,6 +2,9 @@ package com.atc.momo.Jiwaii.servlets;
 
 import com.atc.momo.Jiwaii.beans.ConnexionForm;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
 @WebServlet( name = "Connexion" )
 public class Connexion extends HttpServlet {
@@ -17,9 +22,15 @@ public class Connexion extends HttpServlet {
     public static final String ATT_FORM         = "form";
     public static final String ATT_SESSION_USER = "sessionUtilisateur";
     public static final String VUE              = "/index.jsp";
+    public static final String VUE_ACCUEIL      = "/resources/view/accueil.jsp";
+    final static        Logger logger           = Logger.getLogger( Connexion.class );
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
+        Calendar calendar = Calendar.getInstance();
+        logger.log( Level.INFO,"Calendarrrrrrrrrrrr:" + calendar.getTime() );
+        Date date = new Date();
+
 
         /* Préparation de l'objet formulaire */
         ConnexionForm form = new ConnexionForm();
@@ -44,15 +55,18 @@ public class Connexion extends HttpServlet {
         /* Stockage du formulaire et du bean dans l'objet request */
         request.setAttribute( ATT_FORM, form );
         request.setAttribute( ATT_USER, utilisateur );
+        request.setAttribute( "calendar",calendar.get( Calendar.MONTH ));
 
-
-        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+        if ( form.getErreurs().isEmpty() ) {
+            this.getServletContext().getRequestDispatcher( VUE_ACCUEIL ).forward( request, response );
+        } else {
+            this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+        }
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
 
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
-
     }
 }
