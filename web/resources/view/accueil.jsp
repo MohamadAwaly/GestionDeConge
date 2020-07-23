@@ -31,6 +31,14 @@
 </c:if>
 
 <c:out value="${ message }"></c:out>--%>
-<c:out value="${ calendar }" />
+<c:forEach var="calendar" items="${ calendar }">
+    <tr>
+        <c:out value="${ calendar }" />
+    </tr>
+
+</c:forEach>
+
+
+
 </body>
 </html>
