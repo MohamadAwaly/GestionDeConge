@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 
 @WebServlet( name = "Connexion" )
@@ -29,30 +30,26 @@ public class Connexion extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        Calendar calendar = Calendar.getInstance();
-        logger.log( Level.INFO, "Calendarrrrrrrrrrrr:" + calendar.getTime() );
+
         DateFormatSymbols dfsFR = new DateFormatSymbols( Locale.FRANCE );
-        String[] JourMois = dfsFR.getWeekdays();
+        String[] jourMois = dfsFR.getWeekdays();
         List<String> lsJour = new ArrayList<>();
 
-        for ( int i = 1; i < JourMois.length; i++ ) {
-            logger.log( Level.INFO, "Jourrrrr: " + JourMois[i] );
+        for ( int i = 1; i < jourMois.length; i++ ) {
+            logger.log( Level.INFO, "Jourrrrr: " + jourMois[i] );
             request.setAttribute( "calendar", lsJour );
-            lsJour.add( JourMois[i] );
+            lsJour.add( jourMois[i] );
         }
         request.setAttribute( "calendar", lsJour );
 
         Date date = new Date();
-        // for ( int i = 0; i< 30; i++  ){
-        //     date += i;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime( date );
+        int jour = calendar.get( Calendar.DAY_OF_MONTH );
+        logger.log( Level.INFO, "le jour est: " + jour );
 
-        //     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-        //     String monthNow = dateFormat.format( date );
-        //     request.setAttribute( "calendar",monthNow);
-        // }
-
-
+        calendar.getFirstDayOfWeek();
+        logger.log( Level.INFO,"Nombre des jours dans le mois courant : " + calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
 
 
 
