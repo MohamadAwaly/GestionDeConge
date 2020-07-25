@@ -2,6 +2,7 @@ package com.atc.momo.Jiwaii.servlets;
 
 import com.atc.momo.Jiwaii.beans.ConnexionForm;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
+import model.CalendarTools;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
@@ -40,12 +41,13 @@ public class Connexion extends HttpServlet {
             request.setAttribute( "calendar", lsJour );
             lsJour.add( jourMois[i] );
         }
-        request.setAttribute( "calendar", lsJour );
+
 
         Date date = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime( date );
         int jour = calendar.get( Calendar.DAY_OF_MONTH );
+        request.setAttribute("calendar",CalendarTools.getAWeek());
         logger.log( Level.INFO, "le jour est: " + jour );
 
         calendar.getFirstDayOfWeek();

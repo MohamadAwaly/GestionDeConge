@@ -31,13 +31,21 @@
 </c:if>
 
 <c:out value="${ message }"></c:out>--%>
+<table>
 <c:forEach var="calendar" items="${ calendar }">
+
     <tr>
-        <c:out value="${ calendar }" />
+        <c:forEach var="item" items="${calendar}">
+           <td>
+             <c:out value="${item}"></c:out>
+           </td>
+
+        </c:forEach>
     </tr>
 
-</c:forEach>
 
+</c:forEach>
+</table>
 
 
 </body>
