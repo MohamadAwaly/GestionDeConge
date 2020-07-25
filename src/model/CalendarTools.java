@@ -35,7 +35,7 @@ public class CalendarTools {
             //Lst_Jours.clear();
             for (int iJourDeLaSemaine=1;iJourDeLaSemaine<=7;iJourDeLaSemaine++){
 
-                int JourSurLaSemaine= (iSemaine * 7)+(iJourDeLaSemaine-FirstDayOfWeek+1);
+                int JourSurLaSemaine= (iSemaine * 7)+(iJourDeLaSemaine-FirstDayOfWeek+2); // int JourSurLaSemaine= (iSemaine * 7)+(iJourDeLaSemaine-FirstDayOfWeek+1); 20:55
                 if (JourSurLaSemaine > getMaxDaysInActualyMonth() || JourSurLaSemaine < 1)
                 {
                     //Other month

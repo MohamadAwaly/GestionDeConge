@@ -31,13 +31,30 @@
 </c:if>
 
 <c:out value="${ message }"></c:out>--%>
+<table border="1" cellspacing="1" class="table table-hover">
+    <thead>
+    <td>Lundi</td>
+    <td>Mardi</td>
+    <td>Mercredi</td>
+    <td>Jeudi</td>
+    <td>Vendredi</td>
+    <td>Samedi</td>
+    <td>Dimanche</td>
+    </thead>
 <c:forEach var="calendar" items="${ calendar }">
+
     <tr>
-        <c:out value="${ calendar }" />
+        <c:forEach var="item" items="${calendar}">
+           <td>
+             <c:out value="${item}"></c:out>
+           </td>
+
+        </c:forEach>
     </tr>
 
-</c:forEach>
 
+</c:forEach>
+</table>
 
 
 </body>
