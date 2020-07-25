@@ -72,4 +72,14 @@
         <servlet-name>GestionTestJDBC</servlet-name>
         <url-pattern>/testjdbc</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LabConnection</servlet-name>
+        <servlet-class>com.atc.momo.Jiwaii.servlets.LabConnection</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LabConnection</servlet-name>
+        <url-pattern>/labConnection</url-pattern>
+    </servlet-mapping>
 </web-app>

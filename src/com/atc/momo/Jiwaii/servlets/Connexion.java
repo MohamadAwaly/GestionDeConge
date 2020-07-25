@@ -2,6 +2,7 @@ package com.atc.momo.Jiwaii.servlets;
 
 import com.atc.momo.Jiwaii.beans.ConnexionForm;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
+import model.CalendarTools;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
@@ -35,6 +36,7 @@ public class Connexion extends HttpServlet {
         String[] JourMois = dfsFR.getWeekdays();
         List<String> lsJour = new ArrayList<>();
 
+
         for ( int i = 1; i < JourMois.length; i++ ) {
             logger.log( Level.INFO, "Jourrrrr: " + JourMois[i] );
             request.setAttribute( "calendar", lsJour );
@@ -43,14 +45,17 @@ public class Connexion extends HttpServlet {
         request.setAttribute( "calendar", lsJour );
 
         Date date = new Date();
-        // for ( int i = 0; i< 30; i++  ){
-        //     date += i;
+        Calendar myCalendar = Calendar.getInstance();
+        int MaxDayInMonth = CalendarTools.getMaxDaysInActualyMonth();
+        CalendarTools.getAWeek();
 
-        //     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        for ( int i = 0; i< 30; i++  ){
 
-        //     String monthNow = dateFormat.format( date );
-        //     request.setAttribute( "calendar",monthNow);
-        // }
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+            String monthNow = dateFormat.format( date );
+            request.setAttribute( "calendar",monthNow);
+        }
 
 
 

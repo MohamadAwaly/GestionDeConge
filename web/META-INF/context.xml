@@ -23,7 +23,7 @@
     -->
     <Resource name="jdbc/jpa" auth="Container" type="javax.sql.DataSource"
               maxActive="100" maxIdle="30" maxWait="10000"
-              username="root" password="12345678"
+              username="public" password="ATC12345678"
               driverClassName="com.mysql.jdbc.Driver"
               url="jdbc:mysql://localhost:3306/gestiondeconge?autoReconnect=true"/>
 </Context>

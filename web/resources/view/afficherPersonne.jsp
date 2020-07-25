@@ -42,6 +42,7 @@
             <td><c:out value="${ personnes.fkRole }"/></td>
         </tr>
     </c:forEach>
+    
 
 </table>
 </body>
