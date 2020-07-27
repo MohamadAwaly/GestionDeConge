@@ -33,6 +33,16 @@
         <servlet-class>com.atc.momo.Jiwaii.servlets.Connexion</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>Sosietes</servlet-name>
+        <servlet-class>com.atc.momo.Jiwaii.servlets.Sosietes</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Sosietes</servlet-name>
+        <url-pattern>/societes</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>Connexion</servlet-name>
         <url-pattern>/seconnecter</url-pattern>

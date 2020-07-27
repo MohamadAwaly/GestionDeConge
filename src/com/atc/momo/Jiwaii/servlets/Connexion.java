@@ -47,6 +47,7 @@ public class Connexion extends HttpServlet {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime( date );
         int jour = calendar.get( Calendar.DAY_OF_MONTH );
+
         request.setAttribute("calendar",CalendarTools.getAWeek());
         logger.log( Level.INFO, "le jour est: " + jour );
 
