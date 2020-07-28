@@ -29,6 +29,7 @@ public class ConnexionForm {
     private              Map<String, String>     erreurs               = new HashMap<String, String>();
     private              EntityManagerFactory    entityManagerFactory  = null;
     private              EntityManager           em;
+    private int firstResult;
 
     public String getResultat() {
         return resultat;
@@ -46,12 +47,8 @@ public class ConnexionForm {
         String motDePasse = getValeurChamp( request, CHAMP_PASS );
 
         PersonnesEntity utilisateur = new PersonnesEntity();
-        PersonnesEntity utilisateur1 = new PersonnesEntity();
 
-        utilisateur1 = infoPersonneConnecter(email);
-        logger.log( Level.INFO,"id" + utilisateur1.getIdPersonne() );
-        logger.log( Level.INFO,"nom" + utilisateur1.getNom() );
-        logger.log( Level.INFO,"prenom" + utilisateur1.getPrenom() );
+        logger.log( Level.INFO, "champ email: " + email );
 
         /* Validation du champ email. */
         try {
@@ -81,9 +78,8 @@ public class ConnexionForm {
             try {
                 utilisateur = userDao.userFind(email,motDePasse);
             } catch (DaoException e) {
-                e.printStackTrace();
+                e.getMessage();
             }
-
             resultat = "Succès de la connexion.";
         } else {
             resultat = "Échec de la connexion.";
@@ -96,20 +92,6 @@ public class ConnexionForm {
      * Recuepre toutes les info de la personne connecter
      */
 
-    private PersonnesEntity infoPersonneConnecter( String email ) throws Exception {
-        PersonnesEntity utilisateur = null;
-
-        entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
-        em = entityManagerFactory.createEntityManager();
-        //List<PersonnesEntity> personnesEntities = new ArrayList<PersonnesEntity>();
-        utilisateur = (PersonnesEntity) em.createQuery( "select p from PersonnesEntity p WHERE p.email=:email" ).getSingleResult();
-
-
-       // utilisateur.setIdPersonne( requete.getFirstResul );
-       // requete.setParameter( "email", email );
-        return utilisateur;
-
-    }
 
     /**
      * Valide l'adresse email saisie.
@@ -124,7 +106,7 @@ public class ConnexionForm {
 
         //utilisateur = em.createQuery("select p.email from PersonnesEntity p WHERE p.email=:email" );
 
-        // //List<PersonnesEntity> pers = new ArrayList<>();
+        //List<PersonnesEntity> pers = new ArrayList<>();
         requete.setParameter( "email", email );
         try {
 
