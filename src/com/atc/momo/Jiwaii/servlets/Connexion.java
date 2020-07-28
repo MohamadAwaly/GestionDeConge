@@ -71,7 +71,6 @@ public class Connexion extends HttpServlet {
          */
         if ( form.getErreurs().isEmpty() ) {
             session.setAttribute( ATT_SESSION_USER, utilisateur );
-
         } else {
             session.setAttribute( ATT_SESSION_USER, null );
         }

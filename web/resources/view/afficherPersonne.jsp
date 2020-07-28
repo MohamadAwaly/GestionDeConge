@@ -19,7 +19,7 @@
 
 
 <c:if test="${ !empty erreur}"><p style="color: red;"><c:out value="${ erreur }"/></p></c:if>
-
+<p>Que voulez vous faire <c:out value="${sessionScope.sessionUtilisateur.prenom}"/> <c:out value="${sessionScope.sessionUtilisateur.nom}"/>
 <table style="width:100%" border="1px solid black">
 
     <tr>

@@ -17,6 +17,8 @@
 </head>
 <body>
 <c:import url="header.jsp"/>
+<p>Bienvenue <c:out value="${sessionScope.sessionUtilisateur.prenom}"/> <c:out value="${sessionScope.sessionUtilisateur.nom}"/>
+</p>
 <%-- Affichage de la chaîne "message" transmise par la servlet --%>
 <%--<c:if test="${ validation }" var="varValidation" scope="session">
   </br>

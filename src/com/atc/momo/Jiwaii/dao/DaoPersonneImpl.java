@@ -34,13 +34,13 @@ public class DaoPersonneImpl implements DaoPersonne {
     @Override public List<PersonnesEntity> lister() throws DaoException {
         EntityManagerFactory entityManagerFactory = null;
         EntityManager entityManager = null;
-        List<PersonnesEntity> personnesEntities = new ArrayList<PersonnesEntity>();
+        List<PersonnesEntity> lst_personnesEntities = new ArrayList<PersonnesEntity>();
         try {
 
             entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
             entityManager = entityManagerFactory.createEntityManager();
 
-            personnesEntities = entityManager
+            lst_personnesEntities = entityManager
                     .createQuery( "select p from PersonnesEntity p", PersonnesEntity.class ).getResultList();
 
         } catch ( Exception e ) {
@@ -49,32 +49,27 @@ public class DaoPersonneImpl implements DaoPersonne {
             if ( entityManager != null )
                 entityManager.close();
         }
-        return personnesEntities;
+        return lst_personnesEntities;
     }
 
     @Override public PersonnesEntity userFind( String email, String motDePasse ) throws DaoException {
-        EntityManagerFactory entityManagerFactory = null;
-        EntityManager entityManager = null;
-        List<PersonnesEntity> personnesEntities = new ArrayList<>();
-        PersonnesEntity personne = null;
-       //try {
-       //    entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
-       //    entityManager = entityManagerFactory.createEntityManager();
-       //    Query requete = entityManager.createQuery(
-       //            "select p.email from PersonnesEntity p where p.email = :email and p.motDePasse = :motDePasse" )
-       //    requete.setParameter( PARAM_EMAIL, email);
-       //    try {
-       //        personne = (PersonnesEntity) requete.getSingleResult();
-       //    } catch ( NoResultException e ) {
-       //        return null;
-       //    }
+        EntityManager em = getInstanceEntity(PERSISTENCE_UNIT_NAME);
+        PersonnesEntity personne;
+        Query query = em.createQuery("select p from PersonnesEntity p where p.motDePasse = :motDePasse and p.email = :email", PersonnesEntity.class );
+        query.setParameter("email",email);
+        query.setParameter("motDePasse",motDePasse);
+        personne = (PersonnesEntity) query.getSingleResult();
 
-       //} catch ( Exception e ) {
-       //    logger.log( Level.INFO, "Erreur" );
-       //} finally {
-       //    if ( entityManager != null )
-       //        entityManager.close();
-       //}
-        return null;
+
+        logger.log(Level.INFO,personne.getNom());
+        logger.log(Level.INFO,personne.getDateDeNaissance());
+        logger.log(Level.INFO,personne.getPrenom());
+
+        return personne;
+    }
+    private EntityManager getInstanceEntity (String PERSISTENCE){
+       EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE );
+       EntityManager entityManager = entityManagerFactory.createEntityManager();
+       return entityManager;
     }
 }

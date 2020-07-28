@@ -1,6 +1,9 @@
 package com.atc.momo.Jiwaii.beans;
 
 import com.atc.momo.Jiwaii.dao.DaoException;
+import com.atc.momo.Jiwaii.dao.DaoPersonne;
+import com.atc.momo.Jiwaii.dao.DaoPersonneImpl;
+import com.atc.momo.Jiwaii.entities.EntityException;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
 import com.atc.momo.Jiwaii.servlets.Test;
 import org.apache.log4j.Level;
@@ -60,8 +63,19 @@ public class ConnexionForm {
         }
         utilisateur.setMotDePasse( motDePasse );
 
+
+
+
+
         /* Initialisation du résultat global de la validation. */
         if ( erreurs.isEmpty() ) {
+            DaoPersonne userDao = new DaoPersonneImpl();
+            try {
+                utilisateur = userDao.userFind(email,motDePasse);
+            } catch (DaoException e) {
+                e.printStackTrace();
+            }
+
             resultat = "Succès de la connexion.";
         } else {
             resultat = "Échec de la connexion.";
@@ -80,6 +94,7 @@ public class ConnexionForm {
         entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
         em = entityManagerFactory.createEntityManager();
         Query requete = (Query) em.createQuery( "select p.email from PersonnesEntity p WHERE p.email=:email" );
+
         //utilisateur = em.createQuery("select p.email from PersonnesEntity p WHERE p.email=:email" );
 
         // //List<PersonnesEntity> pers = new ArrayList<>();
