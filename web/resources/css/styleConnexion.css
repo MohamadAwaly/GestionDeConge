@@ -71,3 +71,8 @@ nav {
 footer {
     text-align: center;
 }
+
+.table{
+    border: 2px solid black;
+    mso-cellspacing: 1px;
+}

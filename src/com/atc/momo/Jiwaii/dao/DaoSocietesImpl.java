@@ -1,19 +1,21 @@
 package com.atc.momo.Jiwaii.dao;
 
-import com.atc.momo.Jiwaii.entities.PersonnesEntity;
+import com.atc.momo.Jiwaii.entities.SocietesEntity;
 import org.apache.log4j.Level;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DaoPersonneImpl implements DaoPersonne {
+public class DaoSocietesImpl implements DaoSociete {
     final static         org.apache.log4j.Logger logger                = org.apache.log4j.Logger
-            .getLogger( DaoPersonneImpl.class );
+            .getLogger( DaoSocietesImpl.class );
     private static final String                  PERSISTENCE_UNIT_NAME = "gestiondeconge";
-    private static final String                  PARAM_EMAIL           = "email";
 
-    @Override public void ajouter( PersonnesEntity personne ) throws DaoException {
+    @Override public void ajouter( SocietesEntity societe ) throws DaoException {
         EntityManagerFactory entityManagerFactory = null;
         EntityManager entityManager = null;
         try {
@@ -21,7 +23,7 @@ public class DaoPersonneImpl implements DaoPersonne {
             entityManager = entityManagerFactory.createEntityManager();
             EntityTransaction trans = entityManager.getTransaction();
             trans.begin();
-            entityManager.persist( personne );
+            entityManager.persist( societe );
             trans.commit();
         } catch ( Exception e ) {
             logger.log( Level.INFO, "Erreur" + e.getMessage() );
@@ -29,19 +31,18 @@ public class DaoPersonneImpl implements DaoPersonne {
             if ( entityManager != null )
                 entityManager.close();
         }
+
     }
 
-    @Override public List<PersonnesEntity> lister() throws DaoException {
+    @Override public List<SocietesEntity> lister() throws DaoException {
+
         EntityManagerFactory entityManagerFactory = null;
         EntityManager entityManager = null;
-        List<PersonnesEntity> personnesEntities = new ArrayList<PersonnesEntity>();
+        List<SocietesEntity> societesEntities = new ArrayList<SocietesEntity>();
         try {
-
             entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
             entityManager = entityManagerFactory.createEntityManager();
-
-            personnesEntities = entityManager
-                    .createQuery( "select p from PersonnesEntity p", PersonnesEntity.class ).getResultList();
+            societesEntities = entityManager.createQuery( "select s from SocietesEntity s" ).getResultList();
 
         } catch ( Exception e ) {
             logger.log( Level.INFO, "Erreur" );
@@ -49,8 +50,7 @@ public class DaoPersonneImpl implements DaoPersonne {
             if ( entityManager != null )
                 entityManager.close();
         }
-        return personnesEntities;
+        return societesEntities;
+
     }
-
-
 }
