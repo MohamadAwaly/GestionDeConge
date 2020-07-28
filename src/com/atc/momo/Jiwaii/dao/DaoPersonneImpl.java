@@ -1,6 +1,7 @@
 package com.atc.momo.Jiwaii.dao;
 
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
+import com.atc.momo.Jiwaii.servlets.Personnes;
 import org.apache.log4j.Level;
 
 import javax.persistence.*;
@@ -52,5 +53,21 @@ public class DaoPersonneImpl implements DaoPersonne {
         return personnesEntities;
     }
 
+    @Override public PersonnesEntity userFind( String email, String motDePasse ) throws DaoException {
+        EntityManager em = getEntityManager(PERSISTENCE_UNIT_NAME);
+        PersonnesEntity personne;
+        Query query = em.createQuery("select p from PersonnesEntity p where p.email=:email and p.motDePasse =:motDePasse ", PersonnesEntity.class );
+        query.setParameter("email",email);
+        query.setParameter("motDePasse",motDePasse);
+        personne = (PersonnesEntity)query.getSingleResult();
+
+        return personne;
+    }
+    private EntityManager getEntityManager(String PERSISTANCE){
+      EntityManagerFactory  entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTANCE );
+      EntityManager  entityManager = entityManagerFactory.createEntityManager();
+
+      return entityManager;
+    }
 
 }

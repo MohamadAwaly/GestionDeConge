@@ -2,7 +2,7 @@
 <web-app>
     //expire après 30mn d'inactivité de l'utilisateur
     <session-config>
-        <session-timeout>1</session-timeout>
+        <session-timeout>32</session-timeout>
     </session-config>
     <servlet>
         <servlet-name>Login</servlet-name>
