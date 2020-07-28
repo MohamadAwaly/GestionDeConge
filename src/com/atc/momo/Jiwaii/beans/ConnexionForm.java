@@ -2,6 +2,7 @@ package com.atc.momo.Jiwaii.beans;
 
 import com.atc.momo.Jiwaii.dao.DaoException;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
+import com.atc.momo.Jiwaii.servlets.Personnes;
 import com.atc.momo.Jiwaii.servlets.Test;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class ConnexionForm {
     private static final String                  CHAMP_EMAIL           = "email";
@@ -33,7 +35,7 @@ public class ConnexionForm {
         return erreurs;
     }
 
-    public PersonnesEntity connecterUtilisateur( HttpServletRequest request ) {
+    public PersonnesEntity connecterUtilisateur( HttpServletRequest request ) throws Exception {
 
         logger.log( Level.INFO, "méthode" );
         /* Récupération des champs du formulaire */
@@ -41,6 +43,12 @@ public class ConnexionForm {
         String motDePasse = getValeurChamp( request, CHAMP_PASS );
 
         PersonnesEntity utilisateur = new PersonnesEntity();
+        PersonnesEntity utilisateur1 = new PersonnesEntity();
+
+        utilisateur1 = infoPersonneConnecter(email);
+        logger.log( Level.INFO,"id" + utilisateur1.getIdPersonne() );
+        logger.log( Level.INFO,"nom" + utilisateur1.getNom() );
+        logger.log( Level.INFO,"prenom" + utilisateur1.getPrenom() );
 
         /* Validation du champ email. */
         try {
@@ -71,11 +79,30 @@ public class ConnexionForm {
     }
 
     /**
+     * Recuepre toutes les info de la personne connecter
+     */
+
+    private PersonnesEntity infoPersonneConnecter( String email ) throws Exception {
+        PersonnesEntity utilisateur = null;
+
+        entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
+        em = entityManagerFactory.createEntityManager();
+        //List<PersonnesEntity> personnesEntities = new ArrayList<PersonnesEntity>();
+        utilisateur = (PersonnesEntity) em.createQuery( "select p from PersonnesEntity p WHERE p.email=:email" ).getSingleResult();
+
+
+       // utilisateur.setIdPersonne( requete.getFirstResul );
+       // requete.setParameter( "email", email );
+        return utilisateur;
+
+    }
+
+    /**
      * Valide l'adresse email saisie.
      */
     private void validationEmail( String email ) throws Exception {
 
-        PersonnesEntity utilisateur = null;
+        //PersonnesEntity utilisateur = null;
 
         entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
         em = entityManagerFactory.createEntityManager();
@@ -110,7 +137,7 @@ public class ConnexionForm {
      * Valide le mot de passe saisi.
      */
     private void validationMotDePasse( String motDePasse, String email ) throws Exception {
-        PersonnesEntity utilisateur = null;
+        //PersonnesEntity utilisateur = null;
 
         entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
         em = entityManagerFactory.createEntityManager();

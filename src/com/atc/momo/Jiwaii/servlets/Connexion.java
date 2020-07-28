@@ -61,7 +61,12 @@ public class Connexion extends HttpServlet {
         ConnexionForm form = new ConnexionForm();
 
         /* Traitement de la requête et récupération du bean en résultant */
-        PersonnesEntity utilisateur = form.connecterUtilisateur( request );
+        PersonnesEntity utilisateur = null;
+        try {
+            utilisateur = form.connecterUtilisateur( request );
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
 
         /* Récupération de la session depuis la requête */
         HttpSession session = request.getSession();
@@ -82,7 +87,7 @@ public class Connexion extends HttpServlet {
         request.setAttribute( ATT_USER, utilisateur );
 
         if ( form.getErreurs().isEmpty() ) {
-            this.getServletContext().getRequestDispatcher( VUE_ACCUEIL ).forward( request, response );
+            this.getServletContext().getRequestDispatcher( VUE_ACCUEIL  ).forward( request, response );
         } else {
             this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
         }
