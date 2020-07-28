@@ -42,8 +42,29 @@
             <td><c:out value="${ personnes.fkRole }"/></td>
         </tr>
     </c:forEach>
-    
-
 </table>
+
+<table style="width:100%" border="1px solid black">
+
+    <tr>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Email</th>
+        <th>Adresse rue</th>
+        <th>Numéro</th>
+    </tr>
+    <c:forEach var="adresse" items="${adresse}">
+        <tr>
+            <td><c:out value="${ adresse[0] } "/></td>
+            <td><c:out value="${ adresse[1] } "/></td>
+            <td><c:out value="${ adresse[2] } "/></td>
+            <td><c:out value="${ adresse[3] } "/></td>
+            <td><c:out value="${ adresse[4] }"/></td>
+
+        </tr>
+    </c:forEach>
+</table>
+
+
 </body>
 </html>

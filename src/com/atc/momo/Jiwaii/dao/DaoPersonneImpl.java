@@ -14,6 +14,14 @@ public class DaoPersonneImpl implements DaoPersonne {
     private static final String                  PERSISTENCE_UNIT_NAME = "gestiondeconge";
     private static final String                  PARAM_EMAIL           = "email";
 
+    public List<Object[]> laListeDeOufs(){
+        EntityManager em = getEntityManager(PERSISTENCE_UNIT_NAME);
+        Query query = em.createQuery("select p.nom, p.prenom,p.email, a.nomRue,a.numero " +
+                "from PersonnesEntity p  join AdressesEntity a ON p.fkAdresse=a.idAdresse");
+        List<Object[]> list = query.getResultList();
+
+        return list;
+    }
     @Override public void ajouter( PersonnesEntity personne ) throws DaoException {
         EntityManagerFactory entityManagerFactory = null;
         EntityManager entityManager = null;
@@ -59,7 +67,7 @@ public class DaoPersonneImpl implements DaoPersonne {
         Query query = em.createQuery("select p from PersonnesEntity p where p.email=:email and p.motDePasse =:motDePasse ", PersonnesEntity.class );
         query.setParameter("email",email);
         query.setParameter("motDePasse",motDePasse);
-        personne = (PersonnesEntity)query.getSingleResult();
+        personne = (PersonnesEntity) query.getSingleResult();
 
         return personne;
     }

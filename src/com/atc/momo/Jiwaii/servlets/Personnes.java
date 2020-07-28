@@ -30,6 +30,7 @@ public class Personnes extends HttpServlet {
 
         try {
             request.setAttribute( "personnes", pers.lister() );
+            request.setAttribute("adresse",pers.laListeDeOufs());
         } catch ( DaoException e ) {
             request.setAttribute( "erreur", e.getMessage() );
         }

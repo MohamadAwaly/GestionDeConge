@@ -11,4 +11,5 @@ public interface DaoPersonne {
     //Liste les personnes présent dans la table
     List<PersonnesEntity> lister() throws DaoException;
     PersonnesEntity userFind(String email,String motDePasse) throws DaoException;
+    public List<Object[]> laListeDeOufs();
 }
