@@ -9,6 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <head>
     <link rel="stylesheet" type="text/css" href="resources/css/styleheader.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/styleSession.css">
 </head>
 <nav>
     <div class="table">
@@ -22,6 +23,10 @@
 </nav>
 <header>
     <h1>Gestion de congé</h1>
+    <div class="nomSession">
+        <p><c:out value="${sessionScope.sessionUtilisateur.prenom}"/> <c:out value="${sessionScope.sessionUtilisateur.nom}"/>
+    </div>
+
 </header>
 <body>
 

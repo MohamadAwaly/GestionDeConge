@@ -21,7 +21,6 @@
 <form method="post" action="nouvellepersonne" class="formulairePersonne">
     <fieldset>
         <legend> ******* Nouvel employé *******</legend>
-
         <p>
             <label for="nom" class="labelAjoutPers">Nom : </label>
             <input type="text" name="nom" id="nom" class="ChampFormulaireajoutPersonne"/>

@@ -19,30 +19,6 @@
 
 
 <c:if test="${ !empty erreur}"><p style="color: red;"><c:out value="${ erreur }"/></p></c:if>
-<p>Que voulez vous faire <c:out value="${sessionScope.sessionUtilisateur.prenom}"/> <c:out value="${sessionScope.sessionUtilisateur.nom}"/>
-<table style="width:100%" border="1px solid black">
-
-    <tr>
-        <th>Nom</th>
-        <th>Prenom</th>
-        <th>Date de naissance</th>
-        <th>Email</th>
-        <th>Mot de Passe</th>
-        <th>Adresse</th>
-        <th>Role</th>
-    </tr>
-    <c:forEach var="personnes" items="${ personnes }">
-        <tr>
-            <td><c:out value="${ personnes.prenom } "/></td>
-            <td><c:out value="${ personnes.nom } "/></td>
-            <td><c:out value="${ personnes.dateDeNaissance } "/></td>
-            <td><c:out value="${ personnes.email } "/></td>
-            <td><c:out value="${ personnes.motDePasse }"/></td>
-            <td><c:out value="${ personnes.fkAdresse }"/></td>
-            <td><c:out value="${ personnes.fkRole }"/></td>
-        </tr>
-    </c:forEach>
-</table>
 
 <table style="width:100%" border="1px solid black">
 
@@ -52,6 +28,8 @@
         <th>Email</th>
         <th>Adresse rue</th>
         <th>Numéro</th>
+        <th>Ville</th>
+        <th>Role</th>
     </tr>
     <c:forEach var="adresse" items="${adresse}">
         <tr>
@@ -60,6 +38,8 @@
             <td><c:out value="${ adresse[2] } "/></td>
             <td><c:out value="${ adresse[3] } "/></td>
             <td><c:out value="${ adresse[4] }"/></td>
+            <td><c:out value="${ adresse[5] }"/></td>
+            <td><c:out value="${ adresse[6] }"/></td>
 
         </tr>
     </c:forEach>

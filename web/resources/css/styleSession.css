@@ -1,0 +1,12 @@
+.nomSession{
+    font: 100% Arial, Helvetica, sans-serif;
+    font-family: "Source Code Pro",Tahoma,Serif, cursive;
+    color: #402300;
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+    background-color: rgb(242,242,242);
+    font-size: 13px;
+    top: 0;
+    right: 0;
+    position: fixed;
+}
