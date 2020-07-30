@@ -1,6 +1,8 @@
 package com.atc.momo.Jiwaii.servlets;
 
 import com.atc.momo.Jiwaii.dao.*;
+import com.atc.momo.Jiwaii.entities.JourdecongeautoriseEntity;
+import com.atc.momo.Jiwaii.entities.PersonnejourdecongeautorisetypedemandeEntity;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -35,14 +37,26 @@ public class NouvellePersonne extends HttpServlet {
             personnesEntity.setMotDePasse( request.getParameter( "motDePasse" ) );
             personnesEntity.setFkRole( Integer.parseInt( request.getParameter( "selectrole" ) ) );
             personnesEntity.setFkAdresse( Integer.parseInt( request.getParameter( "selectAdresse" ) ) );
-
-            logger.log( Level.INFO, "A regarder" );
-            logger.log( Level.INFO, "l'adresse est :" + request.getParameter( "selectAdresse" ) );
-            logger.log( Level.INFO, "le role est :" + request.getParameter( "selectrole" ) );
-
             newUSer.ajouter( personnesEntity );
+
+            int idPersonne = personnesEntity.getIdPersonne();
+            logger.log( Level.INFO,"idPersonne : " + idPersonne );
+
+            PersonnejourdecongeautorisetypedemandeEntity aDroit = new PersonnejourdecongeautorisetypedemandeEntity();
+            //aDroit.setFkPersonne( idPersonne );
+            aDroit.setFkJourCongeAutorise( Integer.parseInt( request.getParameter( "holiday" ) ) );
+            aDroit.setDateDebut(Date.valueOf( request.getParameter( "dateDebut" ) )  );
+            aDroit.setDateFin( Date.valueOf( request.getParameter( "dateFin" ) ) );
+            //aDroit.setFkTypeDemandes(  );
+            JourdecongeautoriseEntity holidays = new JourdecongeautoriseEntity();
+
+            holidays.setNbrJourAutorise( Integer.parseInt( request.getParameter( "holiday" ) ) );
+
+
+            //newUSer.dayHoliday( holidays );
+            newUSer.ajouterdayOff( aDroit );
             //DaoPersonne pers = new DaoPersonneImpl();
-            request.setAttribute( "personnes", newUSer.lister() );
+            request.setAttribute( "personnes", newUSer.laListeDeOufs() );
 
         } catch ( Exception e ) {
             request.setAttribute( "erreur", e.getMessage() );
@@ -57,6 +71,7 @@ public class NouvellePersonne extends HttpServlet {
         try {
             request.setAttribute( "adresses", adresse.lister() );
             request.setAttribute( "role", role.lister() );
+            request.setAttribute( "holiday",newUSer.ListeHolidayAutorise() );
         } catch ( DaoException e ) {
             request.setAttribute( "erreur", e.getMessage() );
         }

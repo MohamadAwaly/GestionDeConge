@@ -22,6 +22,8 @@
     <fieldset>
         <legend> ******* Nouvel employé *******</legend>
         <p>
+
+
             <label for="nom" class="labelAjoutPers">Nom : </label>
             <input type="text" name="nom" id="nom" class="ChampFormulaireajoutPersonne"/>
 
@@ -56,6 +58,29 @@
                         <c:out value="${ adresses.nomRue } "/>
                     </c:forEach>
             </SELECT>
+        </p>
+
+        <p>
+        <h2>Déffinir les jours de congée autorisée</h2>
+        <!-- <label for="holiday" class="labelAjoutPers">Jour de congée autorisé : </label>
+         <input type="number" name="holiday" id="holiday" class="ChampFormulaireajoutPersonne">-->
+        </p>
+        <p>
+
+            <label for="holiday" class="holiday">holiday : </label>
+            <SELECT id="holiday" name="holiday" size="1" class="ChampFormulaireajoutPersonne">
+                <c:forEach var="holiday" items="${ holiday }">
+                <OPTION value="${ holiday.idJourDeCongeAutorise }">
+                        <c:out value="${ holiday.nbrJourAutorise } "/>
+                    </c:forEach>
+            </SELECT>
+        </p>
+        <p>
+            <label for="dateDebut" class="labelAjoutPers">Date de Naissance : </label>
+            <input type="date" name="dateDebut" id="dateDebut" class="ChampFormulaireajoutPersonne">
+
+            <label for="dateFin" class="labelAjoutPers">Date de Naissance : </label>
+            <input type="date" name="dateFin" id="dateFin" class="ChampFormulaireajoutPersonne">
         </p>
 
 
