@@ -1,6 +1,9 @@
 package com.atc.momo.Jiwaii.servlets;
 
 import com.atc.momo.Jiwaii.beans.ConnexionForm;
+import com.atc.momo.Jiwaii.dao.DaoException;
+import com.atc.momo.Jiwaii.dao.DaoSociete;
+import com.atc.momo.Jiwaii.dao.DaoSocietesImpl;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
 import model.CalendarTools;
 import org.apache.log4j.Level;
@@ -27,7 +30,9 @@ public class Connexion extends HttpServlet {
     public static final String ATT_SESSION_USER = "sessionUtilisateur";
     public static final String VUE              = "/index.jsp";
     public static final String VUE_ACCUEIL      = "/resources/view/accueil.jsp";
+    public static final String VUE_NOUVELLESOC  = "/resources/view/nouvelleSociete.jsp";
     final static        Logger logger           = Logger.getLogger( Connexion.class );
+    private DaoSociete  societe                 = new DaoSocietesImpl();
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
@@ -85,10 +90,19 @@ public class Connexion extends HttpServlet {
         request.setAttribute( ATT_FORM, form );
         request.setAttribute( ATT_USER, utilisateur );
 
-        if ( form.getErreurs().isEmpty() ) {
-            this.getServletContext().getRequestDispatcher( VUE_ACCUEIL  ).forward( request, response );
-        } else {
-            this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+        try {
+            if ( form.getErreurs().isEmpty() && societe.SocieteExiste()==true) {
+                this.getServletContext().getRequestDispatcher( VUE_ACCUEIL  ).forward( request, response );
+            } else {
+                if (societe.SocieteExiste()==false){
+                    this.getServletContext().getRequestDispatcher( VUE_NOUVELLESOC ).forward( request, response );
+                }
+                else{
+                    this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+                }
+            }
+        } catch (DaoException e) {
+            e.printStackTrace();
         }
     }
 

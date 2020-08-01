@@ -53,4 +53,14 @@ public class DaoSocietesImpl implements DaoSociete {
         return societesEntities;
 
     }
+
+    @Override public boolean SocieteExiste() throws DaoException {
+        if (lister().isEmpty() || lister() == null || lister().size() == 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
 }

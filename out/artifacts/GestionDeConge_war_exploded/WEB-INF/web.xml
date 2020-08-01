@@ -38,6 +38,16 @@
         <servlet-class>com.atc.momo.Jiwaii.servlets.Sosietes</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>nouvellesociete</servlet-name>
+        <servlet-class>com.atc.momo.Jiwaii.servlets.nouvellesociete</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>nouvellesociete</servlet-name>
+        <url-pattern>/nouvellesociete</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>Sosietes</servlet-name>
         <url-pattern>/societes</url-pattern>
