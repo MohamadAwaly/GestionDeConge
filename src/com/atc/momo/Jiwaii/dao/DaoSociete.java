@@ -10,4 +10,5 @@ public interface DaoSociete {
     void ajouter ( SocietesEntity societe ) throws DaoException;
     //Liste les societes présent dans la table
     List<SocietesEntity> lister() throws DaoException;
+
 }
