@@ -5,6 +5,7 @@ import com.atc.momo.Jiwaii.entities.PersonnejourdecongeautorisetypedemandeEntity
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
 
 import javax.persistence.Query;
+import java.util.Date;
 import java.util.List;
 
 public interface DaoPersonne {
@@ -19,6 +20,7 @@ public interface DaoPersonne {
     public List<Object[]> laListeDeOufs();
     //Liste des jours autorisé presnte dans la table
     List<String> ListeHolidayAutorise () throws DaoException;
-    void ajouterdayOff ( PersonnejourdecongeautorisetypedemandeEntity dayOff) throws DaoException;
+    //void ajouterdayOff ( PersonnejourdecongeautorisetypedemandeEntity dayOff) throws DaoException;
+    void ajouterdayOff ( int idJourAutorise, String email, Date datedebut, Date datefin) throws DaoException;
 
 }

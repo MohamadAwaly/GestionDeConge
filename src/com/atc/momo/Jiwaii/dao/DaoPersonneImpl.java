@@ -9,6 +9,7 @@ import org.apache.log4j.Level;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Queue;
 
@@ -58,12 +59,18 @@ public class DaoPersonneImpl implements DaoPersonne {
         return holiday;
     }
 
-    @Override public void ajouterdayOff( PersonnejourdecongeautorisetypedemandeEntity dayOff ) throws DaoException {
+    @Override public void ajouterdayOff( int idJourAutorise, String email, Date datedebut, Date datefin ) throws DaoException {
         EntityManager em = getEntityManager( PERSISTENCE_UNIT_NAME );
         try {
             EntityTransaction trans = em.getTransaction();
             trans.begin();
-            em.persist( dayOff );
+            StoredProcedureQuery storedprocedure = em.createStoredProcedureQuery( "test");
+            storedprocedure.setParameter( "pEmail", email );
+            storedprocedure.setParameter( "datedebut", datedebut );
+            storedprocedure.setParameter( "datefin", datefin );
+            storedprocedure.setParameter( "idJourAutorise", idJourAutorise );
+
+            storedprocedure.execute();
             trans.commit();
 
         } catch ( Exception e ) {
@@ -112,33 +119,33 @@ public class DaoPersonneImpl implements DaoPersonne {
     }
 
     @Override public List<String> lister() throws DaoException {
-       // EntityManagerFactory entityManagerFactory = null;
-       // EntityManager entityManager = null;
-       // //List<Query> personnesEntities = new ArrayList<Query>();
-       // List<String> test = new ArrayList<>();
-       // Query query = null;
-       // try {
-//
-       //     entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
-       //     entityManager = entityManagerFactory.createEntityManager();
-//
-       //     query = (Query) entityManager
-       //             .createQuery( "select p, a from PersonnesEntity p , AdressesEntity  a", PersonnesEntity.class )
-       //             .getResultList();
-       //     for ( int i = 0; i < test.size(); i++ ) {
-       //         test.add( query.toString() );
-       //     }
-//
-       //     for ( int i = 0; i < test.size(); i++ ) {
-       //         logger.log( Level.INFO, "Liste test: " + test.get( i ) );
-       //     }
-//
-       // } catch ( Exception e ) {
-       //     logger.log( Level.INFO, "Erreur" );
-       // } finally {
-       //     if ( entityManager != null )
-       //         entityManager.close();
-       // }
+        // EntityManagerFactory entityManagerFactory = null;
+        // EntityManager entityManager = null;
+        // //List<Query> personnesEntities = new ArrayList<Query>();
+        // List<String> test = new ArrayList<>();
+        // Query query = null;
+        // try {
+        //
+        //     entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
+        //     entityManager = entityManagerFactory.createEntityManager();
+        //
+        //     query = (Query) entityManager
+        //             .createQuery( "select p, a from PersonnesEntity p , AdressesEntity  a", PersonnesEntity.class )
+        //             .getResultList();
+        //     for ( int i = 0; i < test.size(); i++ ) {
+        //         test.add( query.toString() );
+        //     }
+        //
+        //     for ( int i = 0; i < test.size(); i++ ) {
+        //         logger.log( Level.INFO, "Liste test: " + test.get( i ) );
+        //     }
+        //
+        // } catch ( Exception e ) {
+        //     logger.log( Level.INFO, "Erreur" );
+        // } finally {
+        //     if ( entityManager != null )
+        //         entityManager.close();
+        // }
         return null;
     }
 

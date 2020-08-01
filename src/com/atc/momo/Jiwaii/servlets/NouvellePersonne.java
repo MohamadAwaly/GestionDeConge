@@ -27,6 +27,7 @@ public class NouvellePersonne extends HttpServlet {
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
         try {
+
             PersonnesEntity personnesEntity = new PersonnesEntity();
 
             personnesEntity.setNom( request.getParameter( "nom" ) );
@@ -37,24 +38,34 @@ public class NouvellePersonne extends HttpServlet {
             personnesEntity.setMotDePasse( request.getParameter( "motDePasse" ) );
             personnesEntity.setFkRole( Integer.parseInt( request.getParameter( "selectrole" ) ) );
             personnesEntity.setFkAdresse( Integer.parseInt( request.getParameter( "selectAdresse" ) ) );
-            newUSer.ajouter( personnesEntity );
 
-            int idPersonne = personnesEntity.getIdPersonne();
-            logger.log( Level.INFO,"idPersonne : " + idPersonne );
-
-            PersonnejourdecongeautorisetypedemandeEntity aDroit = new PersonnejourdecongeautorisetypedemandeEntity();
+            //PersonnejourdecongeautorisetypedemandeEntity aDroit = new PersonnejourdecongeautorisetypedemandeEntity();
             //aDroit.setFkPersonne( idPersonne );
-            aDroit.setFkJourCongeAutorise( Integer.parseInt( request.getParameter( "holiday" ) ) );
-            aDroit.setDateDebut(Date.valueOf( request.getParameter( "dateDebut" ) )  );
-            aDroit.setDateFin( Date.valueOf( request.getParameter( "dateFin" ) ) );
-            //aDroit.setFkTypeDemandes(  );
-            JourdecongeautoriseEntity holidays = new JourdecongeautoriseEntity();
+           //aDroit.setFkJourCongeAutorise( Integer.parseInt( request.getParameter( "holiday" ) ) );
+           //aDroit.setDateDebut(Date.valueOf( request.getParameter( "dateDebut" ) )  );
+           //aDroit.setDateFin( Date.valueOf( request.getParameter( "dateFin" ) ) );
 
-            holidays.setNbrJourAutorise( Integer.parseInt( request.getParameter( "holiday" ) ) );
+            int idJourAutorise = Integer.parseInt( request.getParameter( "holiday" ) );
+            String email = request.getParameter( "email" );
+            Date dateDebut = (Date.valueOf( request.getParameter( "dateDebut" ) )  );
+            Date dateFin = ( Date.valueOf( request.getParameter( "dateFin" ) ) );
+
+            newUSer.ajouter( personnesEntity );
+            newUSer.ajouterdayOff(  idJourAutorise,email, dateDebut, dateFin );
+
+           // int idPersonne = personnesEntity.getIdPersonne();
+           // logger.log( Level.INFO,"idPersonne : " + idPersonne );
+
+
+            //aDroit.setFkTypeDemandes(  );
+
+           // JourdecongeautoriseEntity holidays = new JourdecongeautoriseEntity();
+//
+           // holidays.setNbrJourAutorise( Integer.parseInt( request.getParameter( "holiday" ) ) );
 
 
             //newUSer.dayHoliday( holidays );
-            newUSer.ajouterdayOff( aDroit );
+
             //DaoPersonne pers = new DaoPersonneImpl();
             request.setAttribute( "personnes", newUSer.laListeDeOufs() );
 
