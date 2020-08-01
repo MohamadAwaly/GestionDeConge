@@ -64,11 +64,17 @@ public class DaoPersonneImpl implements DaoPersonne {
         try {
             EntityTransaction trans = em.getTransaction();
             trans.begin();
-            StoredProcedureQuery storedprocedure = em.createStoredProcedureQuery( "test");
-            storedprocedure.setParameter( "pEmail", email );
-            storedprocedure.setParameter( "datedebut", datedebut );
-            storedprocedure.setParameter( "datefin", datefin );
-            storedprocedure.setParameter( "idJourAutorise", idJourAutorise );
+            StoredProcedureQuery storedprocedure = em.createStoredProcedureQuery( "NewDroitForUserWithId");
+            storedprocedure.registerStoredProcedureParameter("pEmail",String.class,ParameterMode.IN);
+            storedprocedure.registerStoredProcedureParameter("pDateDebut",Date.class,ParameterMode.IN);
+            storedprocedure.registerStoredProcedureParameter("pDateFin",Date.class,ParameterMode.IN);
+            storedprocedure.registerStoredProcedureParameter("pIdJourAutorise",Integer.class,ParameterMode.IN);
+
+            storedprocedure.setParameter("pEmail",email);
+            storedprocedure.setParameter("pDateDebut",datedebut);
+            storedprocedure.setParameter("pDateFin",datefin);
+            storedprocedure.setParameter("pIdJourAutorise",idJourAutorise);
+
 
             storedprocedure.execute();
             trans.commit();
