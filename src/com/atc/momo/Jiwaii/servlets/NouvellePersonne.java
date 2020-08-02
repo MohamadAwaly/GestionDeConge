@@ -17,12 +17,14 @@ import java.sql.Date;
 
 @WebServlet( name = "NouvellePersonne" )
 public class NouvellePersonne extends HttpServlet {
-    public static final String      VUE      = "/resources/view/nouvellePersonne.jsp";
-    public static final String      VUE_LIST = "/resources/view/afficherPersonne.jsp";
-    final static        Logger      logger   = Logger.getLogger( NouvellePersonne.class );
-    private             DaoPersonne newUSer  = new DaoPersonneImpl();
-    private             DaoAdresse  adresse  = new DaoAdresseImpl();
-    private             DaoRole     role     = new DaoRolesImpl();
+    public static final String      VUE              = "/resources/view/nouvellePersonne.jsp";
+    public static final String      VUE_LIST         = "/resources/view/afficherPersonne.jsp";
+    public static final String      ATT_SESSION_USER = "sessionUtilisateur";
+    public static final String      VUE_INDEX        = "/index.jsp";
+    final static        Logger      logger           = Logger.getLogger( NouvellePersonne.class );
+    private             DaoPersonne newUSer          = new DaoPersonneImpl();
+    private             DaoAdresse  adresse          = new DaoAdresseImpl();
+    private             DaoRole     role             = new DaoRolesImpl();
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
@@ -41,28 +43,26 @@ public class NouvellePersonne extends HttpServlet {
 
             //PersonnejourdecongeautorisetypedemandeEntity aDroit = new PersonnejourdecongeautorisetypedemandeEntity();
             //aDroit.setFkPersonne( idPersonne );
-           //aDroit.setFkJourCongeAutorise( Integer.parseInt( request.getParameter( "holiday" ) ) );
-           //aDroit.setDateDebut(Date.valueOf( request.getParameter( "dateDebut" ) )  );
-           //aDroit.setDateFin( Date.valueOf( request.getParameter( "dateFin" ) ) );
+            //aDroit.setFkJourCongeAutorise( Integer.parseInt( request.getParameter( "holiday" ) ) );
+            //aDroit.setDateDebut(Date.valueOf( request.getParameter( "dateDebut" ) )  );
+            //aDroit.setDateFin( Date.valueOf( request.getParameter( "dateFin" ) ) );
 
             int idJourAutorise = Integer.parseInt( request.getParameter( "holiday" ) );
             String email = request.getParameter( "email" );
-            Date dateDebut = (Date.valueOf( request.getParameter( "dateDebut" ) )  );
+            Date dateDebut = ( Date.valueOf( request.getParameter( "dateDebut" ) ) );
             Date dateFin = ( Date.valueOf( request.getParameter( "dateFin" ) ) );
 
             newUSer.ajouter( personnesEntity );
-            newUSer.ajouterdayOff(  idJourAutorise,email, dateDebut, dateFin );
+            newUSer.ajouterdayOff( idJourAutorise, email, dateDebut, dateFin );
 
-           // int idPersonne = personnesEntity.getIdPersonne();
-           // logger.log( Level.INFO,"idPersonne : " + idPersonne );
-
+            // int idPersonne = personnesEntity.getIdPersonne();
+            // logger.log( Level.INFO,"idPersonne : " + idPersonne );
 
             //aDroit.setFkTypeDemandes(  );
 
-           // JourdecongeautoriseEntity holidays = new JourdecongeautoriseEntity();
-//
-           // holidays.setNbrJourAutorise( Integer.parseInt( request.getParameter( "holiday" ) ) );
-
+            // JourdecongeautoriseEntity holidays = new JourdecongeautoriseEntity();
+            //
+            // holidays.setNbrJourAutorise( Integer.parseInt( request.getParameter( "holiday" ) ) );
 
             //newUSer.dayHoliday( holidays );
 
@@ -82,10 +82,15 @@ public class NouvellePersonne extends HttpServlet {
         try {
             request.setAttribute( "adresses", adresse.lister() );
             request.setAttribute( "role", role.lister() );
-            request.setAttribute( "holiday",newUSer.ListeHolidayAutorise() );
+            request.setAttribute( "holiday", newUSer.ListeHolidayAutorise() );
         } catch ( DaoException e ) {
             request.setAttribute( "erreur", e.getMessage() );
         }
-        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+        if ( request.getSession().getAttribute( ATT_SESSION_USER ) == null ) {
+            this.getServletContext().getRequestDispatcher( VUE_INDEX ).forward( request, response );
+
+        } else {
+            this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+        }
     }
 }

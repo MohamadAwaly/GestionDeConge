@@ -19,6 +19,8 @@ public class Personnes extends HttpServlet {
     private static final long        serialVersionUID = 1L;
     private              DaoPersonne personne;
     public static final  String      VUE              = "/resources/view/afficherPersonne.jsp";
+    public static final  String      ATT_SESSION_USER = "sessionUtilisateur";
+    public static final  String      VUE_INDEX        = "/index.jsp";
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
@@ -30,11 +32,17 @@ public class Personnes extends HttpServlet {
 
         try {
             request.setAttribute( "personnes", pers.lister() );
-            request.setAttribute("adresse",pers.laListeDeOufs());
+            request.setAttribute( "adresse", pers.laListeDeOufs() );
         } catch ( DaoException e ) {
             request.setAttribute( "erreur", e.getMessage() );
         }
 
-        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+        if ( request.getSession().getAttribute( ATT_SESSION_USER ) == null ) {
+            this.getServletContext().getRequestDispatcher( VUE_INDEX ).forward( request, response );
+
+        } else {
+            this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+        }
+
     }
 }

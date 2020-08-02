@@ -8,7 +8,6 @@ import com.atc.momo.Jiwaii.entities.PersonnesEntity;
 import model.CalendarTools;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,10 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.DateFormatSymbols;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.*;
 
 @WebServlet( name = "Connexion" )
@@ -55,7 +51,7 @@ public class Connexion extends HttpServlet {
 
         request.setAttribute("calendar",CalendarTools.getAWeek());
         logger.log( Level.INFO, "le jour est: " + jour );
-
+        
         calendar.getFirstDayOfWeek();
         logger.log( Level.INFO,"Nombre des jours dans le mois courant : " + calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
 
