@@ -15,10 +15,11 @@ import java.io.IOException;
 
 @WebServlet( name = "nouvellesociete" )
 public class nouvellesociete extends HttpServlet {
-    public static final String     VUE              = "/resources/view/nouvelleSociete.jsp";
-    private             DaoSociete societe          = new DaoSocietesImpl();
-    public static final String     ATT_SESSION_USER = "sessionUtilisateur";
-    public static final String     VUE_INDEX              = "/index.jsp";
+    public static final String VUE              = "/resources/view/nouvelleSociete.jsp";
+    public static final String VUE_INDEX        = "/index.jsp";
+    public static final String ATT_SESSION_USER = "sessionUtilisateur";
+
+    private DaoSociete societe = new DaoSocietesImpl();
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
@@ -46,7 +47,7 @@ public class nouvellesociete extends HttpServlet {
         if ( request.getSession().getAttribute( ATT_SESSION_USER ) == null ) {
             this.getServletContext().getRequestDispatcher( VUE_INDEX ).forward( request, response );
 
-        }else {
+        } else {
             this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
         }
     }

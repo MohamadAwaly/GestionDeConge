@@ -25,6 +25,9 @@
     <h1>Gestion de congé</h1>
     <div class="nomSession">
         <p><c:out value="${sessionScope.sessionUtilisateur.prenom}"/> <c:out value="${sessionScope.sessionUtilisateur.nom}"/>
+        <form method="get" action="deconnexion" class="formulairePersonne">
+            <input type="submit" value="Logout" />
+        </form>
     </div>
 
 </header>

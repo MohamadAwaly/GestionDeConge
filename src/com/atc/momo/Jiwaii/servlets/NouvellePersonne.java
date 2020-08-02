@@ -1,10 +1,7 @@
 package com.atc.momo.Jiwaii.servlets;
 
 import com.atc.momo.Jiwaii.dao.*;
-import com.atc.momo.Jiwaii.entities.JourdecongeautoriseEntity;
-import com.atc.momo.Jiwaii.entities.PersonnejourdecongeautorisetypedemandeEntity;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
