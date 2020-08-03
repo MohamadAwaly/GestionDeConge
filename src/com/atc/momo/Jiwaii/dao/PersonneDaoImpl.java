@@ -87,7 +87,6 @@ public class PersonneDaoImpl implements PersonneDao {
                 int fkrole = resultat.getInt( "fkrole" );
                 int fkadresse = resultat.getInt( "fkadresse" );
 
-
                 PersonnesEntity personnesEntity = new PersonnesEntity();
                 personnesEntity.setNom( nom );
                 personnesEntity.setPrenom( prenom );
