@@ -1,29 +1,25 @@
-package com.atc.momo.Jiwaii.entities;
+package com.atc.momo.Jiwaii.efface;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.sql.Date;
 import java.util.Objects;
 
-enum EnumApprouver {
-    En_Cours, Accepte, Refuse
-}
+@Table( name = "personnejourdecongetypedemande", schema = "gestiondeconge", catalog = "" ) public class PersonnejourdecongetypedemandeE {
+    private int idPersonneJourDeCongeTypeDemande;
+    private Integer fkPersonne;
+    private Integer fkJourDeConge;
+    private Date dateDemande;
+    private Date dateReponse;
+    private String messageApprobateur;
+    private Integer fkTypeDemande;
+    private Object aprouver;
+    private Date datedebut;
+    private Date datefin;
 
-@Entity @Table( name = "personnejourdecongetypedemande", schema = "gestiondeconge" )
-public class PersonnejourdecongetypedemandeEntity {
-
-    private int           idPersonneJourDeCongeTypeDemande;
-    private Integer       fkPersonne;
-    private Date          dateDemande;
-    private Date          dateReponse;
-    private String        messageApprobateur;
-    private Integer       fkTypeDemande;
-    private EnumApprouver aprouver;
-    private Date          datedebut;
-    private Date          datefin;
-
-    @Id @Column( name = "idPersonneJourDeCongeTypeDemande", nullable = false )
-    public int getIdPersonneJourDeCongeTypeDemande() {
+    @Id @Column( name = "idPersonneJourDeCongeTypeDemande", nullable = false ) public int getIdPersonneJourDeCongeTypeDemande() {
         return idPersonneJourDeCongeTypeDemande;
     }
 
@@ -37,6 +33,14 @@ public class PersonnejourdecongetypedemandeEntity {
 
     public void setFkPersonne( Integer fkPersonne ) {
         this.fkPersonne = fkPersonne;
+    }
+
+    @Basic @Column( name = "FKJourDeConge", nullable = true ) public Integer getFkJourDeConge() {
+        return fkJourDeConge;
+    }
+
+    public void setFkJourDeConge( Integer fkJourDeConge ) {
+        this.fkJourDeConge = fkJourDeConge;
     }
 
     @Basic @Column( name = "DateDemande", nullable = true ) public Date getDateDemande() {
@@ -71,11 +75,11 @@ public class PersonnejourdecongetypedemandeEntity {
         this.fkTypeDemande = fkTypeDemande;
     }
 
-    @Basic @Column( name = "Aprouver", nullable = true ) public EnumApprouver getAprouver() {
+    @Basic @Column( name = "Aprouver", nullable = true ) public Object getAprouver() {
         return aprouver;
     }
 
-    public void setAprouver( EnumApprouver aprouver ) {
+    public void setAprouver( Object aprouver ) {
         this.aprouver = aprouver;
     }
 
@@ -100,9 +104,10 @@ public class PersonnejourdecongetypedemandeEntity {
             return true;
         if ( o == null || getClass() != o.getClass() )
             return false;
-        PersonnejourdecongetypedemandeEntity that = (PersonnejourdecongetypedemandeEntity) o;
+        PersonnejourdecongetypedemandeE that = (PersonnejourdecongetypedemandeE) o;
         return idPersonneJourDeCongeTypeDemande == that.idPersonneJourDeCongeTypeDemande &&
                 Objects.equals( fkPersonne, that.fkPersonne ) &&
+                Objects.equals( fkJourDeConge, that.fkJourDeConge ) &&
                 Objects.equals( dateDemande, that.dateDemande ) &&
                 Objects.equals( dateReponse, that.dateReponse ) &&
                 Objects.equals( messageApprobateur, that.messageApprobateur ) &&
@@ -113,7 +118,7 @@ public class PersonnejourdecongetypedemandeEntity {
     }
 
     @Override public int hashCode() {
-        return Objects.hash( idPersonneJourDeCongeTypeDemande, fkPersonne, dateDemande, dateReponse,
+        return Objects.hash( idPersonneJourDeCongeTypeDemande, fkPersonne, fkJourDeConge, dateDemande, dateReponse,
                 messageApprobateur, fkTypeDemande, aprouver, datedebut, datefin );
     }
 }

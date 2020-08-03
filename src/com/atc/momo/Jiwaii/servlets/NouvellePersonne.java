@@ -38,12 +38,6 @@ public class NouvellePersonne extends HttpServlet {
             personnesEntity.setFkRole( Integer.parseInt( request.getParameter( "selectrole" ) ) );
             personnesEntity.setFkAdresse( Integer.parseInt( request.getParameter( "selectAdresse" ) ) );
 
-            //PersonnejourdecongeautorisetypedemandeEntity aDroit = new PersonnejourdecongeautorisetypedemandeEntity();
-            //aDroit.setFkPersonne( idPersonne );
-            //aDroit.setFkJourCongeAutorise( Integer.parseInt( request.getParameter( "holiday" ) ) );
-            //aDroit.setDateDebut(Date.valueOf( request.getParameter( "dateDebut" ) )  );
-            //aDroit.setDateFin( Date.valueOf( request.getParameter( "dateFin" ) ) );
-
             int idJourAutorise = Integer.parseInt( request.getParameter( "holiday" ) );
             String email = request.getParameter( "email" );
             Date dateDebut = ( Date.valueOf( request.getParameter( "dateDebut" ) ) );
@@ -52,18 +46,6 @@ public class NouvellePersonne extends HttpServlet {
             newUSer.ajouter( personnesEntity );
             newUSer.ajouterdayOff( idJourAutorise, email, dateDebut, dateFin );
 
-            // int idPersonne = personnesEntity.getIdPersonne();
-            // logger.log( Level.INFO,"idPersonne : " + idPersonne );
-
-            //aDroit.setFkTypeDemandes(  );
-
-            // JourdecongeautoriseEntity holidays = new JourdecongeautoriseEntity();
-            //
-            // holidays.setNbrJourAutorise( Integer.parseInt( request.getParameter( "holiday" ) ) );
-
-            //newUSer.dayHoliday( holidays );
-
-            //DaoPersonne pers = new DaoPersonneImpl();
             request.setAttribute( "personnes", newUSer.laListeDeOufs() );
 
         } catch ( Exception e ) {

@@ -18,8 +18,9 @@
         <class>com.atc.momo.Jiwaii.entities.SocietesEntity</class>
         <class>com.atc.momo.Jiwaii.entities.TypedemandeEntity</class>
         <class>com.atc.momo.Jiwaii.entities.VillesEntity</class>
+        <class>com.atc.momo.Jiwaii.efface.PersonnejourdecongetypedemandeE</class>
         <properties>
-            <property name="eclipselink.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="eclipselink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/gestiondeconge"/>
             <property name="eclipselink.jdbc.user" value="root"/>
             <property name="eclipselink.jdbc.password" value="12345678"/>

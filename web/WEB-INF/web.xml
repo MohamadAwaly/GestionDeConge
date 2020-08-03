@@ -48,6 +48,17 @@
         <servlet-class>com.atc.momo.Jiwaii.servlets.Deconnexion</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>Demande</servlet-name>
+        <servlet-class>com.atc.momo.Jiwaii.servlets.Demande</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Demande</servlet-name>
+        <url-pattern>/demande</url-pattern>
+    </servlet-mapping>
+
+
     <servlet-mapping>
         <servlet-name>nouvellesociete</servlet-name>
         <url-pattern>/nouvellesociete</url-pattern>
