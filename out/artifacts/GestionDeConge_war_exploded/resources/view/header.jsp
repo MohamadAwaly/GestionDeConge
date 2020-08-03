@@ -7,10 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!--
 <head>
     <link rel="stylesheet" type="text/css" href="resources/css/styleheader.css">
     <link rel="stylesheet" type="text/css" href="resources/css/styleSession.css">
+
 </head>
+-->
+<c:import url="head.jsp"/>
 <nav>
     <div class="table">
         <ul>
