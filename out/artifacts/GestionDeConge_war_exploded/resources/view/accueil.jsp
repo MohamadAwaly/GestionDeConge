@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestion de Conge</title>
-    <link rel="stylesheet" type="text/css" href="resources/css/styleConnexion.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/style.css">
 </head>
 <body>
 <c:import url="header.jsp"/>
@@ -23,7 +23,7 @@
 <%--<c:if test="${ validation }" var="varValidation" scope="session">
   </br>
   <c:out value="validation: ${ validation }"/>
-  <%-- Puis affichage des données enregistrées dans le bean "Utilisateur" transmis par la servlet --%>
+  <%-- Puis affichage des données enregist  rées dans le bean "Utilisateur" transmis par la servlet --%>
 <%--    </br>
   <c:out value="Email : ${ user.email }"/>
   </br>
