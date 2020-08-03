@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="resources/css/styleSession.css">
 </head>
 <nav>
-    <div class="table">
+    <div id="menunav" >
         <ul>
             <li class="menu-html"><a href="personnes">Afficher Employer</a></li>
             <li class="menu-css"><a href="nouvellepersonne">Nouvel Employé</a></li>

@@ -33,7 +33,7 @@
 </c:if>
 
 <c:out value="${ message }"></c:out>--%>
-<table border="1"  cellspacing="1" class="table">
+<table border="1"  cellspacing="1" class="Calendar">
     <thead>
     <td>Lundi</td>
     <td>Mardi</td>
