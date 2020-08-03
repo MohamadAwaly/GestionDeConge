@@ -23,13 +23,13 @@
 </nav>
 <header>
     <h1>Gestion de congé</h1>
-    <div class="nomSession">
-        <p><c:out value="${sessionScope.sessionUtilisateur.prenom}"/> <c:out value="${sessionScope.sessionUtilisateur.nom}"/>
-        <form method="get" action="deconnexion" class="formulairePersonne">
-            <input type="submit" value="Logout" />
-        </form>
-    </div>
-
+    <form>
+        <SELECT name="nom" size="1" action="deconnexion" class="nomSession" onchange="location = this.value">
+            <option><c:out value="${sessionScope.sessionUtilisateur.prenom}"/> <c:out
+                    value="${sessionScope.sessionUtilisateur.nom}"/></option>
+            <option value="deconnexion">Logout</option>
+        </SELECT>
+    </form>
 </header>
 <body>
 

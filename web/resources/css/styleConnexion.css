@@ -75,4 +75,15 @@ footer {
 .table{
     border: 2px solid black;
     mso-cellspacing: 1px;
+    height: 100%;
+    width: 100%;
+    /* flex-direction: column; */
+    /* margin-left: 8px; */
+    /* display: flex; */
+    position: absolute;
+    /* top: 0; */
+    /* bottom: 0; */
+    /* left: 0; */
+    /* right: 0; */
+
 }

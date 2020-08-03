@@ -117,3 +117,10 @@ H1{
 //vertical-align: top;
 }
 
+.table{
+    border: 2px solid black;
+    mso-cellspacing: 1px;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
