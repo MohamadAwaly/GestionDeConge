@@ -42,13 +42,13 @@ public class DaoPersonneImpl implements DaoPersonne {
             query = em
                     .createQuery( "select j from JourdecongeautoriseEntity j", JourdecongeautoriseEntity.class );
             holiday = query.getResultList();
-            for ( int i = 0; i < holiday.size(); i++ ) {
-                holiday.add( query.toString());
-            }
+          // for ( int i = 0; i < holiday.size(); i++ ) {
+          //     holiday.add( query.toString());
+          // }
 
-            for ( int i = 0; i < holiday.size(); i++ ) {
-                logger.log( Level.INFO, "Liste holiday: " + holiday.get( i ) );
-            }
+          // for ( int i = 0; i < holiday.size(); i++ ) {
+          //     logger.log( Level.INFO, "Liste holiday: " + holiday.get( i ) );
+          // }
 
         } catch ( Exception e ) {
             logger.log( Level.INFO, "Erreur ListeHolidayAutorise" );

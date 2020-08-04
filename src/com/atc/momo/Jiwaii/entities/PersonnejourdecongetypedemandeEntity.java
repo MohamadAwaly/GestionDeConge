@@ -5,9 +5,15 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
-
 @Entity @Table( name = "personnejourdecongetypedemande", schema = "gestiondeconge" )
 public class PersonnejourdecongetypedemandeEntity {
+
+    public enum EnumApprouver {
+        Rien,
+        En_Cours,
+        Accepte ,
+        Refuse
+    }
 
     private int           idPersonneJourDeCongeTypeDemande;
     private Integer       fkPersonne;

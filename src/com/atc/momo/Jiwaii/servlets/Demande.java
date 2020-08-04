@@ -7,7 +7,6 @@ import com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.eclipse.persistence.sessions.Session;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,9 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.*;
-
-//import java.sql.Date;
+import java.util.Date;
 
 @WebServlet( name = "Demande" )
 public class Demande extends HttpServlet {
@@ -26,11 +23,16 @@ public class Demande extends HttpServlet {
     final static        Logger logger           = Logger.getLogger( Connexion.class );
     public static final String VUE              = "/resources/view/demande.jsp";
 
+
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(new  Date());
+
+
+
+
 //<editor-fold desc="By Call procedure">
 //        DaoJourDeCongeImpl daoJourDeConge = new DaoJourDeCongeImpl();
 //        daoJourDeConge.insertDemandeParProcedure(
@@ -46,12 +48,15 @@ public class Demande extends HttpServlet {
         pers = (PersonnesEntity) request.getSession().getAttribute( ATT_SESSION_USER );
         int idPersonne = pers.getIdPersonne();
         PersonnejourdecongetypedemandeEntity personnejourdecongetypedemandeEntity = new PersonnejourdecongetypedemandeEntity();
-
+        PersonnejourdecongetypedemandeEntity.EnumApprouver enumApprouver = PersonnejourdecongetypedemandeEntity.EnumApprouver.En_Cours;
+        logger.log( Level.INFO,"Approuver: " + enumApprouver );
         personnejourdecongetypedemandeEntity.setFkPersonne( idPersonne );
         personnejourdecongetypedemandeEntity.setFkTypeDemande(1);
         personnejourdecongetypedemandeEntity.setDateDemande( java.sql.Date.valueOf(date));
-        personnejourdecongetypedemandeEntity.setDatedebut(java.sql.Date.valueOf(request.getParameter( "dateDebut" )));
-        personnejourdecongetypedemandeEntity.setDatefin(java.sql.Date.valueOf(request.getParameter( "dateFin" )));
+        personnejourdecongetypedemandeEntity.setDatedebut(java.sql.Date.valueOf(date));
+        personnejourdecongetypedemandeEntity.setDatefin(java.sql.Date.valueOf(date));
+        personnejourdecongetypedemandeEntity.setAprouver( enumApprouver );
+
         String test = request.getParameter( "dateDebut" ).toString();
 
         DaoJourDeConge daoJourDeConge = new DaoJourDeCongeImpl();

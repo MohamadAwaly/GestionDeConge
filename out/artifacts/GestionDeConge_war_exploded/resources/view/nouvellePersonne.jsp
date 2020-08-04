@@ -10,6 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
+
 <head>
     <c:import url="head.jsp"/>
     <title>Ajout d'une nouvelle personne</title>
@@ -82,12 +83,8 @@
             <label for="dateFin" class="labelAjoutPers">Date de fin : </label>
             <input type="date" name="dateFin" id="dateFin" class="ChampFormulaireajoutPersonne">
         </p>
-
-
     </fieldset>
     <input type="submit" class="boutonAjoutPersonne"/>
-
-
 </form>
 </body>
 </html>

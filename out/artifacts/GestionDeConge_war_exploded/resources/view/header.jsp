@@ -11,7 +11,6 @@
 <head>
     <link rel="stylesheet" type="text/css" href="resources/css/styleheader.css">
     <link rel="stylesheet" type="text/css" href="resources/css/styleSession.css">
-
 </head>
 
 <c:import url="head.jsp"/>
