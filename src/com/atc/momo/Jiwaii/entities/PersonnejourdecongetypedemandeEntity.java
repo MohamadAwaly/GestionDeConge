@@ -5,9 +5,6 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
-enum EnumApprouver {
-    En_Cours, Accepte, Refuse
-}
 
 @Entity @Table( name = "personnejourdecongetypedemande", schema = "gestiondeconge" )
 public class PersonnejourdecongetypedemandeEntity {
