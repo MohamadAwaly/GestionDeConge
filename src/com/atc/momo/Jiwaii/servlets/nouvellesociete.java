@@ -44,11 +44,15 @@ public class nouvellesociete extends HttpServlet {
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
 
-        if ( request.getSession().getAttribute( ATT_SESSION_USER ) == null ) {
-            this.getServletContext().getRequestDispatcher( VUE_INDEX ).forward( request, response );
+        try {
+            if ( request.getSession().getAttribute( ATT_SESSION_USER ) != null || societe.SocieteExiste()==false) {
+                this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 
-        } else {
-            this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+            } else if (request.getSession().getAttribute( ATT_SESSION_USER ) == null ){
+                this.getServletContext().getRequestDispatcher( VUE_INDEX ).forward( request, response );
+            }
+        } catch ( DaoException e ) {
+            e.getMessage();
         }
     }
 

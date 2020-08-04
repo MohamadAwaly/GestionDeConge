@@ -17,7 +17,7 @@
 </head>
 <body>
 <c:import url="header.jsp"/>
-<p>Bienvenue <c:out value="${sessionScope.sessionUtilisateur.prenom}"/> <c:out value="${sessionScope.sessionUtilisateur.nom}"/>
+<p>Bienvenue <c:out value="${sessionScope.sessionUtilisateur.prenom}"/> <c:out value="${sessionScope.sessionUtilisateur.nom}"/> <c:out value="${sessionScope.sessionUtilisateur.idPersonne}"/>
 </p>
 <%-- Affichage de la chaîne "message" transmise par la servlet --%>
 <%--<c:if test="${ validation }" var="varValidation" scope="session">
@@ -33,7 +33,7 @@
 </c:if>
 
 <c:out value="${ message }"></c:out>--%>
-<table border="1"  cellspacing="1" class="table">
+<table border="1"  cellspacing="1" class="Calendar">
     <thead>
     <td>Lundi</td>
     <td>Mardi</td>

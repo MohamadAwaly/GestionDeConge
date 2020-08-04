@@ -4,21 +4,20 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
-enum EnumApprouver {
-    envoyer, traitement, reponseEnvoye
-}
+
 
 @Entity @Table( name = "personnejourdecongetypedemande", schema = "gestiondeconge" )
-public class PersonnejourdecongetypedemandeEntity  {
+public class PersonnejourdecongetypedemandeEntity {
 
-    private              int     idPersonneJourDeCongeTypeDemande;
-    private              Integer fkPersonne;
-    private              Integer fkJourDeConge;
-    private              Date    dateDemande;
-    private              Date    dateReponse;
-    private              String  messageApprobateur;
-    private              Integer fkTypeDemande;
-    private              EnumApprouver  aprouver;
+    private int           idPersonneJourDeCongeTypeDemande;
+    private Integer       fkPersonne;
+    private Date          dateDemande;
+    private Date          dateReponse;
+    private String        messageApprobateur;
+    private Integer       fkTypeDemande;
+    private EnumApprouver aprouver;
+    private Date          datedebut;
+    private Date          datefin;
 
     @Id @Column( name = "idPersonneJourDeCongeTypeDemande", nullable = false )
     public int getIdPersonneJourDeCongeTypeDemande() {
@@ -35,14 +34,6 @@ public class PersonnejourdecongetypedemandeEntity  {
 
     public void setFkPersonne( Integer fkPersonne ) {
         this.fkPersonne = fkPersonne;
-    }
-
-    @Basic @Column( name = "FKJourDeConge", nullable = true ) public Integer getFkJourDeConge() {
-        return fkJourDeConge;
-    }
-
-    public void setFkJourDeConge( Integer fkJourDeConge ) {
-        this.fkJourDeConge = fkJourDeConge;
     }
 
     @Basic @Column( name = "DateDemande", nullable = true ) public Date getDateDemande() {
@@ -85,6 +76,22 @@ public class PersonnejourdecongetypedemandeEntity  {
         this.aprouver = aprouver;
     }
 
+    @Basic @Column( name = "Datedebut", nullable = false ) public Date getDatedebut() {
+        return datedebut;
+    }
+
+    public void setDatedebut( Date datedebut ) {
+        this.datedebut = datedebut;
+    }
+
+    @Basic @Column( name = "Datefin", nullable = false ) public Date getDatefin() {
+        return datefin;
+    }
+
+    public void setDatefin( Date datefin ) {
+        this.datefin = datefin;
+    }
+
     @Override public boolean equals( Object o ) {
         if ( this == o )
             return true;
@@ -93,16 +100,17 @@ public class PersonnejourdecongetypedemandeEntity  {
         PersonnejourdecongetypedemandeEntity that = (PersonnejourdecongetypedemandeEntity) o;
         return idPersonneJourDeCongeTypeDemande == that.idPersonneJourDeCongeTypeDemande &&
                 Objects.equals( fkPersonne, that.fkPersonne ) &&
-                Objects.equals( fkJourDeConge, that.fkJourDeConge ) &&
                 Objects.equals( dateDemande, that.dateDemande ) &&
                 Objects.equals( dateReponse, that.dateReponse ) &&
                 Objects.equals( messageApprobateur, that.messageApprobateur ) &&
                 Objects.equals( fkTypeDemande, that.fkTypeDemande ) &&
-                Objects.equals( aprouver, that.aprouver );
+                Objects.equals( aprouver, that.aprouver ) &&
+                Objects.equals( datedebut, that.datedebut ) &&
+                Objects.equals( datefin, that.datefin );
     }
 
     @Override public int hashCode() {
-        return Objects.hash( idPersonneJourDeCongeTypeDemande, fkPersonne, fkJourDeConge, dateDemande, dateReponse,
-                messageApprobateur, fkTypeDemande, aprouver );
+        return Objects.hash( idPersonneJourDeCongeTypeDemande, fkPersonne, dateDemande, dateReponse,
+                messageApprobateur, fkTypeDemande, aprouver, datedebut, datefin );
     }
 }
