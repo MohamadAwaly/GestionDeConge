@@ -1,12 +1,11 @@
 package com.atc.momo.Jiwaii.dao;
 
 import com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity;
+import model.Tools;
 import org.apache.log4j.Level;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import java.util.Date;
 
 public class DaoJourDeCongeImpl implements DaoJourDeConge {
     private static final String                  PERSISTENCE_UNIT_NAME = "gestiondeconge";
@@ -15,21 +14,45 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
 
     @Override public void insertDemande( PersonnejourdecongetypedemandeEntity personnejourdecongetypedemandeEntity )
             throws DaoException {
-
-        EntityManagerFactory entityManagerFactory = null;
         EntityManager entityManager = null;
         try {
-            entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
-            entityManager = entityManagerFactory.createEntityManager();
+            entityManager = Tools.getEntityManager(PERSISTENCE_UNIT_NAME);
             EntityTransaction trans = entityManager.getTransaction();
             trans.begin();
             entityManager.persist( personnejourdecongetypedemandeEntity );
             trans.commit();
         } catch ( Exception e ) {
-            logger.log( Level.INFO, "Erreur ajouter personne" + e.getMessage() );
+            logger.log( Level.INFO, "Erreur ajouter Demande Congé" + e.getMessage() );
         } finally {
             if ( entityManager != null )
                 entityManager.close();
+        }
+
+    }
+
+    @Override
+    public void insertDemandeParProcedure(Integer pPersonneId,String pDateDebut,String pDateFin) {
+        EntityManager em = Tools.getEntityManager( PERSISTENCE_UNIT_NAME );
+        try {
+            EntityTransaction trans = em.getTransaction();
+            trans.begin();
+            StoredProcedureQuery storedprocedure = em.createStoredProcedureQuery( "InsererUneDemande");
+            //parametres SQL : pPersonneId INT,pDateDebut Nvarchar(10),pDateFin Nvarchar(10)
+            storedprocedure.registerStoredProcedureParameter("pPersonneId",Integer.class,ParameterMode.IN);
+            storedprocedure.registerStoredProcedureParameter("pDateDebut", Date.class,ParameterMode.IN);
+            storedprocedure.registerStoredProcedureParameter("pDateFin",Date.class,ParameterMode.IN);
+
+            storedprocedure.setParameter("pPersonneId",pPersonneId);
+            storedprocedure.setParameter("pDateDebut",pDateDebut);
+            storedprocedure.setParameter("pDateFin",pDateFin);
+
+            storedprocedure.execute();
+            trans.commit();
+        } catch ( Exception e ) {
+            logger.log( Level.INFO, "Erreur dans la Demande" + e.getMessage() );
+        } finally {
+            if ( em != null )
+                em.close();
         }
 
     }

@@ -32,7 +32,6 @@ public class NouvellePersonne extends HttpServlet {
             personnesEntity.setNom( request.getParameter( "nom" ) );
             personnesEntity.setPrenom( request.getParameter( "prenom" ) );
             personnesEntity.setDateDeNaissance( Date.valueOf( request.getParameter( "dateDeNaissance" ) ) );
-            personnesEntity.setEmail( request.getParameter( "dateDeNaissance" ) );
             personnesEntity.setEmail( request.getParameter( "email" ) );
             personnesEntity.setMotDePasse( request.getParameter( "motDePasse" ) );
             personnesEntity.setFkRole( Integer.parseInt( request.getParameter( "selectrole" ) ) );
