@@ -1,0 +1,89 @@
+/*Style Body*/
+
+body {
+    font: 100% Arial, Helvetica, sans-serif;
+    background-color: #FFFFFF;
+}
+
+/*Style Header*/
+header {
+    border: 1px solid rgb(34, 116, 172);
+    border-radius: 5px;
+    color: #402300;
+    background-color: #072AC8;
+    padding: 2%;
+    background-image: url("../Images/log.png");
+    background-position: left;
+    background-size: 9%;
+    background-repeat: no-repeat;
+}
+
+header li {
+    list-style-type: none;
+    display: inline-block;
+    background-color: rgb(34, 116, 172);
+}
+
+header h1 {
+    background-image: url("../Images/fon.jpg");
+    margin-left: 10%;
+    width: fit-content;
+    right: 100%;
+    margin-left: 6%;
+}
+
+
+nav {
+    padding-top: 10px;
+}
+
+.formulaireLogin {
+    background-color: rgb(30, 150, 252);
+    font-size: 100%;
+    margin-left: 40%;
+    margin-right: 40%;
+    margin-top: 60px;
+    padding: 20px 30px 10px;
+    border-radius: 0 0 20px 0;
+}
+
+#boutonConnexion {
+    background: #041A6B none repeat scroll 0 0;
+    border: medium none;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: bold;
+    border-width: 1px;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-size: 13px;
+    line-height: 30px;
+    padding: 0 20px;
+    text-transform: uppercase;
+    margin-left: 50%;
+}
+
+.ChampFormulaire {
+    width: 100%;
+    padding: 1em 0.5em 0.6em;
+}
+
+footer {
+    text-align: center;
+}
+
+.Calendar{
+    border: 2px solid black;
+    mso-cellspacing: 1px;
+    height: 100%;
+    width: 100%;
+    /* flex-direction: column; */
+    /* margin-left: 8px; */
+    /* display: flex; */
+    position: absolute;
+    /* top: 0; */
+    /* bottom: 0; */
+    /* left: 0; */
+    /* right: 0; */
+
+}
