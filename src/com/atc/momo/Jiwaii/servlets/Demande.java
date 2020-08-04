@@ -30,9 +30,6 @@ public class Demande extends HttpServlet {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(new  Date());
 
-
-
-
 //<editor-fold desc="By Call procedure">
 //        DaoJourDeCongeImpl daoJourDeConge = new DaoJourDeCongeImpl();
 //        daoJourDeConge.insertDemandeParProcedure(
@@ -53,8 +50,8 @@ public class Demande extends HttpServlet {
         personnejourdecongetypedemandeEntity.setFkPersonne( idPersonne );
         personnejourdecongetypedemandeEntity.setFkTypeDemande(1);
         personnejourdecongetypedemandeEntity.setDateDemande( java.sql.Date.valueOf(date));
-        personnejourdecongetypedemandeEntity.setDatedebut(java.sql.Date.valueOf(date));
-        personnejourdecongetypedemandeEntity.setDatefin(java.sql.Date.valueOf(date));
+        personnejourdecongetypedemandeEntity.setDatedebut( java.sql.Date.valueOf(request.getParameter( "dateDebut" )  ));
+        personnejourdecongetypedemandeEntity.setDatefin(java.sql.Date.valueOf(request.getParameter( "dateFin" )  ));
         personnejourdecongetypedemandeEntity.setAprouver( enumApprouver );
 
         String test = request.getParameter( "dateDebut" ).toString();
