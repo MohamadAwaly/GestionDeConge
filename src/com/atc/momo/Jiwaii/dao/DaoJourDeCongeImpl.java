@@ -62,7 +62,7 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
     @Override public List<Object []> listerDemandeEnCours() throws DaoException {
 
         EntityManager em = Tools.getEntityManager(  PERSISTENCE_UNIT_NAME);
-        Query query = em.createQuery("select p.idPersonne, p.nom,pjc.dateDemande , pjc.datedebut,pjc.datefin"
+        Query query = em.createQuery("select pjc.idPersonneJourDeCongeTypeDemande, p.nom,pjc.dateDemande , pjc.datedebut,pjc.datefin"
                         + " from PersonnejourdecongetypedemandeEntity pjc "
                         + " join PersonnesEntity p ON p.idPersonne = pjc.fkPersonne"
                         + " where pjc.aprouver = com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity.EnumApprouver.En_Cours " );

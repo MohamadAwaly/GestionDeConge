@@ -18,28 +18,33 @@
 <c:import url="header.jsp"/>
 
 
+<form method="post" action="reponseDemande" class="formulairePersonne">
 
-<table style="width:100%" border="1px solid black">
 
-    <tr>
-        <th>Identifiant</th>
-        <th>Nom</th>
-        <th>Date Demande</th>
-        <th>Date Debut</th>
-        <th>Date Fin</th>
+    <table style="width:100%" border="1px solid black">
 
-    </tr>
-    <c:forEach var="demandeEnCours" items="${demandeEnCours}">
         <tr>
-            <td><c:out value="${ demandeEnCours[0] } "/></td>
-            <td><c:out value="${ demandeEnCours[1] } "/></td>
-            <td><c:out value="${ demandeEnCours[2] } "/></td>
-            <td><c:out value="${ demandeEnCours[3] } "/></td>
-            <td><c:out value="${ demandeEnCours[4] } "/></td>
+            <th>Numéro de la demande</th>
+            <th>Nom</th>
+            <th>Date Demande</th>
+            <th>Date Debut</th>
+            <th>Date Fin</th>
+            <th>selection</th>
+
         </tr>
-    </c:forEach>
-</table>
+        <c:forEach var="demandeEnCours" items="${demandeEnCours}">
+            <tr>
+                <td><c:out value="${ demandeEnCours[0] } "/></td>
+                <td><c:out value="${ demandeEnCours[1] } "/></td>
+                <td><c:out value="${ demandeEnCours[2] } "/></td>
+                <td><c:out value="${ demandeEnCours[3] } "/></td>
+                <td><c:out value="${ demandeEnCours[4] } "/></td>
+                <td><input type="radio" id="reponse" name="reponse" value="${ demandeEnCours[0] }"></td>
+            </tr>
+        </c:forEach>
+    </table>
+    <input type="submit" class="button"/>
 
-
+</form>
 </body>
 </html>
