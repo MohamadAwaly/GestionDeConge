@@ -18,16 +18,16 @@
 <c:import url="header.jsp"/>
 
 
-<c:if test="${ !empty erreur}"><p style="color: red;"><c:out value="${ erreur }"/></p></c:if>
 
 <table style="width:100%" border="1px solid black">
 
     <tr>
         <th>Identifiant</th>
-        <th>Nom Demandeur</th>
-        <th>Date demande</th>
-        <th>Date debut</th>
-        <th>Date fin</th>
+        <th>Nom</th>
+        <th>Date Demande</th>
+        <th>Date Debut</th>
+        <th>Date Fin</th>
+
     </tr>
     <c:forEach var="demandeEnCours" items="${demandeEnCours}">
         <tr>
@@ -35,7 +35,7 @@
             <td><c:out value="${ demandeEnCours[1] } "/></td>
             <td><c:out value="${ demandeEnCours[2] } "/></td>
             <td><c:out value="${ demandeEnCours[3] } "/></td>
-            <td><c:out value="${ demandeEnCours[4] }"/></td>
+            <td><c:out value="${ demandeEnCours[4] } "/></td>
         </tr>
     </c:forEach>
 </table>
