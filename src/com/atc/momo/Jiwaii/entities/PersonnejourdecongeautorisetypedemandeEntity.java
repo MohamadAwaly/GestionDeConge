@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
+
+
 @Entity @Table( name = "personnejourdecongeautorisetypedemande", schema = "gestiondeconge")
 public class PersonnejourdecongeautorisetypedemandeEntity {
     private int idPersonneJourDeCongeAutoriseTypeDemande;
@@ -13,9 +15,12 @@ public class PersonnejourdecongeautorisetypedemandeEntity {
     private Date dateFin;
     private Integer fkTypeDemandes;
 
+
+
     @Id @Column( name = "idPersonneJourDeCongeAutoriseTypeDemande", nullable = false ) public int getIdPersonneJourDeCongeAutoriseTypeDemande() {
         return idPersonneJourDeCongeAutoriseTypeDemande;
     }
+
 
     public void setIdPersonneJourDeCongeAutoriseTypeDemande( int idPersonneJourDeCongeAutoriseTypeDemande ) {
         this.idPersonneJourDeCongeAutoriseTypeDemande = idPersonneJourDeCongeAutoriseTypeDemande;

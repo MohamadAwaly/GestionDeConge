@@ -62,20 +62,10 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
     @Override public List<Object []> listerDemandeEnCours() throws DaoException {
 
         EntityManager em = Tools.getEntityManager(  PERSISTENCE_UNIT_NAME);
-        List<Object []> lst_demande = null;
-        Query query = null;
-        try {
-            query = em
-                    .createQuery( "select pjc  from PersonnejourdecongetypedemandeEntity pjc "
-                            + "join PersonnesEntity p ON p.idPersonne = pjc.fkPersonne" );
-                            //+ "where pjc.aprouver =: En_cours" );
-            lst_demande = query.getResultList();
-        } catch ( Exception e ) {
-            logger.log( Level.INFO, "Erreur Liste de demande en cours" );
-        } finally {
-            if ( em != null )
-                em.close();
-        }
+        Query query = em.createQuery("select p.idPersonne, p.nom,pjc.dateDemande , pjc.datedebut,pjc.datefin ,pjc.aprouver from PersonnejourdecongetypedemandeEntity pjc "
+                        + "join PersonnesEntity p ON p.idPersonne = pjc.fkPersonne"
+                        + " where pjc.aprouver = com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity.EnumApprouver.En_Cours " );
+        List<Object[]> lst_demande = query.getResultList();
         return lst_demande;
     }
 }
