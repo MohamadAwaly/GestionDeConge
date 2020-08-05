@@ -58,6 +58,17 @@
         <servlet-class>com.atc.momo.Jiwaii.servlets.Accueil</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>listeDemande</servlet-name>
+        <servlet-class>com.atc.momo.Jiwaii.servlets.listeDemande</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>listeDemande</servlet-name>
+        <url-pattern>/listeDemande</url-pattern>
+    </servlet-mapping>
+
+
     <servlet-mapping>
         <servlet-name>Accueil</servlet-name>
         <url-pattern>/accueil</url-pattern>

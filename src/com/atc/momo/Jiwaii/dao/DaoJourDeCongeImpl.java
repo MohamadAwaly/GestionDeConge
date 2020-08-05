@@ -1,11 +1,14 @@
 package com.atc.momo.Jiwaii.dao;
 
+import com.atc.momo.Jiwaii.entities.JourdecongeautoriseEntity;
 import com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity;
 import model.Tools;
 import org.apache.log4j.Level;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class DaoJourDeCongeImpl implements DaoJourDeConge {
     private static final String                  PERSISTENCE_UNIT_NAME = "gestiondeconge";
@@ -54,6 +57,25 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
             if ( em != null )
                 em.close();
         }
+    }
 
+    @Override public List<Object []> listerDemandeEnCours() throws DaoException {
+
+        EntityManager em = Tools.getEntityManager(  PERSISTENCE_UNIT_NAME);
+        List<Object []> lst_demande = null;
+        Query query = null;
+        try {
+            query = em
+                    .createQuery( "select pjc  from PersonnejourdecongetypedemandeEntity pjc "
+                            + "join PersonnesEntity p ON p.idPersonne = pjc.fkPersonne" );
+                            //+ "where pjc.aprouver =: En_cours" );
+            lst_demande = query.getResultList();
+        } catch ( Exception e ) {
+            logger.log( Level.INFO, "Erreur Liste de demande en cours" );
+        } finally {
+            if ( em != null )
+                em.close();
+        }
+        return lst_demande;
     }
 }

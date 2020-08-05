@@ -62,10 +62,7 @@ public class Demande extends HttpServlet {
         } catch ( DaoException e ) {
             e.getMessage();
         }
-
 //</editor-fold>
-
-
 
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
     }
