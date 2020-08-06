@@ -1,16 +1,13 @@
 package com.atc.momo.Jiwaii.dao;
 
-import com.atc.momo.Jiwaii.entities.JourdecongeautoriseEntity;
 import com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity;
 import model.Tools;
 import org.apache.log4j.Level;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Queue;
 
 public class DaoJourDeCongeImpl implements DaoJourDeConge {
     private static final String                  PERSISTENCE_UNIT_NAME = "gestiondeconge";

@@ -6,6 +6,7 @@ import com.atc.momo.Jiwaii.dao.DaoSociete;
 import com.atc.momo.Jiwaii.dao.DaoSocietesImpl;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
 import model.CalendarTools;
+import model.PdfGeneration;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -32,6 +33,9 @@ public class Connexion extends HttpServlet {
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
+
+        PdfGeneration pdfGeneration = new PdfGeneration();
+        pdfGeneration.creationPdf();
 
         DateFormatSymbols dfsFR = new DateFormatSymbols( Locale.FRANCE );
         String[] jourMois = dfsFR.getWeekdays();
