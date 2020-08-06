@@ -128,6 +128,7 @@
 
     </tr>
     <c:forEach var="demandeEnCours" items="${demandeEnCours}">
+
         <tr onclick="showDetailFor(${demandeEnCours[0]},'${demandeEnCours[5]} '+'${demandeEnCours[1]}')"/>
             <td><c:out value="${ demandeEnCours[0] } "/></td>
             <td><c:out value="${ demandeEnCours[1] } "/></td>
