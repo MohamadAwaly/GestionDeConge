@@ -18,32 +18,32 @@
     function showDetailFor(pId, pNom) {
 
         var elementSectionDetail = document.getElementById("rowDetail");
-            elementSectionDetail.innerHTML = null;
+        elementSectionDetail.innerHTML = null;
 
         var elementForm = document.createElement("form");
-            elementForm.setAttribute("method", "post");
-            elementForm.setAttribute("action","listeDemande")
-            elementForm.setAttribute("class", "formulaireReponseDemande");
+        elementForm.setAttribute("method", "post");
+        elementForm.setAttribute("action","listeDemande")
+        elementForm.setAttribute("class", "formulaireReponseDemande");
 
         var elementLegend = document.createElement("legend");
-            elementLegend.innerHTML = "Détail de la demande de "+pNom;
+        elementLegend.innerHTML = "Détail de la demande de "+pNom;
 
         var elementFieldSetLegend = document.createElement("fieldset");
-            elementFieldSetLegend.appendChild(elementLegend);
+        elementFieldSetLegend.appendChild(elementLegend);
 
-            // LABEL AND INPUT CONFIG FOR PUSH IN  elementFieldSetLegend
+        // LABEL AND INPUT CONFIG FOR PUSH IN  elementFieldSetLegend
         var elementLabel = document.createElement("label");
-            elementLabel.innerHTML = "Demande n° ";
-            elementLabel.setAttribute("for","idDemande");
-            elementLabel.setAttribute("class","labelFormDemande");
+        elementLabel.innerHTML = "Demande n° ";
+        elementLabel.setAttribute("for","idDemande");
+        elementLabel.setAttribute("class","labelFormDemande");
 
         var elementInput = document.createElement("input");
-            elementInput.setAttribute("type","text");
-            elementInput.setAttribute("name","idDemande");
-            elementInput.setAttribute("value",pId);
-            elementInput.setAttribute("readonly",true);
-            elementInput.setAttribute("size","5");
-            elementInput.setAttribute("class", "champFormReponseDemande");
+        elementInput.setAttribute("type","text");
+        elementInput.setAttribute("name","idDemande");
+        elementInput.setAttribute("value",pId);
+        elementInput.setAttribute("readonly",true);
+        elementInput.setAttribute("size","5");
+        elementInput.setAttribute("class", "champFormReponseDemande");
 
         var P = document.createElement("p");
         // END FOR PUSH IN  elementFieldSetLegend
@@ -55,9 +55,9 @@
         elementLabelCommentaire.setAttribute("class","labelFormDemande");
 
         var elementInputCommentaire = document.createElement("input");
-        elementInputCommentaire.setAttribute("type","textarea");
-        elementInputCommentaire.setAttribute("name","Commentaire ");
-        elementInputCommentaire.setAttribute("for","Commentaire ");
+        elementInputCommentaire.setAttribute("type","text");
+        elementInputCommentaire.setAttribute("name","Commentaire");
+        elementInputCommentaire.setAttribute("for","Commentaire");
         elementInputCommentaire.setAttribute("class", "champFormReponseDemande");
         elementInputCommentaire.setAttribute("rows","50");
         elementInputCommentaire.setAttribute("size","50");
@@ -66,7 +66,8 @@
 
         var elementInputRadioAccepter = document.createElement("input");
         elementInputRadioAccepter.setAttribute("type","radio");
-        elementInputRadioAccepter.setAttribute("name","Aprouve ");
+        elementInputRadioAccepter.setAttribute("name","Aprouve");
+        elementInputRadioAccepter.setAttribute("for","Accepte");
         elementInputRadioAccepter.setAttribute("value","Accepte");
 
         var elementLabelRadioAccepter = document.createElement("label");
@@ -76,13 +77,13 @@
 
         var elementInputRadioRefuser = document.createElement("input");
         elementInputRadioRefuser.setAttribute("type","radio");
-        elementInputRadioRefuser.setAttribute("name","Aprouve ");
+        elementInputRadioRefuser.setAttribute("name","Aprouve");
         elementInputRadioRefuser.setAttribute("value","Refuse");
+        elementInputRadioRefuser.setAttribute("for","Refuse");
 
         var elementLabelRadioRefuser = document.createElement("label");
         elementLabelRadioRefuser.innerHTML = "Refuser";
         elementLabelRadioRefuser.setAttribute("for","Refuse");
-        elementLabelRadioRefuser.setAttribute("name","Refuse ");
 
         // SUBMIT
 
@@ -130,11 +131,11 @@
     <c:forEach var="demandeEnCours" items="${demandeEnCours}">
 
         <tr onclick="showDetailFor(${demandeEnCours[0]},'${demandeEnCours[5]} '+'${demandeEnCours[1]}')"/>
-            <td><c:out value="${ demandeEnCours[0] } "/></td>
-            <td><c:out value="${ demandeEnCours[1] } "/></td>
-            <td><c:out value="${ demandeEnCours[2] } "/></td>
-            <td><c:out value="${ demandeEnCours[3] } "/></td>
-            <td><c:out value="${ demandeEnCours[4] } "/></td>
+        <td><c:out value="${ demandeEnCours[0] } "/></td>
+        <td><c:out value="${ demandeEnCours[1] } "/></td>
+        <td><c:out value="${ demandeEnCours[2] } "/></td>
+        <td><c:out value="${ demandeEnCours[3] } "/></td>
+        <td><c:out value="${ demandeEnCours[4] } "/></td>
         </tr>
     </c:forEach>
 </table>

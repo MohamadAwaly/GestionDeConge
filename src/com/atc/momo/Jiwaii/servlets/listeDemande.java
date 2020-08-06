@@ -25,11 +25,19 @@ public class listeDemande extends HttpServlet {
         String approuve = (String) request.getParameter( "Aprouve" );
         String commentaire = (String) request.getParameter( "Commentaire" );
 
-        DaoJourDeConge daoJourDeConge = new DaoJourDeCongeImpl();
+       DaoJourDeConge daoJourDeConge = new DaoJourDeCongeImpl();
         try {
             daoJourDeConge.updateDemande( idDemande, commentaire, approuve );
         } catch ( DaoException e ) {
             e.getMessage();
+        }
+
+
+
+        try {
+            request.setAttribute( "demandeEnCours", daoJourDeConge.listerDemandeEnCours() );
+        } catch ( DaoException e ) {
+            e.printStackTrace();
         }
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 

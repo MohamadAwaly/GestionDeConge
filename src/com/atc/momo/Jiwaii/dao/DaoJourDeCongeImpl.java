@@ -21,7 +21,7 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
             throws DaoException {
         EntityManager entityManager = null;
         try {
-            entityManager = Tools.getEntityManager(PERSISTENCE_UNIT_NAME);
+            entityManager = Tools.getEntityManager( PERSISTENCE_UNIT_NAME );
             EntityTransaction trans = entityManager.getTransaction();
             trans.begin();
             entityManager.persist( personnejourdecongetypedemandeEntity );
@@ -36,20 +36,20 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
     }
 
     @Override
-    public void insertDemandeParProcedure(Integer pPersonneId,String pDateDebut,String pDateFin) {
+    public void insertDemandeParProcedure( Integer pPersonneId, String pDateDebut, String pDateFin ) {
         EntityManager em = Tools.getEntityManager( PERSISTENCE_UNIT_NAME );
         try {
             EntityTransaction trans = em.getTransaction();
             trans.begin();
-            StoredProcedureQuery storedprocedure = em.createStoredProcedureQuery( "InsererUneDemande");
+            StoredProcedureQuery storedprocedure = em.createStoredProcedureQuery( "InsererUneDemande" );
             //parametres SQL : pPersonneId INT,pDateDebut Nvarchar(10),pDateFin Nvarchar(10)
-            storedprocedure.registerStoredProcedureParameter("pPersonneId",Integer.class,ParameterMode.IN);
-            storedprocedure.registerStoredProcedureParameter("pDateDebut", Date.class,ParameterMode.IN);
-            storedprocedure.registerStoredProcedureParameter("pDateFin",Date.class,ParameterMode.IN);
+            storedprocedure.registerStoredProcedureParameter( "pPersonneId", Integer.class, ParameterMode.IN );
+            storedprocedure.registerStoredProcedureParameter( "pDateDebut", Date.class, ParameterMode.IN );
+            storedprocedure.registerStoredProcedureParameter( "pDateFin", Date.class, ParameterMode.IN );
 
-            storedprocedure.setParameter("pPersonneId",pPersonneId);
-            storedprocedure.setParameter("pDateDebut",pDateDebut);
-            storedprocedure.setParameter("pDateFin",pDateFin);
+            storedprocedure.setParameter( "pPersonneId", pPersonneId );
+            storedprocedure.setParameter( "pDateDebut", pDateDebut );
+            storedprocedure.setParameter( "pDateFin", pDateFin );
 
             storedprocedure.execute();
             trans.commit();
@@ -61,38 +61,56 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
         }
     }
 
-    @Override public List<Object []> listerDemandeEnCours() throws DaoException {
+    @Override public List<Object[]> listerDemandeEnCours() throws DaoException {
 
-        EntityManager em = Tools.getEntityManager(  PERSISTENCE_UNIT_NAME);
-        Query query = em.createQuery("select pjc.idPersonneJourDeCongeTypeDemande, p.nom,pjc.dateDemande , pjc.datedebut,pjc.datefin,p.prenom "
+        EntityManager em = Tools.getEntityManager( PERSISTENCE_UNIT_NAME );
+        Query query = em.createQuery(
+                "select pjc.idPersonneJourDeCongeTypeDemande, p.nom,pjc.dateDemande , pjc.datedebut,pjc.datefin,p.prenom "
                         + " from PersonnejourdecongetypedemandeEntity pjc "
                         + " join PersonnesEntity p ON p.idPersonne = pjc.fkPersonne"
                         + " where pjc.aprouver = com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity.EnumApprouver.En_Cours " );
 
-
         List<Object[]> lst_demande = query.getResultList();
-//        for (Object[] obj: lst_demande
-//             ) {
-//            logger.log( Level.INFO, obj );
-//            Object[] observable = obj;
-//        }
+        //        for (Object[] obj: lst_demande
+        //             ) {
+        //            logger.log( Level.INFO, obj );
+        //            Object[] observable = obj;
+        //        }
         return lst_demande;
     }
 
-    @Override public void updateDemande( int idDemande, String commentaire, String approuve ) throws DaoException {
+    @Override public void updateDemande( int idPersonneJourDeCongeTypeDemande, String messageApprobateur, String approuver )
+            throws DaoException {
 
         String pattern = "yyyy-MM-dd";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        String date = simpleDateFormat.format(new  Date());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat( pattern );
+        String date = simpleDateFormat.format( new Date() );
+        java.sql.Date dateReponse = java.sql.Date.valueOf( date );
+
+        PersonnejourdecongetypedemandeEntity.EnumApprouver aprouver;
+        aprouver = PersonnejourdecongetypedemandeEntity.EnumApprouver.valueOf( approuver );
 
         EntityManager em = Tools.getEntityManager( PERSISTENCE_UNIT_NAME );
-        EntityTransaction trans = em.getTransaction();
-        trans.begin();
-        Query query = em.createQuery( "UPDATE PersonnejourdecongetypedemandeEntity pjc "
-                + "SET pjc.aprouver =: approuve, pjc.messageApprobateur =: commentaire, pjc.dateReponse =: date"
-                + " WHERE pjc.idPersonneJourDeCongeTypeDemande =: idDemande" );
+        try {
+            EntityTransaction trans = em.getTransaction();
+            trans.begin();
+            Query query = em.createQuery( "UPDATE PersonnejourdecongetypedemandeEntity pjc "
+                    + "SET pjc.aprouver = :aprouver, pjc.messageApprobateur = :messageApprobateur, pjc.dateReponse = :dateReponse"
+                    + " WHERE pjc.idPersonneJourDeCongeTypeDemande = :idPersonneJourDeCongeTypeDemande" );
 
+            query.setParameter( "messageApprobateur", messageApprobateur );
+            query.setParameter( "aprouver", aprouver );
+            query.setParameter( "dateReponse",dateReponse );
+            query.setParameter( "idPersonneJourDeCongeTypeDemande", idPersonneJourDeCongeTypeDemande );
 
-        trans.commit();
+            query.executeUpdate();
+            trans.commit();
+
+        } catch ( Exception e ) {
+            logger.log( Level.INFO, "Erreur update demande  n" + e.getMessage() );
+        } finally {
+            if ( em != null )
+                em.close();
+        }
     }
 }
