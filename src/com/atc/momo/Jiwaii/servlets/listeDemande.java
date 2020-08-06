@@ -3,6 +3,8 @@ package com.atc.momo.Jiwaii.servlets;
 import com.atc.momo.Jiwaii.dao.DaoException;
 import com.atc.momo.Jiwaii.dao.DaoJourDeConge;
 import com.atc.momo.Jiwaii.dao.DaoJourDeCongeImpl;
+import com.atc.momo.Jiwaii.entities.JourdecongeautoriseEntity;
+import com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +19,19 @@ public class listeDemande extends HttpServlet {
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
 
+        PersonnejourdecongetypedemandeEntity personnejourdecongetypedemandeEntity = new PersonnejourdecongetypedemandeEntity();
+
+        int idDemande = Integer.parseInt( request.getParameter( "idDemande" ) );
+        String approuve = (String) request.getParameter( "Aprouve" );
+        String commentaire = (String) request.getParameter( "Commentaire" );
+
+        DaoJourDeConge daoJourDeConge = new DaoJourDeCongeImpl();
+        try {
+            daoJourDeConge.updateDemande( idDemande, commentaire, approuve );
+        } catch ( DaoException e ) {
+            e.getMessage();
+        }
+        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 
     }
 

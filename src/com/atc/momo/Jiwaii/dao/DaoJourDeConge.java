@@ -8,4 +8,5 @@ public interface DaoJourDeConge {
     public void insertDemande ( PersonnejourdecongetypedemandeEntity personnejourdecongetypedemandeEntity ) throws DaoException;
     public void insertDemandeParProcedure(Integer pPersonneId,String pDateDebut,String pDateFin) ;
     List<Object []> listerDemandeEnCours() throws DaoException;
+    public void updateDemande (int idDemande, String commentaire, String aprouve) throws DaoException;
 }

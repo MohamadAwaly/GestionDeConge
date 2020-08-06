@@ -6,9 +6,11 @@ import model.Tools;
 import org.apache.log4j.Level;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Queue;
 
 public class DaoJourDeCongeImpl implements DaoJourDeConge {
     private static final String                  PERSISTENCE_UNIT_NAME = "gestiondeconge";
@@ -67,6 +69,7 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
                         + " join PersonnesEntity p ON p.idPersonne = pjc.fkPersonne"
                         + " where pjc.aprouver = com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity.EnumApprouver.En_Cours " );
 
+
         List<Object[]> lst_demande = query.getResultList();
 //        for (Object[] obj: lst_demande
 //             ) {
@@ -74,5 +77,22 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
 //            Object[] observable = obj;
 //        }
         return lst_demande;
+    }
+
+    @Override public void updateDemande( int idDemande, String commentaire, String approuve ) throws DaoException {
+
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(new  Date());
+
+        EntityManager em = Tools.getEntityManager( PERSISTENCE_UNIT_NAME );
+        EntityTransaction trans = em.getTransaction();
+        trans.begin();
+        Query query = em.createQuery( "UPDATE PersonnejourdecongetypedemandeEntity pjc "
+                + "SET pjc.aprouver =: approuve, pjc.messageApprobateur =: commentaire, pjc.dateReponse =: date"
+                + " WHERE pjc.idPersonneJourDeCongeTypeDemande =: idDemande" );
+
+
+        trans.commit();
     }
 }

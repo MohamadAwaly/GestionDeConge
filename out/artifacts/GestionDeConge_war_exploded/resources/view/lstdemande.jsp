@@ -22,7 +22,7 @@
 
         var elementForm = document.createElement("form");
             elementForm.setAttribute("method", "post");
-            elementForm.setAttribute("action","reponseDeDemande")
+            elementForm.setAttribute("action","listeDemande")
             elementForm.setAttribute("class", "formulaireReponseDemande");
 
         var elementLegend = document.createElement("legend");
@@ -57,6 +57,7 @@
         var elementInputCommentaire = document.createElement("input");
         elementInputCommentaire.setAttribute("type","textarea");
         elementInputCommentaire.setAttribute("name","Commentaire ");
+        elementInputCommentaire.setAttribute("for","Commentaire ");
         elementInputCommentaire.setAttribute("class", "champFormReponseDemande");
         elementInputCommentaire.setAttribute("rows","50");
         elementInputCommentaire.setAttribute("size","50");
@@ -65,22 +66,23 @@
 
         var elementInputRadioAccepter = document.createElement("input");
         elementInputRadioAccepter.setAttribute("type","radio");
-        elementInputRadioAccepter.setAttribute("name","approuve ");
-        elementInputRadioAccepter.setAttribute("value","accepte");
+        elementInputRadioAccepter.setAttribute("name","Aprouve ");
+        elementInputRadioAccepter.setAttribute("value","Accepte");
 
         var elementLabelRadioAccepter = document.createElement("label");
         elementLabelRadioAccepter.innerHTML = "Accepter"
-        elementLabelRadioAccepter.setAttribute("for","accepte");
+        elementLabelRadioAccepter.setAttribute("for","Accepte");
 
 
         var elementInputRadioRefuser = document.createElement("input");
         elementInputRadioRefuser.setAttribute("type","radio");
-        elementInputRadioRefuser.setAttribute("name","approuve ");
-        elementInputRadioRefuser.setAttribute("value","refuse");
+        elementInputRadioRefuser.setAttribute("name","Aprouve ");
+        elementInputRadioRefuser.setAttribute("value","Refuse");
 
         var elementLabelRadioRefuser = document.createElement("label");
         elementLabelRadioRefuser.innerHTML = "Refuser";
-        elementLabelRadioRefuser.setAttribute("for","refuse");
+        elementLabelRadioRefuser.setAttribute("for","Refuse");
+        elementLabelRadioRefuser.setAttribute("name","Refuse ");
 
         // SUBMIT
 
@@ -105,8 +107,6 @@
         elementFieldSetLegend.appendChild(P);
         elementFieldSetLegend.appendChild(elementInputSubmit);
 
-
-
         elementForm.appendChild(elementFieldSetLegend);
         elementSectionDetail.appendChild(elementForm);
     }
@@ -128,6 +128,7 @@
 
     </tr>
     <c:forEach var="demandeEnCours" items="${demandeEnCours}">
+
         <tr onclick="showDetailFor(${demandeEnCours[0]},'${demandeEnCours[5]} '+'${demandeEnCours[1]}')"/>
             <td><c:out value="${ demandeEnCours[0] } "/></td>
             <td><c:out value="${ demandeEnCours[1] } "/></td>
