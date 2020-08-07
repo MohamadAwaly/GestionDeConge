@@ -15,6 +15,7 @@ import org.apache.pdfbox.pdmodel.font.PDType1CFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.text.PDFTextStripper;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -83,23 +84,32 @@ public class PdfGeneration {
      */
     public void addingTextPdf() throws IOException {
 
+        final PDRectangle mediaBox = page.getMediaBox();
+        final PDRectangle cropBox = page.getCropBox();
+
+
         //Chargement d'un document PDF existant
         file = new File( "C:/pdfBox/BlankPdf.pdf" );
         document = PDDocument.load( file );
 
         //Recuperation de la page 1
         page = document.getPage( 0 );
+
         //PDPage page = new PDPage(PDRectangle.A4);
         // Preparation du flux du contenue
         PDPageContentStream contentStream = new PDPageContentStream( document, page );
+
+
+
         //Ajout du text
         contentStream.beginText();
+
         //Definir le font de la content stream
         contentStream.setFont( PDType1Font.TIMES_ROMAN, 12 );
         // définir l' interlignage du texte
         contentStream.setLeading( 14.5f );
         //Definir la position de la ligne
-        contentStream.newLineAtOffset( 25, 500 );
+        contentStream.newLineAtOffset( 25, 400 );
 
 
         List<PersonnesEntity> listTest = null;
@@ -107,6 +117,8 @@ public class PdfGeneration {
         contentStream.showText( "Prenom " );
         contentStream.showText( "Email " );
         contentStream.newLine();
+
+
         try {
             listTest = daoPersonne.lister();
             for ( PersonnesEntity stringPersonne : listTest ) {
@@ -119,6 +131,9 @@ public class PdfGeneration {
         } catch ( DaoException e ) {
             e.getMessage();
         }
+
+
+
 
         //Mettre fin au fluix de contenue
         contentStream.endText();
@@ -149,6 +164,9 @@ public class PdfGeneration {
         String text = pdfStripper.getText( document );
         logger.log( Level.INFO, "text recupere du PDF: " + text );
     }
+
+    //test
+
 
 
 }

@@ -35,12 +35,17 @@ public class Connexion extends HttpServlet {
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
 
+        String inputFile = "C:/pdfBox/Serie4.htm";
+        String outputFile = "C:/pdfBox/Serie4   .pdf";
+
+
         PdfGeneration pdfGeneration = new PdfGeneration();
         pdfGeneration.creationPdf();
         pdfGeneration.addingTextPdf();
-        //pdfGeneration.extractingTextPdf();
 
-        SmtpServices.emailConfig( "gestioncongee@gmail.com","Atc123456","smtp.gmail.com","awalymhassan@hotmail.com" );
+        //pdfGeneration.extractingTextPdf();
+         //Envoie d'email.
+        //SmtpServices.emailConfig( "gestioncongee@gmail.com","Atc123456","smtp.gmail.com","awalymhassan@hotmail.com" );
 
         DateFormatSymbols dfsFR = new DateFormatSymbols( Locale.FRANCE );
         String[] jourMois = dfsFR.getWeekdays();
