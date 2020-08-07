@@ -35,7 +35,9 @@ public class Connexion extends HttpServlet {
             throws ServletException, IOException {
 
         PdfGeneration pdfGeneration = new PdfGeneration();
-        pdfGeneration.creationPdf();
+        //pdfGeneration.creationPdf();
+        pdfGeneration.addingTextPdf();
+        //pdfGeneration.extractingTextPdf();
 
         DateFormatSymbols dfsFR = new DateFormatSymbols( Locale.FRANCE );
         String[] jourMois = dfsFR.getWeekdays();

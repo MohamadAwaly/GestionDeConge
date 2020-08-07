@@ -118,35 +118,34 @@ public class DaoPersonneImpl implements DaoPersonne {
         }
     }
 
-    @Override public List<String> lister() throws DaoException {
-        // EntityManagerFactory entityManagerFactory = null;
-        // EntityManager entityManager = null;
-        // //List<Query> personnesEntities = new ArrayList<Query>();
-        // List<String> test = new ArrayList<>();
-        // Query query = null;
-        // try {
-        //
-        //     entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
-        //     entityManager = entityManagerFactory.createEntityManager();
-        //
-        //     query = (Query) entityManager
-        //             .createQuery( "select p, a from PersonnesEntity p , AdressesEntity  a", PersonnesEntity.class )
-        //             .getResultList();
-        //     for ( int i = 0; i < test.size(); i++ ) {
-        //         test.add( query.toString() );
-        //     }
-        //
-        //     for ( int i = 0; i < test.size(); i++ ) {
-        //         logger.log( Level.INFO, "Liste test: " + test.get( i ) );
-        //     }
-        //
-        // } catch ( Exception e ) {
-        //     logger.log( Level.INFO, "Erreur" );
-        // } finally {
-        //     if ( entityManager != null )
-        //         entityManager.close();
-        // }
-        return null;
+    @Override public List<PersonnesEntity> lister() throws DaoException {
+        EntityManagerFactory entityManagerFactory = null;
+        EntityManager entityManager = null;
+        List<PersonnesEntity> personnesEntities = new ArrayList<>();
+
+        try {
+
+            entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
+            entityManager = entityManagerFactory.createEntityManager();
+
+            personnesEntities = entityManager
+                    .createQuery( "select p from PersonnesEntity p ", PersonnesEntity.class )
+                    .getResultList();
+          //for ( int i = 0; i < test.size(); i++ ) {
+          //    test.add( query.toString() );
+          //}
+
+          //for ( int i = 0; i < test.size(); i++ ) {
+          //    logger.log( Level.INFO, "Liste test: " + test.get( i ) );
+          //}
+
+        } catch ( Exception e ) {
+            logger.log( Level.INFO, "Erreur" );
+        } finally {
+            if ( entityManager != null )
+                entityManager.close();
+        }
+        return personnesEntities;
     }
 
     @Override public PersonnesEntity userFind( String email, String motDePasse ) throws DaoException {

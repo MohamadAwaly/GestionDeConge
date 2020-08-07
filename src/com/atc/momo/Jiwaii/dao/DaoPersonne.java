@@ -15,7 +15,7 @@ public interface DaoPersonne {
     //Déffinir les jours de congées autorisée par personne
     void dayHoliday ( JourdecongeautoriseEntity holiday ) throws DaoException;
     //Liste les personnes présent dans la table
-    List<String> lister() throws DaoException;
+    List<PersonnesEntity> lister() throws DaoException;
     PersonnesEntity userFind(String email,String motDePasse) throws DaoException;
     public List<Object[]> laListeDeOufs();
     //Liste des jours autorisé presnte dans la table
