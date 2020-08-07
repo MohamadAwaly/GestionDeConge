@@ -1,6 +1,7 @@
 package com.atc.momo.Jiwaii.dao;
 
 import com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity;
+import model.SmtpServices;
 import model.Tools;
 import org.apache.log4j.Level;
 
@@ -13,7 +14,6 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
     private static final String                  PERSISTENCE_UNIT_NAME = "gestiondeconge";
     final static         org.apache.log4j.Logger logger                = org.apache.log4j.Logger
             .getLogger( DaoJourDeCongeImpl.class );
-
 
     @Override public void insertDemande( PersonnejourdecongetypedemandeEntity personnejourdecongetypedemandeEntity )
             throws DaoException {
@@ -77,7 +77,8 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
         return lst_demande;
     }
 
-    @Override public void updateDemande( int idPersonneJourDeCongeTypeDemande, String messageApprobateur, String approuver )
+    @Override public void updateDemande( int idPersonneJourDeCongeTypeDemande, String messageApprobateur,
+            String approuver )
             throws DaoException {
 
         String pattern = "yyyy-MM-dd";
@@ -98,11 +99,34 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
 
             query.setParameter( "messageApprobateur", messageApprobateur );
             query.setParameter( "aprouver", aprouver );
-            query.setParameter( "dateReponse",dateReponse );
+            query.setParameter( "dateReponse", dateReponse );
             query.setParameter( "idPersonneJourDeCongeTypeDemande", idPersonneJourDeCongeTypeDemande );
 
             query.executeUpdate();
             trans.commit();
+
+            List<Object[]> lst_querySelect;
+            trans.begin();
+            StoredProcedureQuery storedprocedure = em.createStoredProcedureQuery( "ListeDeDemandeById" );
+            //parametres SQL : pIdDemande
+            storedprocedure.registerStoredProcedureParameter( "pIdDemande", Integer.class, ParameterMode.IN );
+            storedprocedure.setParameter( "pIdDemande", idPersonneJourDeCongeTypeDemande );
+            storedprocedure.execute();
+            trans.commit();
+            lst_querySelect = storedprocedure.getResultList();
+
+            // 0 Prenom, 1 Nom, 2 Email, 3 DateDemande, 4 DateReponse, 5 Aprouver,6 MessageApprobateur, 7 DateDebut, 8 DateFin;
+            //lst_querySelect.get(0)[0].toString();
+            String Message = "Chèr(e) " + lst_querySelect.get( 0 )[0].toString()
+                    + ", \n  Vous aviez demandé congé du " + lst_querySelect.get( 0 )[7].toString() + " au "
+                    + lst_querySelect.get( 0 )[8].toString() + ". Cette demande n°" + idPersonneJourDeCongeTypeDemande
+                    + " du " + lst_querySelect.get( 0 )[3].toString() + " à été << "
+                    + lst_querySelect.get( 0 )[5].toString() + " >> \n"
+                    + " commentaire de votre superieur : \n \"" + lst_querySelect.get( 0 )[6].toString() + "\""
+                    + "\n \n Bien à vous \n -HolidayManager-";
+            SmtpServices
+                    .emailConfig( "gestioncongee@gmail.com", "Atc123456", "smtp.gmail.com",
+                            lst_querySelect.get( 0 )[2].toString(), Message );
 
         } catch ( Exception e ) {
             logger.log( Level.INFO, "Erreur update demande  n" + e.getMessage() );

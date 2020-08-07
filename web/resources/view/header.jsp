@@ -23,6 +23,7 @@
             <li class="menu-javascript"><a href="societes">Afficher Societe</a></li>
             <li class="menu-contact"><a href="nouvellesociete">Nouvelle Societe</a></li>
             <li class="menu-javascript"><a href="demande">Demande de conge</a></li>
+            <li class="menu-javascript"><a href="listeDemande">Liste des demandes</a></li>
         </ul>
     </div>
 </nav>

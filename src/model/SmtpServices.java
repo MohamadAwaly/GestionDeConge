@@ -14,11 +14,10 @@ import javax.mail.internet.MimeMessage;
 
 public class SmtpServices {
 
-    public static void emailConfig( String pFrom, String pPassword, String pHost, String pTo ) {
-        String messageBody, sujet;
+    public static void emailConfig( String pFrom, String pPassword, String pHost, String pTo,String messageBody  ) {
+        String  sujet;
         sujet = "Réponse de votre demande";
-        messageBody = "Vous aviez fait une demande de congé ces derniers jours, votre employeur vous à répondu. " +
-                "Retrouvez la réponse dans le pdf que vous aviez reçu en piece ci-joint. ";
+
 
         Properties props = System.getProperties();
         //String host = "smtp.gmail.com";

@@ -35,15 +35,12 @@ public class Connexion extends HttpServlet {
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
 
-        String inputFile = "C:/pdfBox/Serie4.htm";
-        String outputFile = "C:/pdfBox/Serie4   .pdf";
-
-
         PdfGeneration pdfGeneration = new PdfGeneration();
-        pdfGeneration.creationPdf();
-        pdfGeneration.addingTextPdf();
-
-        //pdfGeneration.extractingTextPdf();
+        try {
+            pdfGeneration.creationPdf();
+        } catch ( Exception e ) {
+            e.getMessage();
+        }
          //Envoie d'email.
         //SmtpServices.emailConfig( "gestioncongee@gmail.com","Atc123456","smtp.gmail.com","awalymhassan@hotmail.com" );
 
