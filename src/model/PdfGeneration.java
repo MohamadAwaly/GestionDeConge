@@ -69,7 +69,7 @@ public class PdfGeneration {
         //Ajout de la page au document
         document.addPage( page );
         //enregistrer le document
-        document.save( "C:/pdfBox/my_doc.pdf" );
+        document.save( "C:/pdfBox/BlankPdf.pdf" );
         logger.log( Level.INFO, "PDF Created" );
         //Fermer l'objet
         document.close();
@@ -84,12 +84,12 @@ public class PdfGeneration {
     public void addingTextPdf() throws IOException {
 
         //Chargement d'un document PDF existant
-        file = new File( "C:/pdfBox/my_doc.pdf" );
+        file = new File( "C:/pdfBox/BlankPdf.pdf" );
         document = PDDocument.load( file );
 
         //Recuperation de la page 1
         page = document.getPage( 0 );
-        PDPage page = new PDPage(PDRectangle.A4);
+        //PDPage page = new PDPage(PDRectangle.A4);
         // Preparation du flux du contenue
         PDPageContentStream contentStream = new PDPageContentStream( document, page );
         //Ajout du text
@@ -127,7 +127,7 @@ public class PdfGeneration {
         contentStream.close();
 
         // enregistrement du document
-        document.save( "C:/pdfBox/my_doc.pdf" );
+        document.save( "C:/pdfBox/BlankPdf.pdf" );
 
         //Fermeture du document
         document.close();

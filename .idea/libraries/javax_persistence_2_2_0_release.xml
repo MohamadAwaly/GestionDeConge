@@ -8,6 +8,7 @@
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/eclipselink-2.7.0-RC1.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/eclipselink.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/pdfbox-app-2.0.20.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/mail.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

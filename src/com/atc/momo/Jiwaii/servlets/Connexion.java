@@ -7,6 +7,7 @@ import com.atc.momo.Jiwaii.dao.DaoSocietesImpl;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
 import model.CalendarTools;
 import model.PdfGeneration;
+import model.SmtpServices;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -35,9 +36,11 @@ public class Connexion extends HttpServlet {
             throws ServletException, IOException {
 
         PdfGeneration pdfGeneration = new PdfGeneration();
-        //pdfGeneration.creationPdf();
+        pdfGeneration.creationPdf();
         pdfGeneration.addingTextPdf();
         //pdfGeneration.extractingTextPdf();
+
+        SmtpServices.emailConfig( "gestioncongee@gmail.com","Atc123456","smtp.gmail.com","awalymhassan@hotmail.com" );
 
         DateFormatSymbols dfsFR = new DateFormatSymbols( Locale.FRANCE );
         String[] jourMois = dfsFR.getWeekdays();
