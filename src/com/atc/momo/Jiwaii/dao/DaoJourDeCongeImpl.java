@@ -14,6 +14,7 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
     final static         org.apache.log4j.Logger logger                = org.apache.log4j.Logger
             .getLogger( DaoJourDeCongeImpl.class );
 
+
     @Override public void insertDemande( PersonnejourdecongetypedemandeEntity personnejourdecongetypedemandeEntity )
             throws DaoException {
         EntityManager entityManager = null;
