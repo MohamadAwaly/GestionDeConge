@@ -7,5 +7,25 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/gestiondeconge</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="gestiondeconge/EclipseLink" uuid="8074b7ac-383e-4381-81ec-c05286bf3173">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>EclipseLink
+
+C:/Users/Gaming/IdeaProjects/GestionDeConge/src/META-INF/persistence.xml</remarks>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/gestiondeconge</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="jdbc/jpa" uuid="e758c639-a030-4fe4-9a92-271202f7788c">
+      <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Tomcat.Resource
+
+C:/Users/Gaming/IdeaProjects/GestionDeConge/web/META-INF/context.xml</remarks>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/gestiondeconge?autoReconnect=true</jdbc-url>
+    </data-source>
   </component>
 </project>

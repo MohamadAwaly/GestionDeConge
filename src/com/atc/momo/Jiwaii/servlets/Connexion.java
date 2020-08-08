@@ -35,12 +35,7 @@ public class Connexion extends HttpServlet {
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
 
-        PdfGeneration pdfGeneration = new PdfGeneration();
-        try {
-            pdfGeneration.creationPdf();
-        } catch ( Exception e ) {
-            e.getMessage();
-        }
+
          //Envoie d'email.
         //SmtpServices.emailConfig( "gestioncongee@gmail.com","Atc123456","smtp.gmail.com","awalymhassan@hotmail.com" );
 

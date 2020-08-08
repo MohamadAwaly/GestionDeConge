@@ -27,8 +27,21 @@ public class PdfGeneration {
     private      PDFTextStripper         pdfStripper;
     private      DaoPersonne             daoPersonne = new DaoPersonneImpl();
 
-
+    /**
+     * Creation d'un fichier pdf liste des employes dans la table Personnes
+     * @throws Exception
+     */
     public void creationPdf () throws Exception {
+        //Cree repertoir si il n'existe pas
+        String dossier = "C:/pdfBox/";
+        if(!new File(dossier).exists())
+        {
+            // Créer le dossier avec tous ses parents
+            new File(dossier).mkdirs();
+
+        } else {
+            logger.log( Level.INFO,"ce dossier existe deja" );
+        }
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream("C:/pdfBox/ListeEmploye.pdf"));
 
@@ -41,15 +54,15 @@ public class PdfGeneration {
 
         PdfPTable table = new PdfPTable(3);
         table.setWidthPercentage(100);
+        table.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.setTotalWidth(new float[]{ 50, 50, 150 });
         addTableHeader(table);
         addRows(table);
         document.add( paragraph );
         document.add( Chunk.NEWLINE );
         document.add( Chunk.NEWLINE );
         document.add(table);
-
         document.close();
-
     }
 
     private void addTableHeader(PdfPTable table) {
@@ -78,6 +91,30 @@ public class PdfGeneration {
         } catch ( DaoException e ) {
             e.getMessage();
         }
+    }
+
+    //test
+    /**
+     * Creates a table; widths are set with special setWidthPercentage() method.
+     * @return a PdfPTable
+     * @throws DocumentException
+     */
+    public static PdfPTable createTable4() throws DocumentException {
+        PdfPTable table = new PdfPTable(3);
+        Rectangle rect = new Rectangle(523, 770);
+        table.setWidthPercentage(new float[]{ 144, 72, 72 }, rect);
+        PdfPCell cell;
+        cell = new PdfPCell(new Phrase("Table 4"));
+        cell.setColspan(3);
+        table.addCell(cell);
+        cell = new PdfPCell(new Phrase("Cell with rowspan 2"));
+        cell.setRowspan(2);
+        table.addCell(cell);
+        table.addCell("row 1; cell 1");
+        table.addCell("row 1; cell 2");
+        table.addCell("row 2; cell 1");
+        table.addCell("row 2; cell 2");
+        return table;
     }
 
 }
