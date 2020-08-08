@@ -1,10 +1,13 @@
 package com.atc.momo.Jiwaii.dao;
 
 import com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity;
+import model.PdfGeneration;
 import model.SmtpServices;
 import model.Tools;
 import org.apache.log4j.Level;
 
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,7 +15,7 @@ import java.util.List;
 
 public class DaoJourDeCongeImpl implements DaoJourDeConge {
     private static final String                  PERSISTENCE_UNIT_NAME = "gestiondeconge";
-    final static         org.apache.log4j.Logger logger                = org.apache.log4j.Logger
+    final static org.apache.log4j.Logger logger        = org.apache.log4j.Logger
             .getLogger( DaoJourDeCongeImpl.class );
 
     @Override public void insertDemande( PersonnejourdecongetypedemandeEntity personnejourdecongetypedemandeEntity )
@@ -88,6 +91,8 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
 
         PersonnejourdecongetypedemandeEntity.EnumApprouver aprouver;
         aprouver = PersonnejourdecongetypedemandeEntity.EnumApprouver.valueOf( approuver );
+
+
 
         EntityManager em = Tools.getEntityManager( PERSISTENCE_UNIT_NAME );
         try {

@@ -17,6 +17,10 @@
 <body>
 <c:import url="header.jsp"/>
 
+<form method="post" action="personnes" class="pdfPersonne">
+    <button type="submit">Enregistre PDF</button>
+</form>
+
 
 <c:if test="${ !empty erreur}"><p style="color: red;"><c:out value="${ erreur }"/></p></c:if>
 

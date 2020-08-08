@@ -2,13 +2,15 @@ package model;
 
 import java.util.Properties;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.*;
 
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 //@author: JY & Mohamad
 
@@ -40,6 +42,11 @@ public class SmtpServices {
 
             message.setSubject( sujet );
             message.setText( messageBody );
+            String filename = "C:/pdfBox/ListeEmploye.pdf";
+            DataSource source = new FileDataSource(filename);
+            message.setDataHandler(new DataHandler(source));
+            message.setFileName(filename);
+
 
             Transport transport = session.getTransport( "smtp" );
             transport.connect( pHost, pFrom, pPassword );

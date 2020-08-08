@@ -21,19 +21,14 @@ import java.util.stream.Stream;
 
 public class PdfGeneration {
     final static org.apache.log4j.Logger logger      = Logger.getLogger( PdfGeneration.class );
-    private      PDDocument              document;
-    private      PDPage                  page;
-    private      File                    file;
-    private      PDFTextStripper         pdfStripper;
     private      DaoPersonne             daoPersonne = new DaoPersonneImpl();
+    Document document = new Document();
 
-    /**
-     * Creation d'un fichier pdf liste des employes dans la table Personnes
-     * @throws Exception
-     */
-    public void creationPdf () throws Exception {
+
+    public void pdfReponse () throws Exception{
+
         //Cree repertoir si il n'existe pas
-        String dossier = "C:/pdfBox/";
+        String dossier = "C:/Conge/Reponse";
         if(!new File(dossier).exists())
         {
             // Créer le dossier avec tous ses parents
@@ -42,8 +37,26 @@ public class PdfGeneration {
         } else {
             logger.log( Level.INFO,"ce dossier existe deja" );
         }
-        Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream("C:/pdfBox/ListeEmploye.pdf"));
+
+    }
+
+    /**
+     * Creation d'un fichier pdf liste des employes dans la table Personnes
+     * @throws Exception
+     */
+    public void creationPdf () throws Exception {
+        //Cree repertoir si il n'existe pas
+        String dossier = "C:/Conge/Employe";
+        if(!new File(dossier).exists())
+        {
+            // Créer le dossier avec tous ses parents
+            new File(dossier).mkdirs();
+
+        } else {
+            logger.log( Level.INFO,"ce dossier existe deja" );
+        }
+
+        PdfWriter.getInstance(document, new FileOutputStream("C:/Conge/Employe/ListeEmploye.pdf"));
 
         document.open();
         Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);

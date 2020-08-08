@@ -68,3 +68,9 @@ nav li:hover a{
     padding: 15px 30px 20px 30px;
 }
 
+.pdfPersonne{
+    position: -webkit-sticky;
+    height: 30px;
+    background-color: #B3F4FE;
+    float: right;
+}
