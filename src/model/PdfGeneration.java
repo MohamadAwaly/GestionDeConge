@@ -25,7 +25,7 @@ public class PdfGeneration {
     Document document = new Document();
 
 
-    public void pdfReponse () throws Exception{
+    public void pdfReponse (int NumeroDemande) throws Exception{
 
         //Cree repertoir si il n'existe pas
         String dossier = "C:/Conge/Reponse";
@@ -37,6 +37,10 @@ public class PdfGeneration {
         } else {
             logger.log( Level.INFO,"ce dossier existe deja" );
         }
+        PdfWriter.getInstance(document, new FileOutputStream("C:/Conge/Reponse/"+ NumeroDemande + ".pdf"));
+
+        document.open();
+        Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
 
     }
 
