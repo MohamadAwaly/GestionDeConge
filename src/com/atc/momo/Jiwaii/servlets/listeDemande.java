@@ -15,7 +15,8 @@ import java.io.IOException;
 
 @WebServlet( name = "listeDemande" )
 public class listeDemande extends HttpServlet {
-    public static final  String      VUE              = "/resources/view/lstdemande.jsp";
+    public static final String VUE = "/resources/view/lstdemande.jsp";
+
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
 
@@ -25,18 +26,12 @@ public class listeDemande extends HttpServlet {
         String approuve = (String) request.getParameter( "Aprouve" );
         String commentaire = (String) request.getParameter( "Commentaire" );
 
-       DaoJourDeConge daoJourDeConge = new DaoJourDeCongeImpl();
+        DaoJourDeConge daoJourDeConge = new DaoJourDeCongeImpl();
         try {
             daoJourDeConge.updateDemande( idDemande, commentaire, approuve );
-        } catch ( DaoException e ) {
-            e.getMessage();
-        }
-
-
-        try {
             request.setAttribute( "demandeEnCours", daoJourDeConge.listerDemandeEnCours() );
         } catch ( DaoException e ) {
-            e.printStackTrace();
+            e.getMessage();
         }
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 
@@ -46,6 +41,7 @@ public class listeDemande extends HttpServlet {
             throws ServletException, IOException {
         DaoJourDeConge daoJourDeConge = new DaoJourDeCongeImpl();
         try {
+            daoJourDeConge.listerDemandeEmployer();
             request.setAttribute( "demandeEnCours", daoJourDeConge.listerDemandeEnCours() );
         } catch ( DaoException e ) {
             e.printStackTrace();

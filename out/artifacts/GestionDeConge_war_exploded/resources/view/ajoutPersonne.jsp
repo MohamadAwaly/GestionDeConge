@@ -28,20 +28,20 @@
     </p>
     <p>
         <label for="dateDeNaissance" class="labelAjoutPers">Date de Naissance : </label>
-        <input type="date" name="dateDeNaissance" id="dateDeNaissance" class="ChampFormulaireajoutPersonne">
+        <input type="date" name="dateDeNaissance" id="dateDeNaissance" class="ChampFormulaireajoutPersonne" required/>
 
         <label for="email" class="labelAjoutPers">Email : </label>
-        <input type="email" name="email" id="email" class="ChampFormulaireajoutPersonne">
+        <input type="email" name="email" id="email" class="ChampFormulaireajoutPersonne" required/>
     <p>
         <label for="motDePasse" class="labelAjoutPers">Mot de passe : </label>
-        <input type="text" name="motDePasse" id="motDePasse" class="ChampFormulaireajoutPersonne">
+        <input type="text" name="motDePasse" id="motDePasse" class="ChampFormulaireajoutPersonne" required/>
 
         <label for="role" class="labelAjoutPers">Role : </label>
-        <input type="number" name="role" id="role" class="ChampFormulaireajoutPersonne">
+        <input type="number" name="role" id="role" class="ChampFormulaireajoutPersonne" >
     </p>
     <p>
         <label for="role" class="labelAjoutPers">Adresse : </label>
-        <SELECT id="selectAdresse" name="selectAdresse" size="1" class="ChampFormulaireajoutPersonne">
+        <SELECT id="selectAdresse" name="selectAdresse" size="1" class="ChampFormulaireajoutPersonne" required>
 
             <c:forEach var="adresses" items="${ adresses }">
             <OPTION value="${ adresses.idAdresse }">

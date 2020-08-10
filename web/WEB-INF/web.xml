@@ -63,6 +63,17 @@
         <servlet-class>com.atc.momo.Jiwaii.servlets.listeDemande</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>listeDemandeEmploye</servlet-name>
+        <servlet-class>com.atc.momo.Jiwaii.servlets.listeDemandeEmploye</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>listeDemandeEmploye</servlet-name>
+        <url-pattern>/listeDemandeEmploye</url-pattern>
+    </servlet-mapping>
+
+
     <servlet-mapping>
         <servlet-name>listeDemande</servlet-name>
         <url-pattern>/listeDemande</url-pattern>

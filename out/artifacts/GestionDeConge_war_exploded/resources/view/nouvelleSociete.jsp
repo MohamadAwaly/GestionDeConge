@@ -23,18 +23,18 @@
         <legend> ******* Nouvel Societe *******</legend>
         <p>
             <label for="nom" class="labelAjoutPers">Nom de la societe : </label>
-            <input type="text" name="nom" id="nom" class="ChampFormulaireajoutPersonne"/>
+            <input type="text" name="nom" id="nom" class="ChampFormulaireajoutPersonne" required />
 
             <label for="tel" class="labelAjoutPers">Téléphone : </label>
-            <input type="text" name="tel" id="tel" class="ChampFormulaireajoutPersonne"/>
+            <input type="text" name="tel" id="tel" class="ChampFormulaireajoutPersonne" required />
 
 
             <label for="ntva" class="labelAjoutPers">numéro de TVA : </label>
-            <input type="number" name="ntva" id="ntva" class="ChampFormulaireajoutPersonne">
+            <input type="number" name="ntva" id="ntva" class="ChampFormulaireajoutPersonne" required />
         </p>
         <p>
             <label for="email" class="labelAjoutPers">Email : </label>
-            <input type="email" name="email" id="email" class="ChampFormulaireajoutPersonne">
+            <input type="email" name="email" id="email" class="ChampFormulaireajoutPersonne" required />
         </p>
 
     </fieldset>

@@ -11,6 +11,7 @@ import javax.activation.FileDataSource;
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class DaoJourDeCongeImpl implements DaoJourDeConge {
@@ -131,13 +132,12 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
 
             // Création du PDF
             PdfGeneration pdfGeneration = new PdfGeneration();
-            pdfGeneration.pdfReponse(idPersonneJourDeCongeTypeDemande,Message, idPersonneJourDeCongeTypeDemande);
+            pdfGeneration.pdfReponse( idPersonneJourDeCongeTypeDemande, Message, idPersonneJourDeCongeTypeDemande );
             String fileName = "C:/Conge/Reponse/demande_numero_" + idPersonneJourDeCongeTypeDemande + ".pdf";
 
             SmtpServices
                     .emailConfig( "gestioncongee@gmail.com", "Atc123456", "smtp.gmail.com",
                             lst_querySelect.get( 0 )[2].toString(), Message, fileName );
-
 
         } catch ( Exception e ) {
             logger.log( Level.INFO, "Erreur update demande  n" + e.getMessage() );
@@ -145,5 +145,32 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
             if ( em != null )
                 em.close();
         }
+    }
+
+    //test
+    @Override public List<Object[]> listerDemandeEmployer() throws DaoException {
+        EntityManager em = Tools.getEntityManager( PERSISTENCE_UNIT_NAME );
+        List<Object[]> list = null;
+        try {
+            EntityTransaction trans = em.getTransaction();
+            trans.begin();
+            StoredProcedureQuery storedprocedure = em.createStoredProcedureQuery( "ListeDeDemandeByIdUSer" );
+            storedprocedure.registerStoredProcedureParameter( 2, Integer.class, ParameterMode.IN );
+            int pPersonneId = 2;
+            storedprocedure.setParameter( 2, pPersonneId );
+            storedprocedure.execute();
+            trans.commit();
+
+            list = storedprocedure.getResultList();
+
+            logger.log( Level.INFO,"Procedure: " + storedprocedure.getResultList() + "\n\n\n" );
+
+        } catch ( Exception e ) {
+            logger.log( Level.INFO, "Erreur dans la Demande" + e.getMessage() );
+        } finally {
+            if ( em != null )
+                em.close();
+        }
+        return list;
     }
 }

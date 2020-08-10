@@ -131,13 +131,7 @@ public class DaoPersonneImpl implements DaoPersonne {
             personnesEntities = entityManager
                     .createQuery( "select p from PersonnesEntity p ", PersonnesEntity.class )
                     .getResultList();
-          //for ( int i = 0; i < test.size(); i++ ) {
-          //    test.add( query.toString() );
-          //}
 
-          //for ( int i = 0; i < test.size(); i++ ) {
-          //    logger.log( Level.INFO, "Liste test: " + test.get( i ) );
-          //}
 
         } catch ( Exception e ) {
             logger.log( Level.INFO, "Erreur" );
