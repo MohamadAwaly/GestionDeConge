@@ -26,21 +26,21 @@
 
 
             <label for="nom" class="labelAjoutPers">Nom : </label>
-            <input type="text" name="nom" id="nom" class="ChampFormulaireajoutPersonne"/>
+            <input type="text" name="nom" id="nom" class="ChampFormulaireajoutPersonne" required/>
 
             <label for="prenom" class="labelAjoutPers">Prénom : </label>
-            <input type="text" name="prenom" id="prenom" class="ChampFormulaireajoutPersonne"/>
+            <input type="text" name="prenom" id="prenom" class="ChampFormulaireajoutPersonne" required/>
 
 
             <label for="dateDeNaissance" class="labelAjoutPers">Date de Naissance : </label>
-            <input type="date" name="dateDeNaissance" id="dateDeNaissance" class="ChampFormulaireajoutPersonne">
+            <input type="date" name="dateDeNaissance" id="dateDeNaissance" class="ChampFormulaireajoutPersonne" required />
         </p>
         <p>
             <label for="email" class="labelAjoutPers">Email : </label>
-            <input type="email" name="email" id="email" class="ChampFormulaireajoutPersonne">
+            <input type="email" name="email" id="email" class="ChampFormulaireajoutPersonne" required />
 
             <label for="motDePasse" class="labelAjoutPers">Mot de passe : </label>
-            <input type="text" name="motDePasse" id="motDePasse" class="ChampFormulaireajoutPersonne">
+            <input type="text" name="motDePasse" id="motDePasse" class="ChampFormulaireajoutPersonne" required />
         </p>
         <p>
             <!-- <input type="number" name="role" id="role" class="ChampFormulaireajoutPersonne"> -->

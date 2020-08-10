@@ -45,7 +45,7 @@ public class NouvellePersonne extends HttpServlet {
             newUSer.ajouter( personnesEntity );
             newUSer.ajouterdayOff( idJourAutorise, email, dateDebut, dateFin );
 
-            request.setAttribute( "personnes", newUSer.laListeDeOufs() );
+            request.setAttribute( "adresse", newUSer.laListeDeOufs() );
 
         } catch ( Exception e ) {
             request.setAttribute( "erreur", e.getMessage() );

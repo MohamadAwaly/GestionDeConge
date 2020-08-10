@@ -20,14 +20,13 @@
     <fieldset>
         <legend> ******* Nouvel Demande *******</legend>
 
-        <label for="dateDebut" class="labelAjoutPers">Date de debut : </label>
-        <input type="date" name="dateDebut" id="dateDebut" class="ChampFormulaireajoutPersonne">
+        <label for="dateDebut" class="labelAjoutPers" >Date de debut : </label>
+        <input type="date" name="dateDebut" id="dateDebut" class="ChampFormulaireajoutPersonne" required>
 
-        <label for="dateFin" class="labelAjoutPers">Date de fin : </label>
-        <input type="date" name="dateFin" id="dateFin" class="ChampFormulaireajoutPersonne">
+        <label for="dateFin" class="labelAjoutPers" required >Date de fin : </label>
+        <input type="date" name="dateFin" id="dateFin" class="ChampFormulaireajoutPersonne" required>
         </p>
     </fieldset>
-
 
     <input type="submit" class="boutonAjoutPersonne"/>
 </form>

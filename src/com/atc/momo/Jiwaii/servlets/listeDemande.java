@@ -33,8 +33,6 @@ public class listeDemande extends HttpServlet {
         }
 
 
-
-
         try {
             request.setAttribute( "demandeEnCours", daoJourDeConge.listerDemandeEnCours() );
         } catch ( DaoException e ) {
