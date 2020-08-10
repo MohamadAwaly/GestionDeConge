@@ -19,6 +19,23 @@
 <c:import url="header.jsp"/>
 <p>Bienvenue <c:out value="${sessionScope.sessionUtilisateur.prenom}"/> <c:out value="${sessionScope.sessionUtilisateur.nom}"/> <c:out value="${sessionScope.sessionUtilisateur.idPersonne}"/>
 </p>
+<table >
+
+    <tr>
+        <th>Nombre des jours restant</th>
+
+
+    </tr>
+    <c:forEach var="jourRestant" items="${jourRestant}">
+        <tr>
+            <td><c:out value="${ jourRestant[6] }"/></td>
+
+        </tr>
+    </c:forEach>
+</table>
+
+
+
 <%-- Affichage de la chaîne "message" transmise par la servlet --%>
 <%--<c:if test="${ validation }" var="varValidation" scope="session">
   </br>

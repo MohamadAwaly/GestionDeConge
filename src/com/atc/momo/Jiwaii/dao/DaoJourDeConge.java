@@ -2,6 +2,7 @@ package com.atc.momo.Jiwaii.dao;
 
 import com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity;
 
+import java.util.Date;
 import java.util.List;
 
 public interface DaoJourDeConge {
@@ -10,4 +11,6 @@ public interface DaoJourDeConge {
     List<Object []> listerDemandeEnCours() throws DaoException;
     public void updateDemande (int idDemande, String commentaire, String aprouve) throws DaoException;
     List<Object []> listerDemandeEmployer (int idPersonne) throws DaoException;
+    List<Object []> JourRestant (int idPersonne) throws DaoException;
+    public void CountDateToDate( Date pDateStart, Date pDateEnd) throws DaoException;
 }

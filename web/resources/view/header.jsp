@@ -18,12 +18,14 @@
 <nav>
     <div id="menunav" >
         <ul>
-            <li class="menu-html"><a href="personnes">Afficher Employer</a></li>
-            <li class="menu-css"><a href="nouvellepersonne">Nouvel Employé</a></li>
-            <li class="menu-javascript"><a href="societes">Afficher Societe</a></li>
-            <li class="menu-contact"><a href="nouvellesociete">Nouvelle Societe</a></li>
+            <c:if test="${ sessionScope.sessionUtilisateur.fkRole != 2 }" var="varfkRole" scope="session">
+                <li class="menu-html"><a href="personnes">Afficher Employer</a></li>
+                <li class="menu-css"><a href="nouvellepersonne">Nouvel Employé</a></li>
+                <li class="menu-javascript"><a href="societes">Afficher Societe</a></li>
+                <li class="menu-contact"><a href="nouvellesociete">Nouvelle Societe</a></li>
+                <li class="menu-javascript"><a href="listeDemande">Liste des demandes</a></li>
+            </c:if>
             <li class="menu-javascript"><a href="demande">Demande de conge</a></li>
-            <li class="menu-javascript"><a href="listeDemande">Liste des demandes</a></li>
             <li class="menu-javascript"><a href="listeDemandeEmploye">Mes demandes</a></li>
         </ul>
     </div>

@@ -1,5 +1,9 @@
 package com.atc.momo.Jiwaii.servlets;
 
+import com.atc.momo.Jiwaii.dao.DaoException;
+import com.atc.momo.Jiwaii.dao.DaoJourDeConge;
+import com.atc.momo.Jiwaii.dao.DaoJourDeCongeImpl;
+import com.atc.momo.Jiwaii.entities.PersonnesEntity;
 import model.CalendarTools;
 
 import javax.servlet.ServletException;
@@ -11,7 +15,9 @@ import java.io.IOException;
 
 @WebServlet( name = "Accueil" )
 public class Accueil extends HttpServlet {
-    public static final String VUE = "/resources/view/accueil.jsp";
+    public static final String         VUE              = "/resources/view/accueil.jsp";
+    public static final String         ATT_SESSION_USER = "sessionUtilisateur";
+    private             DaoJourDeConge daoJourDeConge   = new DaoJourDeCongeImpl();
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
@@ -20,7 +26,18 @@ public class Accueil extends HttpServlet {
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        request.setAttribute("calendar", CalendarTools.getAWeek());
+
+        PersonnesEntity pers = new PersonnesEntity();
+        pers = (PersonnesEntity) request.getSession().getAttribute( ATT_SESSION_USER );
+        int idPersonne = pers.getIdPersonne();
+
+        try {
+            request.setAttribute( "jourRestant", daoJourDeConge.JourRestant( idPersonne ) );
+        } catch ( DaoException e ) {
+            e.getMessage();
+        }
+
+        request.setAttribute( "calendar", CalendarTools.getAWeek() );
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 
     }

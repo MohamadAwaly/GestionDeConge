@@ -147,8 +147,7 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
         }
     }
 
-    //test
-    @Override public List<Object[]> listerDemandeEmployer(int idPersonne) throws DaoException {
+    @Override public List<Object[]> listerDemandeEmployer( int idPersonne ) throws DaoException {
         EntityManager em = Tools.getEntityManager( PERSISTENCE_UNIT_NAME );
         List<Object[]> list = null;
         try {
@@ -163,7 +162,7 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
 
             list = storedprocedure.getResultList();
 
-            logger.log( Level.INFO,"Procedure: " + storedprocedure.getResultList() + "\n\n\n" );
+            logger.log( Level.INFO, "Procedure: " + storedprocedure.getResultList() + "\n\n\n" );
 
         } catch ( Exception e ) {
             logger.log( Level.INFO, "Erreur dans la Demande" + e.getMessage() );
@@ -173,4 +172,39 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
         }
         return list;
     }
+
+    @Override public List<Object[]> JourRestant( int idPersonne ) throws DaoException {
+        EntityManager em = Tools.getEntityManager( PERSISTENCE_UNIT_NAME );
+        List<Object[]> lst = null;
+        try {
+            logger.log( Level.INFO, "idpersonne : " + idPersonne + "\n\n\n\n" );
+            StoredProcedureQuery storedprocedure = em.createStoredProcedureQuery( "CountDate" );
+            storedprocedure.registerStoredProcedureParameter( "idPersonne", Integer.class, ParameterMode.IN );
+            storedprocedure.setParameter( "idPersonne", idPersonne );
+            storedprocedure.execute();
+
+            lst = storedprocedure.getResultList();
+
+        } catch ( Exception e ) {
+            logger.log( Level.INFO, "Erreur dans la Demande" + e.getMessage() );
+        } finally {
+            if ( em != null )
+                em.close();
+        }
+        return lst;
+    }
+
+    @Override public void CountDateToDate(Date pDateStart, Date pDateEnd) throws DaoException {
+        EntityManager em = Tools.getEntityManager( PERSISTENCE_UNIT_NAME );
+        StoredProcedureQuery storedprocedure = em.createStoredProcedureQuery( "CountDateToDate" );
+
+        storedprocedure.registerStoredProcedureParameter( "pDateStart", java.sql.Date.class, ParameterMode.IN );
+        storedprocedure.registerStoredProcedureParameter( "pDateEnd", java.sql.Date.class, ParameterMode.IN );
+        storedprocedure.setParameter( "pDateStart", pDateStart );
+        storedprocedure.setParameter( "pDateEnd", pDateEnd );
+
+        storedprocedure.execute();
+
+    }
+
 }

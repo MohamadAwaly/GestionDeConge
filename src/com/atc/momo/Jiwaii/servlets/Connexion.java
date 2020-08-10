@@ -1,9 +1,7 @@
 package com.atc.momo.Jiwaii.servlets;
 
 import com.atc.momo.Jiwaii.beans.ConnexionForm;
-import com.atc.momo.Jiwaii.dao.DaoException;
-import com.atc.momo.Jiwaii.dao.DaoSociete;
-import com.atc.momo.Jiwaii.dao.DaoSocietesImpl;
+import com.atc.momo.Jiwaii.dao.*;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
 import model.CalendarTools;
 import model.PdfGeneration;
@@ -23,21 +21,19 @@ import java.util.*;
 
 @WebServlet( name = "Connexion" )
 public class Connexion extends HttpServlet {
-    public static final String ATT_USER         = "utilisateur";
-    public static final String ATT_FORM         = "form";
-    public static final String ATT_SESSION_USER = "sessionUtilisateur";
-    public static final String VUE              = "/index.jsp";
-    public static final String VUE_ACCUEIL      = "/resources/view/accueil.jsp";
-    public static final String VUE_NOUVELLESOC  = "/resources/view/nouvelleSociete.jsp";
-    final static        Logger logger           = Logger.getLogger( Connexion.class );
-    private DaoSociete  societe                 = new DaoSocietesImpl();
+    public static final String         ATT_USER         = "utilisateur";
+    public static final String         ATT_FORM         = "form";
+    public static final String         ATT_SESSION_USER = "sessionUtilisateur";
+    public static final String         VUE              = "/index.jsp";
+    public static final String         VUE_ACCUEIL      = "/resources/view/accueil.jsp";
+    public static final String         VUE_NOUVELLESOC  = "/resources/view/nouvelleSociete.jsp";
+    final static        Logger         logger           = Logger.getLogger( Connexion.class );
+    private             DaoSociete     societe          = new DaoSocietesImpl();
+    private             DaoJourDeConge daoJourDeConge   = new DaoJourDeCongeImpl();
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
 
-
-         //Envoie d'email.
-        //SmtpServices.emailConfig( "gestioncongee@gmail.com","Atc123456","smtp.gmail.com","awalymhassan@hotmail.com" );
 
         DateFormatSymbols dfsFR = new DateFormatSymbols( Locale.FRANCE );
         String[] jourMois = dfsFR.getWeekdays();
@@ -49,19 +45,17 @@ public class Connexion extends HttpServlet {
             lsJour.add( jourMois[i] );
         }
 
-
         Date date = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime( date );
         int jour = calendar.get( Calendar.DAY_OF_MONTH );
 
-        request.setAttribute("calendar",CalendarTools.getAWeek());
+        request.setAttribute( "calendar", CalendarTools.getAWeek() );
         logger.log( Level.INFO, "le jour est: " + jour );
-        
+
         calendar.getFirstDayOfWeek();
-        logger.log( Level.INFO,"Nombre des jours dans le mois courant : " + calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-
-
+        logger.log( Level.INFO,
+                "Nombre des jours dans le mois courant : " + calendar.getActualMaximum( Calendar.DAY_OF_MONTH ) );
 
 
         /* Préparation de l'objet formulaire */
@@ -88,22 +82,28 @@ public class Connexion extends HttpServlet {
             session.setAttribute( ATT_SESSION_USER, null );
         }
 
+        int idPersonne = utilisateur.getIdPersonne();
+
         /* Stockage du formulaire et du bean dans l'objet request */
         request.setAttribute( ATT_FORM, form );
         request.setAttribute( ATT_USER, utilisateur );
+        try {
+            request.setAttribute( "jourRestant", daoJourDeConge.JourRestant( idPersonne ) );
+        } catch ( DaoException e ) {
+            e.getMessage();
+        }
 
         try {
-            if ( form.getErreurs().isEmpty() && societe.SocieteExiste()==true) {
-                this.getServletContext().getRequestDispatcher( VUE_ACCUEIL  ).forward( request, response );
+            if ( form.getErreurs().isEmpty() && societe.SocieteExiste() == true ) {
+                this.getServletContext().getRequestDispatcher( VUE_ACCUEIL ).forward( request, response );
             } else {
-                if (societe.SocieteExiste()==false){
+                if ( societe.SocieteExiste() == false ) {
                     this.getServletContext().getRequestDispatcher( VUE_NOUVELLESOC ).forward( request, response );
-                }
-                else{
+                } else {
                     this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
                 }
             }
-        } catch (DaoException e) {
+        } catch ( DaoException e ) {
             e.printStackTrace();
         }
     }
