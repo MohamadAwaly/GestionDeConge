@@ -1,25 +1,36 @@
 package model;
 
-import java.util.Properties;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.*;
-
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import java.util.Properties;
 
 //@author: JY & Mohamad
 
 public class SmtpServices {
+    final static org.apache.log4j.Logger logger = Logger.getLogger( SmtpServices.class );
 
-    public static void emailConfig( String pFrom, String pPassword, String pHost, String pTo,String messageBody  ) {
-        String  sujet;
+    /**
+     * @param pFrom
+     * @param pPassword
+     * @param pHost
+     * @param pTo
+     * @param messageBody
+     */
+
+    public static void emailConfig( String pFrom, String pPassword, String pHost, String pTo, String messageBody,
+            String namePdf )
+            throws MessagingException {
+        String sujet;
         sujet = "Réponse de votre demande";
-
 
         Properties props = System.getProperties();
         //String host = "smtp.gmail.com";
@@ -33,6 +44,8 @@ public class SmtpServices {
         Session session = Session.getDefaultInstance( props );
         MimeMessage message = new MimeMessage( session );
 
+        MimeBodyPart messageBodyPart = new MimeBodyPart();
+
         //<editor-fold desc="TRY bloc for SENT EMAIL   7-08-2020">
 
         try {
@@ -42,11 +55,20 @@ public class SmtpServices {
 
             message.setSubject( sujet );
             message.setText( messageBody );
-            String filename = "C:/pdfBox/ListeEmploye.pdf";
-            DataSource source = new FileDataSource(filename);
-            message.setDataHandler(new DataHandler(source));
-            message.setFileName(filename);
 
+            //piece jointe fichier pdf
+
+            Multipart multipart = new MimeMultipart();
+
+            messageBodyPart = new MimeBodyPart();
+            String file = namePdf;
+            String fileName = "attachment.pdf";
+            DataSource source = new FileDataSource( file );
+            messageBodyPart.setDataHandler( new DataHandler( source ) );
+            messageBodyPart.setFileName( fileName );
+            multipart.addBodyPart( messageBodyPart );
+
+            message.setContent( multipart );
 
             Transport transport = session.getTransport( "smtp" );
             transport.connect( pHost, pFrom, pPassword );

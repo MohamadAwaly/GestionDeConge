@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DaoJourDeCongeImpl implements DaoJourDeConge {
     private static final String                  PERSISTENCE_UNIT_NAME = "gestiondeconge";
-    final static org.apache.log4j.Logger logger        = org.apache.log4j.Logger
+    final static         org.apache.log4j.Logger logger                = org.apache.log4j.Logger
             .getLogger( DaoJourDeCongeImpl.class );
 
     @Override public void insertDemande( PersonnejourdecongetypedemandeEntity personnejourdecongetypedemandeEntity )
@@ -92,8 +92,6 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
         PersonnejourdecongetypedemandeEntity.EnumApprouver aprouver;
         aprouver = PersonnejourdecongetypedemandeEntity.EnumApprouver.valueOf( approuver );
 
-
-
         EntityManager em = Tools.getEntityManager( PERSISTENCE_UNIT_NAME );
         try {
             EntityTransaction trans = em.getTransaction();
@@ -118,6 +116,7 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
             storedprocedure.setParameter( "pIdDemande", idPersonneJourDeCongeTypeDemande );
             storedprocedure.execute();
             trans.commit();
+
             lst_querySelect = storedprocedure.getResultList();
 
             // 0 Prenom, 1 Nom, 2 Email, 3 DateDemande, 4 DateReponse, 5 Aprouver,6 MessageApprobateur, 7 DateDebut, 8 DateFin;
@@ -125,13 +124,20 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
             String Message = "Chèr(e) " + lst_querySelect.get( 0 )[0].toString()
                     + ", \n  Vous aviez demandé congé du " + lst_querySelect.get( 0 )[7].toString() + " au "
                     + lst_querySelect.get( 0 )[8].toString() + ". Cette demande n°" + idPersonneJourDeCongeTypeDemande
-                    + " du " + lst_querySelect.get( 0 )[3].toString() + " à été << "
+                    + " du " + lst_querySelect.get( 0 )[3].toString() + "\n à été << "
                     + lst_querySelect.get( 0 )[5].toString() + " >> \n"
                     + " commentaire de votre superieur : \n \"" + lst_querySelect.get( 0 )[6].toString() + "\""
                     + "\n \n Bien à vous \n -HolidayManager-";
+
+            // Création du PDF
+            PdfGeneration pdfGeneration = new PdfGeneration();
+            pdfGeneration.pdfReponse(idPersonneJourDeCongeTypeDemande,Message, idPersonneJourDeCongeTypeDemande);
+            String fileName = "C:/Conge/Reponse/demande_numero_" + idPersonneJourDeCongeTypeDemande + ".pdf";
+
             SmtpServices
                     .emailConfig( "gestioncongee@gmail.com", "Atc123456", "smtp.gmail.com",
-                            lst_querySelect.get( 0 )[2].toString(), Message );
+                            lst_querySelect.get( 0 )[2].toString(), Message, fileName );
+
 
         } catch ( Exception e ) {
             logger.log( Level.INFO, "Erreur update demande  n" + e.getMessage() );
