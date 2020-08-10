@@ -148,16 +148,16 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
     }
 
     //test
-    @Override public List<Object[]> listerDemandeEmployer() throws DaoException {
+    @Override public List<Object[]> listerDemandeEmployer(int idPersonne) throws DaoException {
         EntityManager em = Tools.getEntityManager( PERSISTENCE_UNIT_NAME );
         List<Object[]> list = null;
         try {
             EntityTransaction trans = em.getTransaction();
             trans.begin();
             StoredProcedureQuery storedprocedure = em.createStoredProcedureQuery( "ListeDeDemandeByIdUSer" );
-            storedprocedure.registerStoredProcedureParameter( 2, Integer.class, ParameterMode.IN );
-            int pPersonneId = 2;
-            storedprocedure.setParameter( 2, pPersonneId );
+            storedprocedure.registerStoredProcedureParameter( "idPersonne", Integer.class, ParameterMode.IN );
+
+            storedprocedure.setParameter( "idPersonne", idPersonne );
             storedprocedure.execute();
             trans.commit();
 

@@ -41,7 +41,6 @@ public class listeDemande extends HttpServlet {
             throws ServletException, IOException {
         DaoJourDeConge daoJourDeConge = new DaoJourDeCongeImpl();
         try {
-            daoJourDeConge.listerDemandeEmployer();
             request.setAttribute( "demandeEnCours", daoJourDeConge.listerDemandeEnCours() );
         } catch ( DaoException e ) {
             e.printStackTrace();
