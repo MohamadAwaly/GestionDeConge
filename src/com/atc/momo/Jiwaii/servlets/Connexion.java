@@ -4,8 +4,6 @@ import com.atc.momo.Jiwaii.beans.ConnexionForm;
 import com.atc.momo.Jiwaii.dao.*;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
 import model.CalendarTools;
-import model.PdfGeneration;
-import model.SmtpServices;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -17,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @WebServlet( name = "Connexion" )
@@ -34,7 +33,17 @@ public class Connexion extends HttpServlet {
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
 
-
+       // String date1 = "2020-10-10";
+       // Date firstDate1 = new Date(2020, 10, 10);
+       // SimpleDateFormat dt1 = new SimpleDateFormat("yyyyy-mm-dd");
+       // Date firstDate2 = new Date(2021, 10, 10);
+       //
+//
+       // try {
+       //     daoJourDeConge.CountDateToDate(dt1.format( date1 ),firstDate2);
+       // } catch ( DaoException e ) {
+       //     e.printStackTrace();
+       // }
         DateFormatSymbols dfsFR = new DateFormatSymbols( Locale.FRANCE );
         String[] jourMois = dfsFR.getWeekdays();
         List<String> lsJour = new ArrayList<>();

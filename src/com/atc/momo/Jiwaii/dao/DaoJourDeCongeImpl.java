@@ -194,17 +194,30 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
         return lst;
     }
 
-    @Override public void CountDateToDate(Date pDateStart, Date pDateEnd) throws DaoException {
+    @Override public void CountDateToDate( Date pDateStart, Date pDateEnd ) throws DaoException {
         EntityManager em = Tools.getEntityManager( PERSISTENCE_UNIT_NAME );
-        StoredProcedureQuery storedprocedure = em.createStoredProcedureQuery( "CountDateToDate" );
+        try {
+            StoredProcedureQuery storedprocedure = em.createStoredProcedureQuery( "CountDateToDate" );
 
-        storedprocedure.registerStoredProcedureParameter( "pDateStart", java.sql.Date.class, ParameterMode.IN );
-        storedprocedure.registerStoredProcedureParameter( "pDateEnd", java.sql.Date.class, ParameterMode.IN );
-        storedprocedure.setParameter( "pDateStart", pDateStart );
-        storedprocedure.setParameter( "pDateEnd", pDateEnd );
+            storedprocedure.registerStoredProcedureParameter( "pDateStart", java.sql.Date.class, ParameterMode.IN );
+            storedprocedure.registerStoredProcedureParameter( "pDateEnd", java.sql.Date.class, ParameterMode.IN );
+            storedprocedure.setParameter( "pDateStart", pDateStart );
+            storedprocedure.setParameter( "pDateEnd", pDateEnd );
 
-        storedprocedure.execute();
+            storedprocedure.execute();
 
+            List<Object[]> lst = storedprocedure.getResultList();
+
+            for(int i =0; i< lst.size(); i++){
+                logger.log( Level.INFO,"lst: " +  lst.get( i ));
+            }
+
+        } catch ( Exception e ) {
+            logger.log( Level.INFO, "Erreur dans la Demande" + e.getMessage() );
+        } finally {
+            if ( em != null )
+                em.close();
+        }
     }
 
 }
