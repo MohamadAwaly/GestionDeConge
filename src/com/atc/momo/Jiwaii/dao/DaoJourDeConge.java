@@ -12,5 +12,5 @@ public interface DaoJourDeConge {
     public void updateDemande (int idDemande, String commentaire, String aprouve) throws DaoException;
     List<Object []> listerDemandeEmployer (int idPersonne) throws DaoException;
     List<Object []> JourRestant (int idPersonne) throws DaoException;
-    public void CountDateToDate( String pDateStart, String pDateEnd) throws DaoException;
+    public List<Object[]> CountDateToDate( int idPersonne) throws DaoException;
 }

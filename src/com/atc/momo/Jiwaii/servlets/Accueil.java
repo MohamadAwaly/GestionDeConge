@@ -32,7 +32,7 @@ public class Accueil extends HttpServlet {
         int idPersonne = pers.getIdPersonne();
 
         try {
-            request.setAttribute( "jourRestant", daoJourDeConge.JourRestant( idPersonne ) );
+            request.setAttribute( "jourdecongerestant", daoJourDeConge.CountDateToDate( idPersonne ));
         } catch ( DaoException e ) {
             e.getMessage();
         }

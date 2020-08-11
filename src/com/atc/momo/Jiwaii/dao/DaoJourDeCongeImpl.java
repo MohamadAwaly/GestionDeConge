@@ -177,7 +177,7 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
         EntityManager em = Tools.getEntityManager( PERSISTENCE_UNIT_NAME );
         List<Object[]> lst = null;
         try {
-            logger.log( Level.INFO, "idpersonne : " + idPersonne + "\n\n\n\n" );
+
             StoredProcedureQuery storedprocedure = em.createStoredProcedureQuery( "CountDate" );
             storedprocedure.registerStoredProcedureParameter( "idPersonne", Integer.class, ParameterMode.IN );
             storedprocedure.setParameter( "idPersonne", idPersonne );
@@ -194,24 +194,16 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
         return lst;
     }
 
-    @Override public void CountDateToDate( String pDateStart, String pDateEnd ) throws DaoException {
+    @Override public List<Object[]> CountDateToDate( int idPersonne ) throws DaoException {
         EntityManager em = Tools.getEntityManager( PERSISTENCE_UNIT_NAME );
-        logger.log( Level.INFO,"Date: " + pDateStart + pDateEnd );
+        List<Object[]> lst = null;
         try {
-            StoredProcedureQuery storedprocedure = em.createStoredProcedureQuery( "CountDateToDate" );
-
-            storedprocedure.registerStoredProcedureParameter( "pDateStart", java.sql.Date.class, ParameterMode.IN );
-            storedprocedure.registerStoredProcedureParameter( "pDateEnd", java.sql.Date.class, ParameterMode.IN );
-            storedprocedure.setParameter( "pDateStart", java.sql.Date.valueOf( pDateStart ) );
-            storedprocedure.setParameter( "pDateEnd", java.sql.Date.valueOf(pDateEnd) );
-
+            StoredProcedureQuery storedprocedure = em.createStoredProcedureQuery( "CountDatePro" )
+                    .registerStoredProcedureParameter( "idPersonne", Integer.class, ParameterMode.IN )
+                    .setParameter( "idPersonne", idPersonne );
             storedprocedure.execute();
+            lst = storedprocedure.getResultList();
 
-            List<Object[]> lst = storedprocedure.getResultList();
-
-            for(int i =0; i< lst.size(); i++){
-                logger.log( Level.INFO,"lst: " +  lst.get( i ) + "\n\n\n");
-            }
 
         } catch ( Exception e ) {
 
@@ -220,6 +212,7 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
             if ( em != null )
                 em.close();
         }
+        return lst;
     }
 
 }

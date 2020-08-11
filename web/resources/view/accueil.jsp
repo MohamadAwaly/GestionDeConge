@@ -19,16 +19,28 @@
 <c:import url="header.jsp"/>
 <p>Bienvenue <c:out value="${sessionScope.sessionUtilisateur.prenom}"/> <c:out value="${sessionScope.sessionUtilisateur.nom}"/> <c:out value="${sessionScope.sessionUtilisateur.idPersonne}"/>
 </p>
-<table >
+<table border="1"  cellspacing="1" class="...">
 
     <tr>
+        <th>Dernier date de conge</th>
+        <th>Nombre des jours pris</th>
+        <th>Date debut de conge</th>
+        <th>Nombre des jours autorise</th>
         <th>Nombre des jours restant</th>
+        <th>Date debut du contrat</th>
+        <th>Date fin du contrat</th>
 
 
     </tr>
-    <c:forEach var="jourRestant" items="${jourRestant}">
+    <c:forEach var="jourdecongerestant" items="${jourdecongerestant}">
         <tr>
-            <td><c:out value="${ jourRestant[6] }"/></td>
+            <td><c:out value="${ jourdecongerestant[0] }"/></td>
+            <td><c:out value="${ jourdecongerestant[1] }"/></td>
+            <td><c:out value="${ jourdecongerestant[2] }"/></td>
+            <td><c:out value="${ jourdecongerestant[3] }"/></td>
+            <td><c:out value="${ jourdecongerestant[4] }"/></td>
+            <td><c:out value="${ jourdecongerestant[5] }"/></td>
+            <td><c:out value="${ jourdecongerestant[6] }"/></td>
 
         </tr>
     </c:forEach>
