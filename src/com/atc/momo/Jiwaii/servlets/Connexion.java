@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @WebServlet( name = "Connexion" )
@@ -33,17 +35,8 @@ public class Connexion extends HttpServlet {
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
 
-       // String date1 = "2020-10-10";
-       // Date firstDate1 = new Date(2020, 10, 10);
-       // SimpleDateFormat dt1 = new SimpleDateFormat("yyyyy-mm-dd");
-       // Date firstDate2 = new Date(2021, 10, 10);
-       //
-//
-       // try {
-       //     daoJourDeConge.CountDateToDate(dt1.format( date1 ),firstDate2);
-       // } catch ( DaoException e ) {
-       //     e.printStackTrace();
-       // }
+
+
         DateFormatSymbols dfsFR = new DateFormatSymbols( Locale.FRANCE );
         String[] jourMois = dfsFR.getWeekdays();
         List<String> lsJour = new ArrayList<>();
@@ -93,14 +86,35 @@ public class Connexion extends HttpServlet {
 
         int idPersonne = utilisateur.getIdPersonne();
 
+        SimpleDateFormat formater = null;
+
+        Date aujourdhui = new Date();
+
+        LocalDate today = LocalDate.now();
+        LocalDate tomorrow = today.plus(60, ChronoUnit.DAYS);
+        LocalDate yesterday = tomorrow.minusDays(2);
+
+
+        formater = new SimpleDateFormat("yyyy-MM-dd");
+        String date1 = "2020-10-10";
+        String date2 = "2021-10-10";
+
+
+        try {
+            daoJourDeConge.CountDateToDate(date1,date2);
+        } catch ( DaoException e ) {
+            e.printStackTrace();
+        }
+
+
         /* Stockage du formulaire et du bean dans l'objet request */
         request.setAttribute( ATT_FORM, form );
         request.setAttribute( ATT_USER, utilisateur );
-        try {
-            request.setAttribute( "jourRestant", daoJourDeConge.JourRestant( idPersonne ) );
-        } catch ( DaoException e ) {
-            e.getMessage();
-        }
+       try {
+           request.setAttribute( "jourRestant", daoJourDeConge.JourRestant( idPersonne ) );
+       } catch ( DaoException e ) {
+           e.getMessage();
+       }
 
         try {
             if ( form.getErreurs().isEmpty() && societe.SocieteExiste() == true ) {
