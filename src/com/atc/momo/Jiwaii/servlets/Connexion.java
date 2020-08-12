@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.DateFormatSymbols;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -88,7 +89,7 @@ public class Connexion extends HttpServlet {
 
         try {
             request.setAttribute( "jourdecongerestant", daoJourDeConge.CountDateToDate( idPersonne ) );
-        } catch ( DaoException e ) {
+        } catch ( DaoException | ParseException e ) {
             e.getMessage();
         }
 

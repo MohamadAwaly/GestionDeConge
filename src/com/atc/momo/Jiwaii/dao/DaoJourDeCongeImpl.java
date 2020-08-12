@@ -1,6 +1,8 @@
 package com.atc.momo.Jiwaii.dao;
 
 import com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity;
+import com.sun.corba.se.impl.naming.cosnaming.InternalBindingValue;
+import javafx.beans.binding.ObjectExpression;
 import model.PdfGeneration;
 import model.SmtpServices;
 import model.Tools;
@@ -8,11 +10,16 @@ import org.apache.log4j.Level;
 
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
+import javax.ejb.Local;
 import javax.persistence.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.*;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class DaoJourDeCongeImpl implements DaoJourDeConge {
     private static final String                  PERSISTENCE_UNIT_NAME = "gestiondeconge";
@@ -194,7 +201,7 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
         return lst;
     }
 
-    @Override public List<Object[]> CountDateToDate( int idPersonne ) throws DaoException {
+    @Override public List<Object[]> CountDateToDate( int idPersonne ) throws DaoException, ParseException {
         EntityManager em = Tools.getEntityManager( PERSISTENCE_UNIT_NAME );
         List<Object[]> lst = null;
         try {
@@ -204,10 +211,10 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
             storedprocedure.execute();
             lst = storedprocedure.getResultList();
 
+            lst.get( 0 )[0].toString();
 
         } catch ( Exception e ) {
-
-            logger.log( Level.INFO, "Erreur dans la Demande" + e.getMessage() );
+            logger.log( Level.INFO, "Erreur de date count" + e.getMessage() );
         } finally {
             if ( em != null )
                 em.close();
@@ -215,4 +222,60 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
         return lst;
     }
 
+    //Méthode principale
+    public String ValidationDateDemande( Date dateDebutConge, Date dateFinconge, int idPersonne )
+            throws ParseException, DaoException {
+        List<Object[]> countDateToDate = CountDateToDate( idPersonne );
+        int nbjoursDemande = getNbJours( dateDebutConge.toString(), dateFinconge.toString() );
+        int jourRestant = Integer.parseInt( countDateToDate.get( 0 )[4].toString() ) ;
+        Date dateFinContrat = (Date) countDateToDate.get( 0 )[6];
+        String messageErreur = limitationJourSelection( nbjoursDemande, jourRestant, dateDebutConge, dateFinconge,
+                dateFinContrat );
+        return messageErreur;
+
+    }
+
+    public static int getNbJours( String pDateDebut, String pDateFin ) {
+        int joursPris = 0;
+        LocalDate dateDebut = LocalDate.parse( pDateDebut );
+        LocalDate dateFin = LocalDate.parse( pDateFin );
+        while ( dateDebut.isBefore( dateFin.plusDays( 1 ) ) ) {
+            if ( dateDebut.getDayOfWeek().getValue() != 6 && dateDebut.getDayOfWeek().getValue() != 7 ) {
+                joursPris++;
+            }
+            dateDebut = dateDebut.plusDays( 1 );
+        }
+        return joursPris;
+    }
+
+    /**
+     * Verification de la somme des jours demande par le demandeur s'ils ne depasse pas les nombres des jours restant.
+     *
+     * @param nbJourDemade
+     * @param jourRestant
+     * @return
+     */
+    public static String limitationJourSelection( int nbJourDemade, int jourRestant, Date dateDebutConge,
+            Date dateFinconge, Date dateFinContrat ) {
+
+        String messageErreur = null;
+        LocalDate afterTomorrow = LocalDate.now().plusDays( 2 );
+        LocalDate dateDebutCongeLC = LocalDate.parse( new SimpleDateFormat("yyyy-MM-dd").format( dateDebutConge ) );
+
+        if ( nbJourDemade <= jourRestant ) {
+            messageErreur = null;
+        } else {
+            return messageErreur = "Votre demande depasse vos jours restant";
+        }
+        if (dateDebutCongeLC.isBefore( afterTomorrow )){
+            return messageErreur = "Votre demande doit etre faite deux jours a l'avance !!!";
+        }else{
+            messageErreur = null;
+        }
+
+        return messageErreur;
+    }
+
 }
+
+

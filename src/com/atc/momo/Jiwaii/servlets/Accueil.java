@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
 
 @WebServlet( name = "Accueil" )
 public class Accueil extends HttpServlet {
@@ -33,7 +34,7 @@ public class Accueil extends HttpServlet {
 
         try {
             request.setAttribute( "jourdecongerestant", daoJourDeConge.CountDateToDate( idPersonne ));
-        } catch ( DaoException e ) {
+        } catch ( DaoException | ParseException e ) {
             e.getMessage();
         }
 
