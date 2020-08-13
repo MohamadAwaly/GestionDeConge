@@ -23,7 +23,6 @@
 
     <tr>
         <th>Numero de la Demande</th>
-
         <th>Date de la demande</th>
         <th>Date de la reponse</th>
         <th>Approuve</th>
@@ -36,7 +35,6 @@
         <c:forEach var="mesdemandes" items="${mesdemandes}">
 
         <td><c:out value="${ mesdemandes[0] } "/></td>
-
         <td><c:out value="${ mesdemandes[4] } "/></td>
         <td><c:out value="${ mesdemandes[5] } "/></td>
         <td><c:out value="${ mesdemandes[6] } "/></td>

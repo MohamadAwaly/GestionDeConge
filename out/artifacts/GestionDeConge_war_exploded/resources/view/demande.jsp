@@ -16,6 +16,8 @@
 <body>
 <c:import url="header.jsp"/>
 
+<p>Message!!!!  <c:out value="${message}"/>
+
 <form method="post" action="demande">
     <fieldset>
         <legend> ******* Nouvel Demande *******</legend>

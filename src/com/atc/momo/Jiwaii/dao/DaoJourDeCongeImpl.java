@@ -1,25 +1,17 @@
 package com.atc.momo.Jiwaii.dao;
 
 import com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity;
-import com.sun.corba.se.impl.naming.cosnaming.InternalBindingValue;
-import javafx.beans.binding.ObjectExpression;
 import model.PdfGeneration;
 import model.SmtpServices;
 import model.Tools;
 import org.apache.log4j.Level;
 
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.ejb.Local;
 import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.*;
+import java.time.LocalDate;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 public class DaoJourDeCongeImpl implements DaoJourDeConge {
     private static final String                  PERSISTENCE_UNIT_NAME = "gestiondeconge";
@@ -227,10 +219,18 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
             throws ParseException, DaoException {
         List<Object[]> countDateToDate = CountDateToDate( idPersonne );
         int nbjoursDemande = getNbJours( dateDebutConge.toString(), dateFinconge.toString() );
-        int jourRestant = Integer.parseInt( countDateToDate.get( 0 )[4].toString() ) ;
+
+        int jourRestant = 0;
+        try {
+            jourRestant = Integer.parseInt( countDateToDate.get( 0 )[4].toString() );
+        } catch ( NullPointerException e ) {
+            jourRestant = 0;
+        }
         Date dateFinContrat = (Date) countDateToDate.get( 0 )[6];
+
+        int jourAutorise = Integer.parseInt( countDateToDate.get( 0 )[3].toString() );
         String messageErreur = limitationJourSelection( nbjoursDemande, jourRestant, dateDebutConge, dateFinconge,
-                dateFinContrat );
+                dateFinContrat, jourAutorise, idPersonne );
         return messageErreur;
 
     }
@@ -250,30 +250,48 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
 
     /**
      * Verification de la somme des jours demande par le demandeur s'ils ne depasse pas les nombres des jours restant.
+     * Verification que les vacanse demande doit être faite au moin 2 jours a l'avance!!
      *
      * @param nbJourDemade
      * @param jourRestant
      * @return
      */
-    public static String limitationJourSelection( int nbJourDemade, int jourRestant, Date dateDebutConge,
-            Date dateFinconge, Date dateFinContrat ) {
+    public String limitationJourSelection( int nbJourDemade, int jourRestant, Date dateDebutConge,
+            Date dateFinconge, Date dateFinContrat, int jourAutorise, int idPersonne ) throws DaoException {
 
         String messageErreur = null;
         LocalDate afterTomorrow = LocalDate.now().plusDays( 2 );
-        LocalDate dateDebutCongeLC = LocalDate.parse( new SimpleDateFormat("yyyy-MM-dd").format( dateDebutConge ) );
+        LocalDate dateDebutCongeLC = LocalDate.parse( new SimpleDateFormat( "yyyy-MM-dd" ).format( dateDebutConge ) );
+        LocalDate dateFincongeLC = LocalDate.parse( new SimpleDateFormat( "yyyy-MM-dd" ).format( dateFinconge ) );
+        LocalDate dateFinContratLC = LocalDate.parse( new SimpleDateFormat( "yyyy-MM-dd" ).format( dateFinContrat ) );
 
-        if ( nbJourDemade <= jourRestant ) {
+        if ( nbJourDemade <= jourRestant || nbJourDemade < jourAutorise ) {
             messageErreur = null;
         } else {
             return messageErreur = "Votre demande depasse vos jours restant";
         }
-        if (dateDebutCongeLC.isBefore( afterTomorrow )){
+        if ( dateDebutCongeLC.isBefore( afterTomorrow ) ) {
             return messageErreur = "Votre demande doit etre faite deux jours a l'avance !!!";
-        }else{
+        } else {
             messageErreur = null;
         }
+        if ( dateDebutCongeLC.isAfter( dateFincongeLC ) ) {
+            return messageErreur = "La date de fin est inferieur a la date debut";
+        } else {
+            messageErreur = null;
+        }
+        if ( dateFincongeLC.isAfter( dateFinContratLC ) ) {
+            return messageErreur = "la date de fin de conge depasse votre date de fin de contrat";
+        } else {
+            messageErreur = null;
+        }
+        //Verifier si la demande a deja etait fait precedemant ou des jours on etait demande et accepte precedemant
 
+        List<Object[]> lstDemandeEnCours = listerDemandeEmployer( idPersonne );
+
+        logger.log( Level.INFO,"Test lsr: "+ lstDemandeEnCours.get(0)[0] + "\n\n\n" );
         return messageErreur;
+
     }
 
 }
