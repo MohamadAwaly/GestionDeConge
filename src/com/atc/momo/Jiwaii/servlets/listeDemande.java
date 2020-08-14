@@ -22,9 +22,9 @@ public class listeDemande extends HttpServlet {
 
         PersonnejourdecongetypedemandeEntity personnejourdecongetypedemandeEntity = new PersonnejourdecongetypedemandeEntity();
 
-        int idDemande = Integer.parseInt( request.getParameter( "idDemande" ) );
-        String approuve = (String) request.getParameter( "Aprouve" );
-        String commentaire = (String) request.getParameter( "Commentaire" );
+        int idDemande = Integer.parseInt(request.getParameter( "idDemande" ));
+        String commentaire = request.getParameter( "commentaire" ).toString();
+        String approuve = request.getParameter( "aprouve" ).toString();
 
         DaoJourDeConge daoJourDeConge = new DaoJourDeCongeImpl();
         try {
@@ -33,6 +33,12 @@ public class listeDemande extends HttpServlet {
         } catch ( DaoException e ) {
             e.getMessage();
         }
+        try {
+            request.setAttribute( "demandeEnCours", daoJourDeConge.listerDemandeEnCours());
+        } catch ( DaoException e ) {
+            e.printStackTrace();
+        }
+
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 
     }
@@ -41,7 +47,7 @@ public class listeDemande extends HttpServlet {
             throws ServletException, IOException {
         DaoJourDeConge daoJourDeConge = new DaoJourDeCongeImpl();
         try {
-            request.setAttribute( "demandeEnCours", daoJourDeConge.listerDemandeEnCours() );
+            request.setAttribute( "demandeEnCours", daoJourDeConge.listerDemandeEnCours());
         } catch ( DaoException e ) {
             e.printStackTrace();
         }

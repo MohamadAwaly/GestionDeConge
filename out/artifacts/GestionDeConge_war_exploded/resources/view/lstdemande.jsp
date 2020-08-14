@@ -51,13 +51,13 @@
         // Label Input commentaire:
         var elementLabelCommentaire = document.createElement("label");
         elementLabelCommentaire.innerHTML = " Vos commentaires : ";
-        elementLabelCommentaire.setAttribute("for","Commentaire");
+        elementLabelCommentaire.setAttribute("for","commentaire");
         elementLabelCommentaire.setAttribute("class","labelFormDemande");
 
         var elementInputCommentaire = document.createElement("input");
         elementInputCommentaire.setAttribute("type","text");
-        elementInputCommentaire.setAttribute("name","Commentaire");
-        elementInputCommentaire.setAttribute("for","Commentaire");
+        elementInputCommentaire.setAttribute("name","commentaire");
+        elementInputCommentaire.setAttribute("for","commentaire");
         elementInputCommentaire.setAttribute("class", "champFormReponseDemande");
         elementInputCommentaire.setAttribute("rows","50");
         elementInputCommentaire.setAttribute("size","50");
@@ -66,24 +66,24 @@
 
         var elementInputRadioAccepter = document.createElement("input");
         elementInputRadioAccepter.setAttribute("type","radio");
-        elementInputRadioAccepter.setAttribute("name","Aprouve");
-        elementInputRadioAccepter.setAttribute("for","Accepte");
+        elementInputRadioAccepter.setAttribute("name","aprouve");
+        elementInputRadioAccepter.setAttribute("for","accepte");
         elementInputRadioAccepter.setAttribute("value","Accepte");
 
         var elementLabelRadioAccepter = document.createElement("label");
         elementLabelRadioAccepter.innerHTML = "Accepter"
-        elementLabelRadioAccepter.setAttribute("for","Accepte");
+        elementLabelRadioAccepter.setAttribute("for","accepte");
 
 
         var elementInputRadioRefuser = document.createElement("input");
         elementInputRadioRefuser.setAttribute("type","radio");
-        elementInputRadioRefuser.setAttribute("name","Aprouve");
+        elementInputRadioRefuser.setAttribute("name","aprouve");
         elementInputRadioRefuser.setAttribute("value","Refuse");
-        elementInputRadioRefuser.setAttribute("for","Refuse");
+        elementInputRadioRefuser.setAttribute("for","refuse");
 
         var elementLabelRadioRefuser = document.createElement("label");
         elementLabelRadioRefuser.innerHTML = "Refuser";
-        elementLabelRadioRefuser.setAttribute("for","Refuse");
+        elementLabelRadioRefuser.setAttribute("for","refuse");
 
         // SUBMIT
 

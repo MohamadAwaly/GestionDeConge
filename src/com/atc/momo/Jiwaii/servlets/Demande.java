@@ -62,7 +62,7 @@ public class Demande extends HttpServlet {
         try {
             message = daoJourDeConge.ValidationDateDemande( java.sql.Date.valueOf( request.getParameter( "dateDebut" ) ),
                     java.sql.Date.valueOf( request.getParameter( "dateFin" ) ), idPersonne );
-            if (message.equals( null )){
+            if (message == null){
                 daoJourDeConge.insertDemande( personnejourdecongetypedemandeEntity );
             }
         } catch ( ParseException e ) {

@@ -6,21 +6,16 @@ import org.apache.log4j.Logger;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
+
 enum DayOfWeek{Lundi,Mardi,Mercredi,Jeudi,Vendredi,Samedi,Dimanche};
 
 public class CalendarTools {
     final static Logger logger           = Logger.getLogger( CalendarTools.class );
-    //public static List<Integer> getListOfCalendar(){
-    //
-    //}
-    //public static List<List> getWeeks(){
-    //
-    //}
+
     public static List<List> getAWeek() {
         Calendar calendar = Calendar.getInstance();
         int month = calendar.get(Calendar.MONTH);
@@ -55,8 +50,6 @@ public class CalendarTools {
     return Lst_Semaines;
     }
 
-
-
     public static int getMaxDaysInActualyMonth(){
         /*
         Month/Mois commence a partir de 0 (Zéro) ex: Janvier = 1;
@@ -66,7 +59,53 @@ public class CalendarTools {
         return myCalendar.getActualMaximum(myCalendar.DAY_OF_MONTH);
     }
 
+//    public static int getNbJours(String pDateDebut, String pDateFin){
+//        int nbJoursPris =0 ;
+//        SimpleDateFormat FormatDateDebut = new SimpleDateFormat("yyyy-MM-dd");
+//        Date  dateDebut = null,
+//                dateFin = null;
+//        Calendar calendardateDebut = Calendar.getInstance(),
+//                calendardateFin= Calendar.getInstance();
+//        try {
+//            dateDebut = FormatDateDebut.parse(pDateDebut);
+//            dateFin = FormatDateDebut.parse(pDateFin);
+//            calendardateDebut.setTime(dateDebut);
+//            calendardateFin.setTime(dateFin);
+//
+//        } catch (ParseException e) {
+//            e.getMessage();
+//        }
+//        while (dateDebut != dateFin){
+//
+//        }
+//
+//
+//        return  nbJoursPris;
+//    }
 
+    public static int getNbJours(String pDateDebut, String pDateFin){
+        int joursPris = 0;
+        LocalDate dateDebut = LocalDate.parse(pDateDebut);
+        LocalDate dateFin = LocalDate.parse(pDateFin);
+        while(dateDebut.isBefore(dateFin.plusDays(1))){
+            if (dateDebut.getDayOfWeek().getValue() != 6 && dateDebut.getDayOfWeek().getValue() != 7){
+                joursPris ++;
+            }
+            dateDebut = dateDebut.plusDays(1);
+        }
+
+        return joursPris;
+    }
+
+    public static List<LocalDate> getListOfBetwenDates(LocalDate startDate,LocalDate endDate){
+        List<LocalDate> lst_localDate = new ArrayList<LocalDate>();
+        LocalDate localDateItem = startDate;
+        while (localDateItem.isBefore(endDate.plusDays(1))){
+            lst_localDate.add(localDateItem);
+            localDateItem = localDateItem.plusDays(1);
+        }
+        return lst_localDate;
+    }
 
 
 }

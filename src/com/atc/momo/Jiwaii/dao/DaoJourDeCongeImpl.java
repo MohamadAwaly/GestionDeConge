@@ -1,6 +1,7 @@
 package com.atc.momo.Jiwaii.dao;
 
 import com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity;
+import model.CalendarTools;
 import model.PdfGeneration;
 import model.SmtpServices;
 import model.Tools;
@@ -10,6 +11,8 @@ import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -72,11 +75,6 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
                         + " where pjc.aprouver = com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity.EnumApprouver.En_Cours " );
 
         List<Object[]> lst_demande = query.getResultList();
-        //        for (Object[] obj: lst_demande
-        //             ) {
-        //            logger.log( Level.INFO, obj );
-        //            Object[] observable = obj;
-        //        }
         return lst_demande;
     }
 
@@ -285,51 +283,55 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
         } else {
             messageErreur = null;
         }
-        //Verifier si la demande a deja etait fait precedemant ou des jours on etait demande et accepte precedemant
+
+//<editor-fold desc="Dates Already used"
 
         List<Object[]> lstDemandeEnCours = listerDemandeEmployer( idPersonne );
-        int j = 0;
-        for ( int i = 0; i < lstDemandeEnCours.size(); i++ ) {
+        List<LocalDate> lst_LocalDateFromForm = CalendarTools.getListOfBetwenDates(dateDebutCongeLC,dateFincongeLC);
 
-            LocalDate dateDebutRecu = LocalDate
-                    .parse( new SimpleDateFormat( "yyyy-MM-dd" ).format( lstDemandeEnCours.get( i )[8] ).toString() );
+        TestParLigne:
+        for (int i=0;i < lstDemandeEnCours.size(); i++) {
+            LocalDate dateDebutRow = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(lstDemandeEnCours.get(i)[8]).toString());
+            LocalDate dateFinRow = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(lstDemandeEnCours.get(i)[9]).toString());
+            List<LocalDate> lst_dateDb = CalendarTools.getListOfBetwenDates(dateDebutRow,dateFinRow);
 
-
-            while ( dateDebutRecu.isBefore( dateFincongeLC.plusDays( 1 ) ) ){
-
-
-                if ( dateDebutRecu.equals( dateDebutCongeLC ) ) {
-
-                    return messageErreur = "Vous avez deja choisie ce jour ";
-
-                }else {
-
-                    dateDebutRecu = dateDebutRecu.plusDays( 1 );
-                    logger.log( Level.INFO,
-                            "dans le else Date demande conge: " + j + " " + dateDebutRecu.plusDays( j ) + " " + dateFincongeLC + "\n\n\n" );
+            for (LocalDate lcItem:lst_dateDb
+                 ) {
+                if(lst_LocalDateFromForm.contains(lcItem)){
+                  messageErreur = "Enchevauchement pour le :"+lcItem.toString();
+                  break TestParLigne;
                 }
-                j++;
             }
-
-
-
-          // for ( int j = 0; dateDebutRecu.isBefore( dateFincongeLC ) ||dateDebutRecu.isEqual( dateFincongeLC ); j++ ) {
-          //
-          //     if ( dateDebutRecu.equals( dateDebutCongeLC ) ) {
-          //
-          //         return messageErreur = "Vous avez deja choisie ce jour ";
-          //
-          //     }else {
-          //
-          //         dateDebutRecu.plusDays( 1 );
-          //         logger.log( Level.INFO,
-          //                 "dans le else Date demande conge: " + j + " " + dateDebutRecu.plusDays( j ) + " " + dateFincongeLC + "\n\n\n" );
-          //     }
-          // }
-          // dateDebutCongeLC.plusDays( i );
         }
 
+
+//</editor-fold>
+
+
+
+
+
+//        ListerDebutDeConge:
+//        for ( int i = 0; i < lstDemandeEnCours.size(); i++ ) {
+//            LocalDate dateDebutIncrementable = dateDebutCongeLC;
+//            LocalDate dateDebutLigneDB = LocalDate
+//                    .parse( new SimpleDateFormat( "yyyy-MM-dd" ).format( lstDemandeEnCours.get( i )[8] ).toString() );
+//
+//            while (dateDebutIncrementable.isBefore(dateFincongeLC.plusDays( 1 ))){
+//
+//                if ( dateDebutLigneDB.equals( dateDebutIncrementable ) ) {
+//                    messageErreur = "Vous avez deja choisie ce jour ";
+//                }else {
+//                    dateDebutIncrementable = dateDebutIncrementable.plusDays( 1 );//
+//                    logger.log( Level.INFO,
+//                            "dans le else Date demande conge: " + dateDebutIncrementable + " " + dateFincongeLC + "\n\n\n" );
+//                }
+//            }
+//        }
+
         //logger.log( Level.INFO, "Test lsr: " + lstDemandeEnCours.get( 0 )[0] + "\n\n\n" );
+
+
         return messageErreur;
 
     }

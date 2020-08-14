@@ -25,6 +25,7 @@ public class PersonnejourdecongetypedemandeEntity {
     public EnumApprouver  aprouver;
     private Date          datedebut;
     private Date          datefin;
+    public String        approuveString;
     //public static EnumApprouver enumReponse;
 
     @Id @Column( name = "idPersonneJourDeCongeTypeDemande", nullable = false )
@@ -77,12 +78,15 @@ public class PersonnejourdecongetypedemandeEntity {
     }
 
     @Basic @Column( name = "Aprouver", nullable = true ) public EnumApprouver getAprouver() {
+        this.approuveString = aprouver.toString();
         return aprouver;
     }
 
     public void setAprouver( EnumApprouver aprouver ) {
+        this.approuveString = aprouver.toString();
         this.aprouver = aprouver;
     }
+
 
     @Basic @Column( name = "Datedebut", nullable = false ) public Date getDatedebut() {
         return datedebut;
