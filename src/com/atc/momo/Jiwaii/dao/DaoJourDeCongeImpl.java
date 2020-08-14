@@ -289,7 +289,16 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
 
         List<Object[]> lstDemandeEnCours = listerDemandeEmployer( idPersonne );
 
-        logger.log( Level.INFO,"Test lsr: "+ lstDemandeEnCours.get(0)[0] + "\n\n\n" );
+
+        for (int i = 0; i<=lstDemandeEnCours.size(); i++ ) {
+            //LocalDate dateDemandeConge = LocalDate
+            //        .parse( new SimpleDateFormat( "yyyy-MM-dd" ).format( lstDemandeEnCours.get( i )[8] ) );
+            dateDebutCongeLC.plusDays( i );
+            //logger.log( Level.INFO,"dateDemandeConge: " + i + " " + dateDemandeConge + "\n\n\n" );
+            logger.log( Level.INFO,"dateDebutCongeLC: " + i + " " + lstDemandeEnCours.get( i )[i].toString()  + "\n\n\n" );
+        }
+
+        //logger.log( Level.INFO, "Test lsr: " + lstDemandeEnCours.get( 0 )[0] + "\n\n\n" );
         return messageErreur;
 
     }
