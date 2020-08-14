@@ -295,7 +295,7 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
                     .parse( new SimpleDateFormat( "yyyy-MM-dd" ).format( lstDemandeEnCours.get( i )[8] ).toString() );
 
 
-            while ( dateDebutRecu.isBefore( dateFincongeLC ) || dateDebutRecu.isEqual( dateFincongeLC ) ){
+            while ( dateDebutRecu.isBefore( dateFincongeLC.plusDays( 1 ) ) ){
 
 
                 if ( dateDebutRecu.equals( dateDebutCongeLC ) ) {
