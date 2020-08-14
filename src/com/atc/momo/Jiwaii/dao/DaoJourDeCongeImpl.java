@@ -289,13 +289,20 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
 
         List<Object[]> lstDemandeEnCours = listerDemandeEmployer( idPersonne );
 
-
-        for (int i = 0; i<=lstDemandeEnCours.size(); i++ ) {
-            //LocalDate dateDemandeConge = LocalDate
-            //        .parse( new SimpleDateFormat( "yyyy-MM-dd" ).format( lstDemandeEnCours.get( i )[8] ) );
+        for ( int i = 0; i < lstDemandeEnCours.size(); i++ ) {
+            LocalDate dateDemandeConge = LocalDate
+                    .parse( new SimpleDateFormat( "yyyy-MM-dd" ).format( lstDemandeEnCours.get( i )[8] ).toString() );
+            for ( int j = 0; dateDemandeConge.isBefore( dateFincongeLC ) ||dateDemandeConge.isEqual( dateFincongeLC ); j++ ) {
+                if ( dateDemandeConge.equals( dateDebutCongeLC ) ) {
+                    return messageErreur = "Vous avez deja choisie ce jour ";
+                }else {
+                    dateDemandeConge.plusDays( 1 );
+                    logger.log( Level.INFO,
+                            "dans le else Date demande conge: " + j + " " + dateDemandeConge.plusDays( j ) + " " + dateFincongeLC + "\n\n\n" );
+                }
+            }
             dateDebutCongeLC.plusDays( i );
-            //logger.log( Level.INFO,"dateDemandeConge: " + i + " " + dateDemandeConge + "\n\n\n" );
-            logger.log( Level.INFO,"dateDebutCongeLC: " + i + " " + lstDemandeEnCours.get( i )[i].toString()  + "\n\n\n" );
+
         }
 
         //logger.log( Level.INFO, "Test lsr: " + lstDemandeEnCours.get( 0 )[0] + "\n\n\n" );
