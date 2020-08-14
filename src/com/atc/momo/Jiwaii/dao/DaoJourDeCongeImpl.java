@@ -265,7 +265,7 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
         LocalDate dateFincongeLC = LocalDate.parse( new SimpleDateFormat( "yyyy-MM-dd" ).format( dateFinconge ) );
         LocalDate dateFinContratLC = LocalDate.parse( new SimpleDateFormat( "yyyy-MM-dd" ).format( dateFinContrat ) );
 
-        if ( nbJourDemade <= jourRestant || nbJourDemade < jourAutorise ) {
+        if ( nbJourDemade <= jourRestant || nbJourDemade <= jourAutorise ) {
             messageErreur = null;
         } else {
             return messageErreur = "Votre demande depasse vos jours restant";
@@ -288,21 +288,45 @@ public class DaoJourDeCongeImpl implements DaoJourDeConge {
         //Verifier si la demande a deja etait fait precedemant ou des jours on etait demande et accepte precedemant
 
         List<Object[]> lstDemandeEnCours = listerDemandeEmployer( idPersonne );
-
+        int j = 0;
         for ( int i = 0; i < lstDemandeEnCours.size(); i++ ) {
-            LocalDate dateDemandeConge = LocalDate
-                    .parse( new SimpleDateFormat( "yyyy-MM-dd" ).format( lstDemandeEnCours.get( i )[8] ).toString() );
-            for ( int j = 0; dateDemandeConge.isBefore( dateFincongeLC ) ||dateDemandeConge.isEqual( dateFincongeLC ); j++ ) {
-                if ( dateDemandeConge.equals( dateDebutCongeLC ) ) {
-                    return messageErreur = "Vous avez deja choisie ce jour ";
-                }else {
-                    dateDemandeConge.plusDays( 1 );
-                    logger.log( Level.INFO,
-                            "dans le else Date demande conge: " + j + " " + dateDemandeConge.plusDays( j ) + " " + dateFincongeLC + "\n\n\n" );
-                }
-            }
-            dateDebutCongeLC.plusDays( i );
 
+            LocalDate dateDebutRecu = LocalDate
+                    .parse( new SimpleDateFormat( "yyyy-MM-dd" ).format( lstDemandeEnCours.get( i )[8] ).toString() );
+
+
+            while ( dateDebutRecu.isBefore( dateFincongeLC ) || dateDebutRecu.isEqual( dateFincongeLC ) ){
+
+
+                if ( dateDebutRecu.equals( dateDebutCongeLC ) ) {
+
+                    return messageErreur = "Vous avez deja choisie ce jour ";
+
+                }else {
+
+                    dateDebutRecu = dateDebutRecu.plusDays( 1 );
+                    logger.log( Level.INFO,
+                            "dans le else Date demande conge: " + j + " " + dateDebutRecu.plusDays( j ) + " " + dateFincongeLC + "\n\n\n" );
+                }
+                j++;
+            }
+
+
+
+          // for ( int j = 0; dateDebutRecu.isBefore( dateFincongeLC ) ||dateDebutRecu.isEqual( dateFincongeLC ); j++ ) {
+          //
+          //     if ( dateDebutRecu.equals( dateDebutCongeLC ) ) {
+          //
+          //         return messageErreur = "Vous avez deja choisie ce jour ";
+          //
+          //     }else {
+          //
+          //         dateDebutRecu.plusDays( 1 );
+          //         logger.log( Level.INFO,
+          //                 "dans le else Date demande conge: " + j + " " + dateDebutRecu.plusDays( j ) + " " + dateFincongeLC + "\n\n\n" );
+          //     }
+          // }
+          // dateDebutCongeLC.plusDays( i );
         }
 
         //logger.log( Level.INFO, "Test lsr: " + lstDemandeEnCours.get( 0 )[0] + "\n\n\n" );
