@@ -19,7 +19,7 @@
 <c:import url="header.jsp"/>
 
 
-<table style="width:100%" border="1px solid black">
+<table border="1px solid black" class="ListSociete">
 
     <tr>
         <th>Numero de la Demande</th>

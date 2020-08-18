@@ -18,27 +18,27 @@
 <body>
 <c:import url="header.jsp"/>
 <c:if test="${ !empty erreur}"><p style="color: red;"><c:out value="${ erreur }"/></p></c:if>
-<form method="post" action="nouvellesociete">
+<form method="post" action="nouvellesociete" class="formulairePersonne">
     <fieldset>
         <legend> ******* Nouvel Societe *******</legend>
         <p>
-            <label for="nom" class="labelAjoutPers">Nom de la societe : </label>
+            <label for="nom" class="labelAjoutPers">Nom de la societe <span class="etoile">*</span>  : </label>
             <input type="text" name="nom" id="nom" class="ChampFormulaireajoutPersonne" required />
 
-            <label for="tel" class="labelAjoutPers">Téléphone : </label>
+            <label for="tel" class="labelAjoutPers">Téléphone <span class="etoile">*</span> : </label>
             <input type="text" name="tel" id="tel" class="ChampFormulaireajoutPersonne" required />
 
 
-            <label for="ntva" class="labelAjoutPers">numéro de TVA : </label>
+            <label for="ntva" class="labelAjoutPers">numéro de TVA <span class="etoile">*</span> : </label>
             <input type="number" name="ntva" id="ntva" class="ChampFormulaireajoutPersonne" required />
         </p>
         <p>
-            <label for="email" class="labelAjoutPers">Email : </label>
+            <label for="email" class="labelAjoutPers">Email <span class="etoile">*</span> : </label>
             <input type="email" name="email" id="email" class="ChampFormulaireajoutPersonne" required />
         </p>
-
+        <input type="submit" class="boutonAjoutPersonne"/>
     </fieldset>
-    <input type="submit"/>
+
 
 </form>
 </body>

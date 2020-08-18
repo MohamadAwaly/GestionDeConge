@@ -55,7 +55,6 @@ public class Demande extends HttpServlet {
         personnejourdecongetypedemandeEntity.setDatefin( java.sql.Date.valueOf( request.getParameter( "dateFin" ) ) );
         personnejourdecongetypedemandeEntity.setAprouver( enumApprouver );
 
-        //String test = request.getParameter( "dateDebut" ).toString();
 
         DaoJourDeCongeImpl daoJourDeConge = new DaoJourDeCongeImpl();
         String message = null;

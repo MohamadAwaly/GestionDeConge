@@ -180,7 +180,7 @@ label{
     margin-right: 10%;
 }
 .ListSociete{
-    position: absolute;
+    /*position: absolute;*/
     width: 80%;
     border: 1px solid #ccc;
     text-align: center;

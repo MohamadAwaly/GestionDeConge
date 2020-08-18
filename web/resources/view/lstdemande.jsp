@@ -23,7 +23,7 @@
         var elementForm = document.createElement("form");
         elementForm.setAttribute("method", "post");
         elementForm.setAttribute("action","listeDemande")
-        elementForm.setAttribute("class", "formulaireReponseDemande");
+        elementForm.setAttribute("class", "ListSociete");
 
         var elementLegend = document.createElement("legend");
         elementLegend.innerHTML = "Détail de la demande de "+pNom;
@@ -116,9 +116,7 @@
 <body>
 <c:import url="header.jsp"/>
 
-
-
-<table style="width:100%" border="1px solid black">
+<table border="1px solid black" class="ListSociete">
 
     <tr>
         <th>Numero de la Demande</th>
