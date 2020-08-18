@@ -111,3 +111,77 @@ td:hover{
     font-weight: bold;
     margin-left: 10%;
 }
+
+.personneList{
+    position: absolute;
+    width: 80%;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin-left: 10%;
+    margin-right: 15%;
+}
+th.personneList{
+
+}
+.titreListeemploye{
+    line-height: 18pt;
+    font-style: italic;
+    font-weight: bold;
+    margin-left: 10%;
+}
+.etoile{
+    color: red;
+}
+input:hover{
+    background: rgb(161,249,255);
+
+}
+label{
+    line-height: 18pt;
+    font-style: italic;
+    font-weight: bold;
+    margin-left: 10%;
+}
+
+/******************Formulaire Personne ************/
+.formulairePersonne{
+    background-color: rgba(35, 150, 248, 0.03);
+    font-size: 100%;
+    padding: 20px 30px 10px;
+    border-radius: 0 0 20px 0;
+    display: flex;
+    flex-flow: column;
+    line-height: 18pt;
+    font-style: italic;
+    font-weight: bold;
+    margin-left: 10%;
+    margin-right: 10%;
+
+}
+
+.ChampFormulaireajoutPersonne{
+    width: 18%;
+//padding: 1em 0.5em 0.2em;
+    height: auto;
+//vertical-align: top;
+}
+.labelAjoutPers{
+    padding: 1em 0.5em 0.6em;
+    display: inline-block;
+    width: 205px;
+    font-weight: bold;
+//vertical-align: top;
+}
+.boutonAjoutPersonne{
+    background: #041A6B none repeat scroll 0 0;
+    font-weight: bold;
+    border-width: 1px;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-size: 13px;
+    line-height: 30px;
+    padding: 0 20px;
+    text-transform: uppercase;
+    margin-left: 70%;
+    margin-right: 10%;
+}

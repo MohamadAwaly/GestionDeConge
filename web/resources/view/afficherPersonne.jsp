@@ -24,9 +24,12 @@
 
 <c:if test="${ !empty erreur}"><p style="color: red;"><c:out value="${ erreur }"/></p></c:if>
 
-<table style="width:100%" border="1px solid black">
+<p class="titreListeemploye">Liste des employés</p>
 
-    <tr>
+<table class="personneList" border="1px solid black">
+
+    <tr class="" style="background: lightblue;
+                    border-color: white;">
         <th>Nom</th>
         <th>Prenom</th>
         <th>Email</th>
