@@ -16,21 +16,21 @@
 <body>
 <c:import url="header.jsp"/>
 
-<p>Message!!!!  <c:out value="${message}"/>
+<p style="text-align: center; color: red; font-weight: bold"><c:out value="${message}"/></p>
 
-<form method="post" action="demande">
+<form method="post" action="demande" class="formulairePersonne">
     <fieldset>
         <legend> ******* Nouvel Demande *******</legend>
 
-        <label for="dateDebut" class="labelAjoutPers" >Date de debut : </label>
+        <label for="dateDebut" class="labelAjoutPers">Date de debut : </label>
         <input type="date" name="dateDebut" id="dateDebut" class="ChampFormulaireajoutPersonne" required>
 
-        <label for="dateFin" class="labelAjoutPers" required >Date de fin : </label>
+        <label for="dateFin" class="labelAjoutPers" required>Date de fin : </label>
         <input type="date" name="dateFin" id="dateFin" class="ChampFormulaireajoutPersonne" required>
-        </p>
-    </fieldset>
 
-    <input type="submit" class="boutonAjoutPersonne"/>
+
+        <input type="submit" class="boutonAjoutPersonne"/>
+    </fieldset>
 </form>
 
 </body>

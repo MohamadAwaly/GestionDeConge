@@ -25,26 +25,27 @@
         <p>
 
 
-            <label for="nom" class="labelAjoutPers">Nom : </label>
+            <label for="nom" class="labelAjoutPers">Nom <span class="etoile">*</span> : </label>
             <input type="text" name="nom" id="nom" class="ChampFormulaireajoutPersonne" required/>
 
-            <label for="prenom" class="labelAjoutPers">Prénom : </label>
+            <label for="prenom" class="labelAjoutPers">Prénom <span class="etoile">*</span> : </label>
             <input type="text" name="prenom" id="prenom" class="ChampFormulaireajoutPersonne" required/>
 
+        </p>
+            <label for="dateDeNaissance" class="labelAjoutPers">Date de Naissance <span class="etoile">*</span> :
+            </label>
+            <input type="date" name="dateDeNaissance" id="dateDeNaissance" class="ChampFormulaireajoutPersonne"
+                   required/>
 
-            <label for="dateDeNaissance" class="labelAjoutPers">Date de Naissance : </label>
-            <input type="date" name="dateDeNaissance" id="dateDeNaissance" class="ChampFormulaireajoutPersonne" required />
+        <p>
+            <label for="email" class="labelAjoutPers">Email <span class="etoile">*</span> : </label>
+            <input type="email" name="email" id="email" class="ChampFormulaireajoutPersonne" required/>
+
+            <label for="motDePasse" class="labelAjoutPers">Mot de passe <span class="etoile">*</span> : </label>
+            <input type="text" name="motDePasse" id="motDePasse" class="ChampFormulaireajoutPersonne" required/>
         </p>
         <p>
-            <label for="email" class="labelAjoutPers">Email : </label>
-            <input type="email" name="email" id="email" class="ChampFormulaireajoutPersonne" required />
-
-            <label for="motDePasse" class="labelAjoutPers">Mot de passe : </label>
-            <input type="text" name="motDePasse" id="motDePasse" class="ChampFormulaireajoutPersonne" required />
-        </p>
-        <p>
-            <!-- <input type="number" name="role" id="role" class="ChampFormulaireajoutPersonne"> -->
-            <label for="selectrole" class="labelAjoutPers">Role : </label>
+            <label for="selectrole" class="labelAjoutPers">Role <span class="etoile">*</span> : </label>
             <SELECT id="selectrole" name="selectrole" size="1" class="ChampFormulaireajoutPersonne">
                 <c:forEach var="role" items="${ role }">
                 <OPTION value="${ role.idRole }">
@@ -52,7 +53,7 @@
                     </c:forEach>
             </SELECT>
 
-            <label for="selectAdresse" class="labelAjoutPers">Adresse : </label>
+            <label for="selectAdresse" class="labelAjoutPers">Adresse <span class="etoile">*</span> : </label>
             <SELECT id="selectAdresse" name="selectAdresse" size="1" class="ChampFormulaireajoutPersonne">
                 <c:forEach var="adresses" items="${ adresses }">
                 <OPTION value="${ adresses.idAdresse }">
@@ -62,13 +63,8 @@
         </p>
 
         <p>
-        <h2>Déffinir les jours de congée autorisée</h2>
-        <!-- <label for="holiday" class="labelAjoutPers">Jour de congée autorisé : </label>
-         <input type="number" name="holiday" id="holiday" class="ChampFormulaireajoutPersonne">-->
-        </p>
-        <p>
 
-            <label for="holiday" class="holiday">holiday : </label>
+            <label for="holiday" class="holiday">Jour de congé autorisée <span class="etoile">*</span> : </label>
             <SELECT id="holiday" name="holiday" size="1" class="ChampFormulaireajoutPersonne">
                 <c:forEach var="holiday" items="${ holiday }">
                 <OPTION value="${ holiday.idJourDeCongeAutorise }">
@@ -77,14 +73,16 @@
             </SELECT>
         </p>
         <p>
-            <label for="dateDebut" class="labelAjoutPers">Date de debut : </label>
-            <input type="date" name="dateDebut" id="dateDebut" class="ChampFormulaireajoutPersonne">
+            <label for="dateDebut" class="labelAjoutPers">Date de debut de contrat: <span class="etoile">*</span>
+            </label>
+            <input type="date" name="dateDebut" id="dateDebut" class="ChampFormulaireajoutPersonne" required/>
 
-            <label for="dateFin" class="labelAjoutPers">Date de fin : </label>
-            <input type="date" name="dateFin" id="dateFin" class="ChampFormulaireajoutPersonne">
+            <label for="dateFin" class="labelAjoutPers">Date de fin de contrat: <span class="etoile">*</span> </label>
+            <input type="date" name="dateFin" id="dateFin" class="ChampFormulaireajoutPersonne" required/>
         </p>
+
+        <input type="submit" class="boutonAjoutPersonne"/>
     </fieldset>
-    <input type="submit" class="boutonAjoutPersonne"/>
 </form>
 </body>
 </html>

@@ -26,7 +26,6 @@ header li {
 
 header h1 {
     background-image: url("../Images/fon.jpg");
-    margin-left: 10%;
     width: fit-content;
     right: 100%;
     margin-left: 6%;
@@ -53,10 +52,7 @@ nav {
     border-radius: 3px;
     font-size: 14px;
     font-weight: bold;
-    border-width: 1px;
-    border-radius: 5px;
     color: #FFFFFF;
-    font-size: 13px;
     line-height: 30px;
     padding: 0 20px;
     text-transform: uppercase;

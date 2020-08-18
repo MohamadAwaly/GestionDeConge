@@ -26,7 +26,6 @@ header li {
 
 header h1 {
     background-image: url("../Images/fon.jpg");
-    margin-left: 10%;
     width: fit-content;
     right: 100%;
     margin-left: 6%;
@@ -74,16 +73,11 @@ footer {
 
 .Calendar{
     mso-cellspacing: 1px;
-
     position: absolute;
-
-
-    /************************/
     width: 80%;
     height: 50%;
     border: 1px solid #ccc;
     text-align: center;
-
     margin-left: 10%;
     margin-right: 15%;
 
@@ -184,4 +178,12 @@ label{
     text-transform: uppercase;
     margin-left: 70%;
     margin-right: 10%;
+}
+.ListSociete{
+    position: absolute;
+    width: 80%;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin-left: 10%;
+    margin-right: 15%;
 }

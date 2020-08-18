@@ -17,12 +17,14 @@
 <body>
 <c:import url="header.jsp"/>
 
-
+<p class="titreListeemploye">Détail société</p>
 <c:if test="${ !empty erreur}"><p style="color: red;"><c:out value="${ erreur }"/></p></c:if>
 
-<table style="width:100%" border="1px solid black">
 
-    <tr>
+<table border="1px solid black" class="ListSociete" >
+
+    <tr  style="background: lightblue;
+                    border-color: white;">
         <th>Societe</th>
         <th>Téléphone</th>
         <th>Numéro TVA</th>
