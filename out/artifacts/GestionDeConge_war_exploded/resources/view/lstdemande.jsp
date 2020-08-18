@@ -23,7 +23,7 @@
         var elementForm = document.createElement("form");
         elementForm.setAttribute("method", "post");
         elementForm.setAttribute("action","listeDemande")
-        elementForm.setAttribute("class", "formulaireReponseDemande");
+        elementForm.setAttribute("class", "ListSociete");
 
         var elementLegend = document.createElement("legend");
         elementLegend.innerHTML = "Détail de la demande de "+pNom;
@@ -116,9 +116,7 @@
 <body>
 <c:import url="header.jsp"/>
 
-
-
-<table style="width:100%" border="1px solid black">
+<table border="1px solid black" class="ListSociete">
 
     <tr>
         <th>Numero de la Demande</th>
@@ -130,7 +128,7 @@
     </tr>
     <c:forEach var="demandeEnCours" items="${demandeEnCours}">
 
-        <tr onclick="showDetailFor(${demandeEnCours[0]},'${demandeEnCours[5]} '+'${demandeEnCours[1]}')"/>
+        <tr class="TrDemande" onclick="showDetailFor(${demandeEnCours[0]},'${demandeEnCours[5]} '+'${demandeEnCours[1]}')"/>
         <td><c:out value="${ demandeEnCours[0] } "/></td>
         <td><c:out value="${ demandeEnCours[1] } "/></td>
         <td><c:out value="${ demandeEnCours[2] } "/></td>

@@ -60,7 +60,7 @@
     </thead>
     <c:forEach var="calendar" items="${ calendar }">
 
-        <tr>
+        <tr class="TrDemande">
             <c:forEach var="item" items="${calendar}">
                 <td>
                     <c:out value="${item}"></c:out>
