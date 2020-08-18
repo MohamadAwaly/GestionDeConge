@@ -20,7 +20,7 @@ public class DaoPersonneImpl implements DaoPersonne {
     private static final String                  PARAM_EMAIL           = "email";
 
     //Lister Personne avec leur adresses et roles
-    public List<Object[]> laListeDeOufs() {
+    public List<Object[]> listDesPersonnes() {
         EntityManager em = getEntityManager( PERSISTENCE_UNIT_NAME );
         Query query = em.createQuery(
                 "select p.nom, p.prenom,p.email, a.nomRue,a.numero,v.nomVille,r.typeRole from PersonnesEntity p"

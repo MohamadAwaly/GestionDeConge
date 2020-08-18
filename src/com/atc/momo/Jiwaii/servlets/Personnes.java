@@ -4,7 +4,6 @@ import com.atc.momo.Jiwaii.dao.DaoException;
 import com.atc.momo.Jiwaii.dao.DaoPersonne;
 import com.atc.momo.Jiwaii.dao.DaoPersonneImpl;
 import model.PdfGeneration;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -37,7 +36,7 @@ public class Personnes extends HttpServlet {
 
         try {
             request.setAttribute( "personnes", pers.lister() );
-            request.setAttribute( "adresse", pers.laListeDeOufs() );
+            request.setAttribute( "adresse", pers.listDesPersonnes() );
         } catch ( DaoException e ) {
             request.setAttribute( "erreur", e.getMessage() );
         }
@@ -56,7 +55,7 @@ public class Personnes extends HttpServlet {
 
         try {
             request.setAttribute( "personnes", pers.lister() );
-            request.setAttribute( "adresse", pers.laListeDeOufs() );
+            request.setAttribute( "adresse", pers.listDesPersonnes() );
         } catch ( DaoException e ) {
             request.setAttribute( "erreur", e.getMessage() );
         }

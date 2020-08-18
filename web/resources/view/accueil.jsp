@@ -17,9 +17,10 @@
 </head>
 <body>
 <c:import url="header.jsp"/>
-<p>Bienvenue <c:out value="${sessionScope.sessionUtilisateur.prenom}"/> <c:out value="${sessionScope.sessionUtilisateur.nom}"/> <c:out value="${sessionScope.sessionUtilisateur.idPersonne}"/>
+<p id="bienvenu">Bienvenue <c:out value="${sessionScope.sessionUtilisateur.prenom}"/> <c:out
+        value="${sessionScope.sessionUtilisateur.nom}"/>
 </p>
-<table border="1"  cellspacing="1" class="...">
+<table border="1" cellspacing="1" class="tableaudebord">
 
     <tr>
         <th>Dernier date de conge</th>
@@ -46,45 +47,30 @@
     </c:forEach>
 </table>
 
-
-
-<%-- Affichage de la chaîne "message" transmise par la servlet --%>
-<%--<c:if test="${ validation }" var="varValidation" scope="session">
-  </br>
-  <c:out value="validation: ${ validation }"/>
-  <%-- Puis affichage des données enregist  rées dans le bean "Utilisateur" transmis par la servlet --%>
-<%--    </br>
-  <c:out value="Email : ${ user.email }"/>
-  </br>
-  <c:out value="mot de passe : ${ user.motDePasse }"/>
-  </br>
-  <c:out value="Calendar: ${ calendar }"/>
-</c:if>
-
-<c:out value="${ message }"></c:out>--%>
-<table border="1"  cellspacing="1" class="Calendar">
-    <thead>
-    <td>Lundi</td>
-    <td>Mardi</td>
-    <td>Mercredi</td>
-    <td>Jeudi</td>
-    <td>Vendredi</td>
-    <td>Samedi</td>
-    <td>Dimanche</td>
+<table border="1" cellspacing="1" class="Calendar">
+    <thead class="" style="background: lightblue;
+                    border-color: white;">
+    <th>Lundi</th>
+    <th>Mardi</th>
+    <th>Mercredi</th>
+    <th>Jeudi</th>
+    <th>Vendredi</th>
+    <th>Samedi</th>
+    <th>Dimanche</th>
     </thead>
-<c:forEach var="calendar" items="${ calendar }">
+    <c:forEach var="calendar" items="${ calendar }">
 
-    <tr>
-        <c:forEach var="item" items="${calendar}">
-           <td>
-             <c:out value="${item}"></c:out>
-           </td>
+        <tr>
+            <c:forEach var="item" items="${calendar}">
+                <td>
+                    <c:out value="${item}"></c:out>
+                </td>
 
-        </c:forEach>
-    </tr>
+            </c:forEach>
+        </tr>
 
 
-</c:forEach>
+    </c:forEach>
 </table>
 
 
