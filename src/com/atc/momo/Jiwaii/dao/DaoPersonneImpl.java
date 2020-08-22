@@ -1,17 +1,13 @@
 package com.atc.momo.Jiwaii.dao;
 
-import com.atc.momo.Jiwaii.entities.JourdecongeEntity;
 import com.atc.momo.Jiwaii.entities.JourdecongeautoriseEntity;
-import com.atc.momo.Jiwaii.entities.PersonnejourdecongeautorisetypedemandeEntity;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
-import com.atc.momo.Jiwaii.servlets.Personnes;
 import org.apache.log4j.Level;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Queue;
 
 public class DaoPersonneImpl implements DaoPersonne {
     final static         org.apache.log4j.Logger logger                = org.apache.log4j.Logger

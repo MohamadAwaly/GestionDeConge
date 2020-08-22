@@ -3,22 +3,14 @@ package com.atc.momo.Jiwaii.beans;
 import com.atc.momo.Jiwaii.dao.DaoException;
 import com.atc.momo.Jiwaii.dao.DaoPersonne;
 import com.atc.momo.Jiwaii.dao.DaoPersonneImpl;
-import com.atc.momo.Jiwaii.entities.EntityException;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
-import com.atc.momo.Jiwaii.servlets.Personnes;
-import com.atc.momo.Jiwaii.servlets.Test;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import javax.persistence.*;
 import javax.servlet.http.HttpServletRequest;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 public class ConnexionForm {
     private static final String                  CHAMP_EMAIL           = "email";

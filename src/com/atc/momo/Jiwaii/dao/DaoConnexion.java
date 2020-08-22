@@ -1,12 +1,10 @@
 package com.atc.momo.Jiwaii.dao;
 
-import com.atc.momo.Jiwaii.servlets.TestEntityManager;
 import org.apache.log4j.Level;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.logging.Logger;
 
 public class DaoConnexion {
     final static         org.apache.log4j.Logger logger                = org.apache.log4j.Logger

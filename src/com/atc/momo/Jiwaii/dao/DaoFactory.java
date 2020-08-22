@@ -51,17 +51,5 @@ public class DaoFactory {
 
     }
 
-    /**
-     * Récupération du Dao qui represente les tables de la base de données
-     * Retourne systematiquement l'implementation
-     * et ca lui envoie la factory elle meme pour que l'objet de l'implementation puisse accede
-     * directement a la base de donnée connecter (pour chaque table on 'aura une méthode)
-     *
-     * @return
-     */
-    public PersonneDao getPersonneDao() {
-        return new PersonneDaoImpl( this );
-    }
-    public AdresseDao getAdresseDao() {
-        return new AdresseDaoImpl( this );}
+
 }

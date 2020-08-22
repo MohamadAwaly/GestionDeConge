@@ -1,13 +1,8 @@
-package model;
+package com.atc.momo.Jiwaii.model;
 
-import com.atc.momo.Jiwaii.servlets.Connexion;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 

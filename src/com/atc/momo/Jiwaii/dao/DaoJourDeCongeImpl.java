@@ -1,18 +1,16 @@
 package com.atc.momo.Jiwaii.dao;
 
 import com.atc.momo.Jiwaii.entities.PersonnejourdecongetypedemandeEntity;
-import model.CalendarTools;
-import model.PdfGeneration;
-import model.SmtpServices;
-import model.Tools;
+import com.atc.momo.Jiwaii.model.CalendarTools;
+import com.atc.momo.Jiwaii.model.PdfGeneration;
+import com.atc.momo.Jiwaii.model.SmtpServices;
+import com.atc.momo.Jiwaii.model.Tools;
 import org.apache.log4j.Level;
 
 import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 

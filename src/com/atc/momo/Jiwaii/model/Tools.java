@@ -1,4 +1,4 @@
-package model;
+package com.atc.momo.Jiwaii.model;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

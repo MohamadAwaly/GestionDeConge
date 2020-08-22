@@ -4,7 +4,7 @@ import com.atc.momo.Jiwaii.dao.DaoException;
 import com.atc.momo.Jiwaii.dao.DaoJourDeConge;
 import com.atc.momo.Jiwaii.dao.DaoJourDeCongeImpl;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
-import model.CalendarTools;
+import com.atc.momo.Jiwaii.model.CalendarTools;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

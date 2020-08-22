@@ -3,7 +3,7 @@ package com.atc.momo.Jiwaii.servlets;
 import com.atc.momo.Jiwaii.dao.DaoException;
 import com.atc.momo.Jiwaii.dao.DaoPersonne;
 import com.atc.momo.Jiwaii.dao.DaoPersonneImpl;
-import model.PdfGeneration;
+import com.atc.momo.Jiwaii.model.PdfGeneration;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;

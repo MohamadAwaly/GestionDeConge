@@ -1,4 +1,4 @@
-package model;
+package com.atc.momo.Jiwaii.model;
 
 import com.atc.momo.Jiwaii.dao.DaoException;
 import com.atc.momo.Jiwaii.dao.DaoPersonne;

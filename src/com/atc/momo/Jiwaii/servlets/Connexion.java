@@ -3,7 +3,7 @@ package com.atc.momo.Jiwaii.servlets;
 import com.atc.momo.Jiwaii.beans.ConnexionForm;
 import com.atc.momo.Jiwaii.dao.*;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
-import model.CalendarTools;
+import com.atc.momo.Jiwaii.model.CalendarTools;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -16,9 +16,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @WebServlet( name = "Connexion" )

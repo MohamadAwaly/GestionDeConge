@@ -1,6 +1,5 @@
-package model;
+package com.atc.momo.Jiwaii.model;
 
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import javax.activation.DataHandler;
