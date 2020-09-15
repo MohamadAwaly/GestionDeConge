@@ -93,15 +93,16 @@ public class DaoPersonneImpl implements DaoPersonne {
         try {
 
             trans.begin();
-            entityManager.persist( personne );
+            entityManager.merge( personne );
             entityManager.persist( persJrCongAut );
-            PersonnesEntity test = entityManager.merge( personne );
-            entityManager.flush();
-            //persJrCongAut.setFkPersonne( personne );
-            logger.log( Level.INFO, "id personne+++++++++++++++++++" + test.getIdPersonne() );
-            logger.log( Level.INFO, "id personne+++++++++++++++++++" + test.getNom() );
-
+            //
+            //entityManager.refresh( persJrCongAut );
+            logger.log( Level.INFO, "avant id personne+++++++++++++++++++" + personne.getIdPersonne() );
+            logger.log( Level.INFO, "id personne+++++++++++++++++++" + personne.getNom() );
             trans.commit();
+            logger.log( Level.INFO, "id personne+++++++++++++++++++" + personne.getIdPersonne() );
+            logger.log( Level.INFO, "id personne+++++++++++++++++++" + personne.getNom() );
+
         } catch ( Exception e ) {
             logger.log( Level.INFO, "Erreur ajouter personne" + e.getMessage() );
         } finally {
