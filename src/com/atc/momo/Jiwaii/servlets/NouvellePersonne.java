@@ -42,8 +42,8 @@ public class NouvellePersonne extends HttpServlet {
             Date dateDebut = ( Date.valueOf( request.getParameter( "dateDebut" ) ) );
             Date dateFin = ( Date.valueOf( request.getParameter( "dateFin" ) ) );
 
-            newUSer.ajouter( personnesEntity );
-            newUSer.ajouterdayOff( idJourAutorise, email, dateDebut, dateFin );
+            newUSer.ajouter( personnesEntity, idJourAutorise, email, dateDebut, dateFin );
+            //newUSer.ajouterdayOff( idJourAutorise, email, dateDebut, dateFin );
 
             request.setAttribute( "adresse", newUSer.listDesPersonnes() );
 

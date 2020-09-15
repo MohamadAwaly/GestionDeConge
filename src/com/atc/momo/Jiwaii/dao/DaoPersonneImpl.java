@@ -1,6 +1,7 @@
 package com.atc.momo.Jiwaii.dao;
 
 import com.atc.momo.Jiwaii.entities.JourdecongeautoriseEntity;
+import com.atc.momo.Jiwaii.entities.PersonnejourdecongeautorisetypedemandeEntity;
 import com.atc.momo.Jiwaii.entities.PersonnesEntity;
 import org.apache.log4j.Level;
 
@@ -39,7 +40,6 @@ public class DaoPersonneImpl implements DaoPersonne {
                     .createQuery( "select j from JourdecongeautoriseEntity j", JourdecongeautoriseEntity.class );
             holiday = query.getResultList();
 
-
         } catch ( Exception e ) {
             logger.log( Level.INFO, "Erreur ListeHolidayAutorise" );
         } finally {
@@ -49,23 +49,21 @@ public class DaoPersonneImpl implements DaoPersonne {
         return holiday;
     }
 
-    @Override public void ajouterdayOff( int idJourAutorise, String email, Date datedebut, Date datefin ) throws DaoException {
+    @Override public void ajouterdayOff( int idJourAutorise, String email, Date datedebut, Date datefin )
+            throws DaoException {
         EntityManager em = getEntityManager( PERSISTENCE_UNIT_NAME );
         try {
             EntityTransaction trans = em.getTransaction();
             trans.begin();
-            StoredProcedureQuery storedprocedure = em.createStoredProcedureQuery( "NewDroitForUserWithId");
-            storedprocedure.registerStoredProcedureParameter("pEmail",String.class,ParameterMode.IN);
-            storedprocedure.registerStoredProcedureParameter("pDateDebut",Date.class,ParameterMode.IN);
-            storedprocedure.registerStoredProcedureParameter("pDateFin",Date.class,ParameterMode.IN);
-            storedprocedure.registerStoredProcedureParameter("pIdJourAutorise",Integer.class,ParameterMode.IN);
-
-            storedprocedure.setParameter("pEmail",email);
-            storedprocedure.setParameter("pDateDebut",datedebut);
-            storedprocedure.setParameter("pDateFin",datefin);
-            storedprocedure.setParameter("pIdJourAutorise",idJourAutorise);
-
-
+            StoredProcedureQuery storedprocedure = em.createStoredProcedureQuery( "NewDroitForUserWithId" );
+            storedprocedure.registerStoredProcedureParameter( "pEmail", String.class, ParameterMode.IN );
+            storedprocedure.registerStoredProcedureParameter( "pDateDebut", Date.class, ParameterMode.IN );
+            storedprocedure.registerStoredProcedureParameter( "pDateFin", Date.class, ParameterMode.IN );
+            storedprocedure.registerStoredProcedureParameter( "pIdJourAutorise", Integer.class, ParameterMode.IN );
+            storedprocedure.setParameter( "pEmail", email );
+            storedprocedure.setParameter( "pDateDebut", datedebut );
+            storedprocedure.setParameter( "pDateFin", datefin );
+            storedprocedure.setParameter( "pIdJourAutorise", idJourAutorise );
             storedprocedure.execute();
             trans.commit();
 
@@ -77,19 +75,39 @@ public class DaoPersonneImpl implements DaoPersonne {
         }
     }
 
-    @Override public void ajouter( PersonnesEntity personne ) throws DaoException {
+    @Override public void ajouter( PersonnesEntity personne, int idJourAutorise, String email, Date datedebut,
+            Date datefin ) throws DaoException {
+
+        PersonnejourdecongeautorisetypedemandeEntity persJrCongAut = new PersonnejourdecongeautorisetypedemandeEntity();
+        //persJrCongAut.setFkPersonne( 65 );
+        persJrCongAut.setFkJourCongeAutorise( idJourAutorise );
+        persJrCongAut.setDateDebut( (java.sql.Date) datedebut );
+        persJrCongAut.setDateFin( (java.sql.Date) datefin );
+        persJrCongAut.setFkTypeDemandes( 1 );
+
         EntityManagerFactory entityManagerFactory = null;
         EntityManager entityManager = null;
+        entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
+        entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction trans = entityManager.getTransaction();
         try {
-            entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
-            entityManager = entityManagerFactory.createEntityManager();
-            EntityTransaction trans = entityManager.getTransaction();
+
             trans.begin();
             entityManager.persist( personne );
+            entityManager.persist( persJrCongAut );
+            PersonnesEntity test = entityManager.merge( personne );
+            entityManager.flush();
+            //persJrCongAut.setFkPersonne( personne );
+            logger.log( Level.INFO, "id personne+++++++++++++++++++" + test.getIdPersonne() );
+            logger.log( Level.INFO, "id personne+++++++++++++++++++" + test.getNom() );
+
             trans.commit();
         } catch ( Exception e ) {
             logger.log( Level.INFO, "Erreur ajouter personne" + e.getMessage() );
         } finally {
+            if(trans.isActive()){
+                trans.rollback();
+            }
             if ( entityManager != null )
                 entityManager.close();
         }
@@ -127,7 +145,6 @@ public class DaoPersonneImpl implements DaoPersonne {
             personnesEntities = entityManager
                     .createQuery( "select p from PersonnesEntity p ", PersonnesEntity.class )
                     .getResultList();
-
 
         } catch ( Exception e ) {
             logger.log( Level.INFO, "Erreur" );
